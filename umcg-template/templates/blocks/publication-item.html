@@ -1,0 +1,70 @@
+<li>{{- BIB_ITEMS[bibkey]['authors']|safe }}, "{{ BIB_ITEMS[bibkey]['title'] }}",
+  {% if 'journal' in BIB_ITEMS[bibkey] -%}
+    <i>{{ BIB_ITEMS[bibkey]['journal'] }},
+    </i>
+  {%- elif 'booktitle' in BIB_ITEMS[bibkey] -%}
+    <i>{{ BIB_ITEMS[bibkey]['booktitle'] }},
+    </i>
+  {%- endif -%}
+  {%- if 'pubinfo' in BIB_ITEMS[bibkey] -%}
+    {{- BIB_ITEMS[bibkey]['pubinfo'] -}}.
+  {%- endif -%}
+  <div>
+    <small>
+      {% if 'abstract' in BIB_ITEMS[bibkey] and 'abstract unavailable' not in BIB_ITEMS[bibkey]['abstract']|lower %}
+        {% if ENABLE_PUBLICATION_PDF_REQUEST and 'file' in BIB_ITEMS[bibkey] %}
+          <a class="badge badge-publication" href="{{- '/publications/%s'%bibkey -}}">Abstract/PDF</a>
+        {% else %}
+          <a class="badge badge-publication" href="{{- '/publications/%s'%bibkey -}}">Abstract</a>
+        {% endif %}
+      {% endif %}
+
+      {% if 'doi' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['doi'] }}">DOI</a>
+      {% endif %}
+
+      {% if 'pmid' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['pmid'] }}">PMID</a>
+      {% endif %}
+
+      {% if 'url' in BIB_ITEMS[bibkey] %}
+        {% if 'doi' not in BIB_ITEMS[bibkey] or BIB_ITEMS[bibkey]['url_type'] == 'arXiv' %}
+          <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['url'] }}">
+            {{ BIB_ITEMS[bibkey]['url_type'] }}
+          </a>
+        {% endif %}
+      {% endif %}
+
+      {% if 'code' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['code'] }}">Code</a>
+      {% endif %}
+
+      {% if 'github' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['github'] }}">GitHub</a>
+      {% endif %}
+
+      {% if 'algorithm' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['algorithm'] }}">Algorithm</a>
+      {% endif %}
+
+      {% if 'taverne_url' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="{{ BIB_ITEMS[bibkey]['taverne_url'] }}">Download</a>
+      {% endif %}
+
+      {% if 'vimeo' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="https://vimeo.com/{{ BIB_ITEMS[bibkey]['vimeo'] }}">Vimeo</a>
+      {% endif %}
+
+      {% if 'youtube' in BIB_ITEMS[bibkey] %}
+        <a class="badge badge-publication" href="https://youtube.com/watch?v={{ BIB_ITEMS[bibkey]['youtube'] }}">YouTube</a>
+      {% endif %}
+
+      {% if 'gscites' in BIB_ITEMS[bibkey] %}
+        {% if BIB_ITEMS[bibkey]['gscites'] != '0' %}
+          <a class="badge badge-publication" style="background-color: #FCFCFC !important; margin-left: 10px;">Cited by ~{{ BIB_ITEMS[bibkey]['gscites'] }}</a>
+        {% endif %}
+      {% endif %}
+
+    </small>
+  </div>
+</li>

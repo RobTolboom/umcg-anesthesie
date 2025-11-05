@@ -11,4 +11,4 @@ cd above-the-fold
 npm run critical
 `
 
-The script generates a critical css file for each template, which is stored in the template folder under `radboudumc-template > templates > critical_css`.
+The script generates a critical css file for each template, which is stored in the template folder under `umcg-template > templates > critical_css`.

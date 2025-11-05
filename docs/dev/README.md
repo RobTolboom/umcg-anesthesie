@@ -92,7 +92,7 @@ We have 2 types of content folders
 The copy_content.sh script copies content from the main folder to a website folder (this is also one of the first scipts you need to run in order to build a website locally). Within the copy_content.sh script, the default website pages are copied (such as the home page, 404 and the colofon), the content bib files are copied, and the parse_content.sh script is called which copies only the relevant site specific content to the website folder. Later down the website building pipeline, some of the files of the websites' content folders are generated automatically by --BY WHAT--?. 
  
 ### Templates
-The radboudumc-template folder contains the website page templates, as well as subfolders for recurring blocks of code, css (page and text layout style sheets). 
+The umcg-template folder contains the website page templates, as well as subfolders for recurring blocks of code, css (page and text layout style sheets). 
 
 The html templates provide backbones of the web pages. They contain many jinja placeholders that are filled in automatically when the websites are built. -- NOT SURE HOW THESE ARE USED
 

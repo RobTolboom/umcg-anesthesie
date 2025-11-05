@@ -1,0 +1,23 @@
+{
+  "name": "umcg-theme",
+  "version": "1.0.0",
+  "description": "Theme for UMCG Anesthesiology website",
+  "main": "index.js",
+  "scripts": {
+    "minify": "node-sass --output-style compressed ./sass/ -o ./build/",
+    "postcss": "postcss  --replace ./build/*.css --no-map --map --use autoprefixer",
+    "watch": "node-sass-chokidar ./sass -o ./build --watch --source-map-embed ",
+    "deploy": "npm run minify && npm run postcss && cp -r ./build/. ./../umcg-template/static/css/ && node increase-version.js",
+    "deploy-watch": "node-sass-chokidar --watch --source-map-embed ./sass/anes-theme.scss ./../website-anes/output/theme/css/anes-theme.css"
+  },
+  "author": "Wouter Bulten",
+  "license": "Copyright",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "bootstrap": "^4.5.0",
+    "browser-sync": "^3.0.4",
+    "node-sass": "^7.0.0",
+    "node-sass-chokidar": "^2.0.0",
+    "postcss-cli": "^8.3.1"
+  }
+}
