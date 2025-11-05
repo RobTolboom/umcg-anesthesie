@@ -131,11 +131,18 @@ website-*/content/pages/vacancies.md
 website-*/content/diag.bib
 website-*/content/bibitems.json
 website-*/content/authorkeys.json
+website-*/content/bibitems_diag.json
+website-*/content/authorkeys_diag.json
+website-*/content/groupkeys_diag.json
+website-*/content/news/*
 #!output/README.md
 .idea
 
 content/pages/publications/*
 !content/pages/publications/.gitkeep
+content/bibitems_diag.json
+content/authorkeys_diag.json
+content/groupkeys_diag.json
 
 # vscode
 .vscode/
