@@ -2,7 +2,7 @@
 //
 const fs = require('fs');
 
-const filePath = '../radboudumc-template/templates/blocks/css.version';
+const filePath = '../umcg-template/templates/blocks/css.version';
 
 const newVersion = parseInt(fs.readFileSync(filePath));
 

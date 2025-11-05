@@ -115,7 +115,7 @@ INDEX_SAVE_AS = "news/index.html"
 
 
 # Theme settings
-THEME = "../radboudumc-template"
+THEME = "../umcg-template"
 DIRECT_TEMPLATES = ["index", "archives", "sitemap"]
 
 # Plugins

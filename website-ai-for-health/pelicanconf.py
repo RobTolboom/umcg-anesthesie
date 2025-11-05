@@ -133,7 +133,7 @@ ARCHIVES_SAVE_AS = ""
 SITEMAP_SAVE_AS = "sitemap.xml"
 INDEX_SAVE_AS = "news/index.html"
 # Theme settings
-THEME = "../radboudumc-template"
+THEME = "../umcg-template"
 DIRECT_TEMPLATES = ["index", "sitemap"]
 
 ARTICLE_EXCLUDES = ['templates']

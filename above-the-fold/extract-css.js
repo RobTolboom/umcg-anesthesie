@@ -44,11 +44,11 @@ function startNewJob () {
 
   return penthouse({
     url: current.url,
-    css: '../radboudumc-template/static/css/theme.min.css'
+    css: '../umcg-template/static/css/theme.min.css'
   })
   .then(criticalCss => {
     console.log(`-> Completed processing ${current.id}`);
-    fs.writeFileSync('../radboudumc-template/templates/critical_css/' + current.id + '.css', criticalCss);
+    fs.writeFileSync('../umcg-template/templates/critical_css/' + current.id + '.css', criticalCss);
     return startNewJob();
   })
   .catch(e => {
