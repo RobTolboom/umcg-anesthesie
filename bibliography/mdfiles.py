@@ -20,15 +20,21 @@ def save_md_file(output_path, md_content):
 
 def create_group_md_files(_bib_items, bib_items_per_group_per_date, rest_year=2012):
     for group, bib_items_per_date in bib_items_per_group_per_date.items():
+        # Skip if the website directory doesn't exist
+        website_dir = f'./website-{group}'
+        if not os.path.exists(website_dir):
+            print(f"Skipping group '{group}' - website directory does not exist")
+            continue
+
         all_bib_items = []
         rest_bib_items = []
         md_content = {}
         md_content['main_title'] = 'main_title: Publications'
         md_content['template'] = 'template: publications'
-        
+
         dir_name = os.path.join(f'./website-{group}/content/pages/publications/')
         if not os.path.exists(dir_name):
-            os.mkdir(dir_name)
+            os.makedirs(dir_name, exist_ok=True)
 
         # per year
         for year, bib_items in bib_items_per_date.items():
@@ -83,6 +89,11 @@ def create_author_md_files(bibfile, bib_items_per_author_per_date, list_research
         md_content['groups'] = 'groups: ' + ','.join(groups)
  
         for group in groups:
+            # Skip if the website directory doesn't exist
+            website_dir = f'./website-{group}'
+            if not os.path.exists(website_dir):
+                continue
+
             if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
                 dir_name = os.path.join(f'./website-{group}/content/pages/publications/',  name.lower())
                 print(dir_name)
@@ -142,16 +153,24 @@ def create_publication_md(bibfile, bib_items, bib_items_per_author_per_date, lis
                     has_member_author = True
                     diag_authors.append(name)
                     for group in list_researchers[name][1]:
+                        # Only add group if website directory exists
+                        website_dir = f'./website-{group}'
+                        if not os.path.exists(website_dir):
+                            continue
                         if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
                             groups.add(group)
 
         # If no member authors found, assign to default groups based on bibfile
         if not groups:
             if bibfile == 'cara':
-                groups.add('cara-lab')
+                if os.path.exists('./website-cara-lab'):
+                    groups.add('cara-lab')
             else:
-                # For diag bibfile, add to relevant groups
-                groups.update(['diag', 'pathology', 'anes'])
+                # For diag bibfile, add to relevant groups that exist
+                default_groups = ['diag', 'pathology', 'anes']
+                for group in default_groups:
+                    if os.path.exists(f'./website-{group}'):
+                        groups.add(group)
 
         # Create markdown string for publication
         md_string = 'title: ' + bib_item['title'] + '\n'
