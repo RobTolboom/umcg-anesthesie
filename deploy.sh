@@ -4,7 +4,7 @@
 set -e
 
 echo "Starting Pelican build of $WEBSITE"
-cd $WEBSITE
+cd "$WEBSITE"
 
 # Build pelican website for deployment
 pelican content -s publishconf.py

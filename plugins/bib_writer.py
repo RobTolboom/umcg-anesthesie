@@ -209,10 +209,10 @@ class PublicationsGenerator:
         print('Output dirs: {}'.format((out_dir, bib_file, json_path)))
 
         # Parses diag.bib
-        start_time = time.clock()
+        start_time = time.perf_counter()
         index, global_index, string_rules = bibtexlib.read_bibtex_file(bib_file)
-        time_diagbib = time.clock() - start_time
-        start_time = time.clock()
+        time_diagbib = time.perf_counter() - start_time
+        start_time = time.perf_counter()
 
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
@@ -224,14 +224,14 @@ class PublicationsGenerator:
         # Writes single md files per publication
         self.__write_single_publication_md(global_index, string_rules, filtered_bibkeys, out_dir)
         print('\nTime to process diag.bib ', time_diagbib)
-        print('Time to create ' + str(len(global_index)) + ' MD files ', time.clock() - start_time)
+        print('Time to create ' + str(len(global_index)) + ' MD files ', time.perf_counter() - start_time)
 
         # Writes list of publications of a member
-        time_list_pubs = time.clock()
+        time_list_pubs = time.perf_counter()
         self.__write_author_publications_md(author_index, [list_researcher[0] for list_researcher in list_researchers], out_dir)
         dict_pubs = self.__write_list_publications_md(global_index, filtered_bibkeys, string_rules)
         print('Time to create filtered list of publications and publications per researcher',
-              time.clock() - time_list_pubs)
+              time.perf_counter() - time_list_pubs)
 
         # Stores metadata as json file
         json_path = os.path.join(base_dir, '..', 'content/dict_pubs.json')

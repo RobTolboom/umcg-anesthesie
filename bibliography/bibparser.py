@@ -59,10 +59,44 @@ def sort_bib_keys_author(author_bib_keys, bib_items):
         "book",
         "other",
     ]
+
+    # Month name to number mapping
+    month_map = {
+        "january": 1, "jan": 1,
+        "february": 2, "feb": 2,
+        "march": 3, "mar": 3,
+        "april": 4, "apr": 4,
+        "may": 5,
+        "june": 6, "jun": 6,
+        "july": 7, "jul": 7,
+        "august": 8, "aug": 8,
+        "september": 9, "sep": 9,
+        "october": 10, "oct": 10,
+        "november": 11, "nov": 11,
+        "december": 12, "dec": 12
+    }
+
+    def get_sort_key(item):
+        """Generate sort key: (year DESC, month DESC, pmid DESC)"""
+        year = bib_items[item].get("year", 0)
+        month = bib_items[item].get("month", 0)
+
+        # Convert month to integer if it's a string
+        if isinstance(month, str):
+            month = month_map.get(month.lower(), 0)
+        else:
+            month = int(month) if month else 0
+
+        pmid = bib_items[item]["pmidnumber"]
+
+        # Return tuple for sorting (negative for descending order)
+        return (-int(year) if year else 0, -month, -pmid)
+
     bib_items_per_author_per_date = {}
     for researcher, keys in author_bib_keys.items():
         keys = set(keys)
-        keys = sorted(keys, key=lambda item: bib_items[item]["pmidnumber"])[::-1]
+        # Sort by year (desc), month (desc), then pmid (desc)
+        keys = sorted(keys, key=get_sort_key)
         bib_items_per_data = {}
         for key in keys:
             bib_items_per_data.setdefault(bib_items[key]["year"], []).append(key)
@@ -76,7 +110,6 @@ def sort_bib_keys_author(author_bib_keys, bib_items):
             t for t in _types if t in bib_items_per_data["__types__"]
         ]
 
-        # TODO sort by month
         bib_items_per_author_per_date[researcher] = bib_items_per_data
     return bib_items_per_author_per_date
 
@@ -132,13 +165,43 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
             for bib_key in bib_items.keys():
                 group_keys[group].add(bib_key)
 
+    # Month name to number mapping (same as in sort_bib_keys_author)
+    month_map = {
+        "january": 1, "jan": 1,
+        "february": 2, "feb": 2,
+        "march": 3, "mar": 3,
+        "april": 4, "apr": 4,
+        "may": 5,
+        "june": 6, "jun": 6,
+        "july": 7, "jul": 7,
+        "august": 8, "aug": 8,
+        "september": 9, "sep": 9,
+        "october": 10, "oct": 10,
+        "november": 11, "nov": 11,
+        "december": 12, "dec": 12
+    }
+
+    def get_sort_key(item):
+        """Generate sort key: (year DESC, month DESC, pmid DESC)"""
+        year = bib_items[item].get("year", 0)
+        month = bib_items[item].get("month", 0)
+
+        # Convert month to integer if it's a string
+        if isinstance(month, str):
+            month = month_map.get(month.lower(), 0)
+        else:
+            month = int(month) if month else 0
+
+        pmid = bib_items[item]["pmidnumber"]
+
+        # Return tuple for sorting (negative for descending order)
+        return (-int(year) if year else 0, -month, -pmid)
+
     # compute all years per group
     for group in groups:
         if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
-            group_keys_sorted = sorted(
-                group_keys[group],
-                key=lambda item: bib_items[item]["pmidnumber"],
-            )[::-1]
+            # Sort by year (desc), month (desc), then pmid (desc)
+            group_keys_sorted = sorted(group_keys[group], key=get_sort_key)
 
             for key in group_keys_sorted:
                 bib_items_per_group_per_date[group].setdefault(
@@ -160,7 +223,6 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
             bib_items_per_group_per_date[group]["__types__"] = [
                 t for t in _types if t in bib_items_per_group_per_date[group]["__types__"]
             ]
-            # TODO sort by month
     return bib_items_per_group_per_date
 
 
