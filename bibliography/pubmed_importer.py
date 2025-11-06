@@ -3,20 +3,20 @@
 PubMed Bibliography Importer
 
 This script automatically imports publications from PubMed for all group members
-and adds them to the diag.bib file.
+and adds them to the umcg-anes.bib file.
 
 Features:
 - Reads member information from content/pages/members/*.md files
 - Queries PubMed using ORCID IDs and/or author names
 - Converts PubMed XML to BibTeX format
 - Detects and avoids duplicates
-- Merges new entries into diag.bib
+- Merges new entries into umcg-anes.bib
 
 Usage:
     python pubmed_importer.py [options]
 
 Options:
-    --dry-run       : Show what would be added without modifying diag.bib
+    --dry-run       : Show what would be added without modifying umcg-anes.bib
     --member NAME   : Only import for specific member (e.g., "Bram van Ginneken")
     --since YEAR    : Only import publications from YEAR onwards (e.g., 2020)
     --email EMAIL   : Email for PubMed API (required for >3 requests/sec)
@@ -630,7 +630,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     members_dir = os.path.join(project_root, 'content', 'pages', 'members')
-    bib_file = os.path.join(project_root, 'content', 'diag.bib')
+    bib_file = os.path.join(project_root, 'content', 'umcg-anes.bib')
 
     print(f"PubMed Bibliography Importer")
     print(f"{'='*80}\n")

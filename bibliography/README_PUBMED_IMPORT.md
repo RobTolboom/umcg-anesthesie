@@ -4,13 +4,13 @@ Automatisch publicaties importeren vanuit PubMed voor alle groepsleden.
 
 ## Overzicht
 
-Het `pubmed_importer.py` script haalt automatisch publicaties op uit PubMed voor alle leden van de groep en voegt ze toe aan het `diag.bib` bestand. Het script:
+Het `pubmed_importer.py` script haalt automatisch publicaties op uit PubMed voor alle leden van de groep en voegt ze toe aan het `umcg-anes.bib` bestand. Het script:
 
 - Leest alle member informatie uit `content/pages/members/*.md` bestanden
 - Zoekt publicaties in PubMed via ORCID IDs (meest betrouwbaar) of auteursnamen
 - Converteert PubMed data naar BibTeX formaat
 - Detecteert duplicaten (via PMID) en voorkomt dubbele entries
-- Voegt nieuwe publicaties toe aan `content/diag.bib`
+- Voegt nieuwe publicaties toe aan `content/umcg-anes.bib`
 
 ## Vereisten
 
@@ -182,8 +182,8 @@ Dit genereert de JSON bestanden en markdown pagina's.
 ### 4. Review en commit
 
 ```bash
-git diff content/diag.bib
-git add content/diag.bib content/*.json
+git diff content/umcg-anes.bib
+git add content/umcg-anes.bib content/*.json
 git commit -m "Add new publications from PubMed (2024)"
 git push
 ```
@@ -210,7 +210,7 @@ ORCID is veel betrouwbaarder dan naam matching, dus het is aan te raden om ORCID
 
 ## Duplicate detectie
 
-Het script detecteert duplicaten op basis van PMID (PubMed ID). Als een publicatie al een `pmid` veld heeft in `diag.bib`, wordt deze overgeslagen.
+Het script detecteert duplicaten op basis van PMID (PubMed ID). Als een publicatie al een `pmid` veld heeft in `umcg-anes.bib`, wordt deze overgeslagen.
 
 ## BibTeX formaat
 

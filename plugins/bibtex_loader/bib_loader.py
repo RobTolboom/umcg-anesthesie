@@ -1,5 +1,5 @@
 """
-This plugin writes the md files for each publication found in bib_file (diag.bib by default)
+This plugin writes the md files for each publication found in bib_file (umcg-anes.bib by default)
 It writes the output in 'out_dir'
 
 
