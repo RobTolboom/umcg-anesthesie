@@ -140,9 +140,9 @@ website-*/content/news/*
 
 content/pages/publications/*
 !content/pages/publications/.gitkeep
-content/bibitems_diag.json
-content/authorkeys_diag.json
-content/groupkeys_diag.json
+content/bibitems_umcg-anes.json
+content/authorkeys_umcg-anes.json
+content/groupkeys_umcg-anes.json
 
 # vscode
 .vscode/

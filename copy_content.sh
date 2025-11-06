@@ -11,9 +11,9 @@ cp --no-clobber content/pages/defaults/colofon.md "$WEBSITE/content/pages/colofo
 cp --no-clobber content/pages/defaults/home.md "$WEBSITE/content/pages/home.md"
 
 # Copy bibliography files
-cp content/bibitems_diag.json "$WEBSITE/content/bibitems_diag.json"
-cp content/authorkeys_diag.json "$WEBSITE/content/authorkeys_diag.json"
-cp content/groupkeys_diag.json "$WEBSITE/content/groupkeys_diag.json"
+cp content/bibitems_umcg-anes.json "$WEBSITE/content/bibitems_umcg-anes.json"
+cp content/authorkeys_umcg-anes.json "$WEBSITE/content/authorkeys_umcg-anes.json"
+cp content/groupkeys_umcg-anes.json "$WEBSITE/content/groupkeys_umcg-anes.json"
 
 # Copy images when deploying locally (for development)
 # Do not overwrite existing images to save time

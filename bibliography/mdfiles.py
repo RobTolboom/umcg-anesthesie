@@ -6,8 +6,8 @@ MD files
 
 """
 
-diag_bib = ['diag', 'pathology']
-cara_bib = ['cara-lab']
+diag_bib = ['anes']  # Only anes website is active
+cara_bib = []  # Cara website no longer exists
 
 def save_md_file(output_path, md_content):
     '''

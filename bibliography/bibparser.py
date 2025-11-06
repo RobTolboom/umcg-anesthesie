@@ -153,7 +153,7 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
             if bibfile == 'cara':
                 target_groups = ['cara-lab']
             else:
-                target_groups = ['diag', 'pathology', 'anes']
+                target_groups = ['anes']  # Only anes website is active
 
         # Add all publications to target groups
         for group in target_groups:
