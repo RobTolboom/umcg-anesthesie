@@ -403,6 +403,78 @@ class PubMedImporter:
         print(f"  Searching PubMed with name: {name} (formatted as: {pubmed_name})")
         return self.search_pubmed(query, retmax=max_results, mindate=mindate)
 
+    def _extract_initials(self, name: str) -> str:
+        """
+        Extract initials from a name.
+
+        Examples:
+            "Robert Tolboom" -> "R"
+            "Rob C. Tolboom" -> "RC"
+            "Rob Tolboom" -> "R"
+            "Clara I Sánchez" -> "CI"
+
+        Args:
+            name: Full name in format "Firstname [Middle] Lastname"
+
+        Returns:
+            Initials (e.g., "R", "RC", "CI")
+        """
+        if not name:
+            return ""
+
+        # Split name into parts
+        parts = name.strip().split()
+
+        if len(parts) <= 1:
+            return ""
+
+        # Get initials from all parts except the last (lastname)
+        initials = []
+        for part in parts[:-1]:
+            # Remove periods and get first character
+            clean_part = part.replace('.', '').strip()
+            if clean_part:
+                initials.append(clean_part[0].upper())
+
+        return ''.join(initials)
+
+    def search_by_author_initials(self, name: str, since_year: int = None, max_results: int = 100) -> List[str]:
+        """
+        Search PubMed by author name with initials.
+
+        Converts name to format "Lastname, Initials".
+        Examples:
+            "Robert Tolboom" -> "Tolboom, R"
+            "Rob C. Tolboom" -> "Tolboom, RC"
+
+        Many publications use initials instead of full first names,
+        so this search helps find those publications.
+        """
+        if not name:
+            return []
+
+        # Split name into parts
+        parts = name.strip().split()
+
+        if len(parts) <= 1:
+            return []
+
+        # Extract lastname and initials
+        lastname = parts[-1]
+        initials = self._extract_initials(name)
+
+        if not initials:
+            return []
+
+        # Format as "Lastname, Initials"
+        pubmed_name = f"{lastname}, {initials}"
+        query = f'"{pubmed_name}"[Author]'
+
+        mindate = f"{since_year}/01/01" if since_year else None
+
+        print(f"  Searching PubMed with initials: {name} (formatted as: {pubmed_name})")
+        return self.search_pubmed(query, retmax=max_results, mindate=mindate)
+
 
 def parse_member_files(members_dir: str) -> List[MemberInfo]:
     """Parse all member markdown files and extract relevant information."""
@@ -855,12 +927,27 @@ def main():
             if pub_name_pmids:
                 print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
 
+            # Also search with initials from pub_name
+            pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
+                                                                        max_results=args.max_results)
+            all_pmids.extend(pub_name_initial_pmids)
+            if pub_name_initial_pmids:
+                print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
+
         # Search by regular name
         name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
                                                     max_results=args.max_results)
         all_pmids.extend(name_pmids)
         if name_pmids:
             print(f"  Found {len(name_pmids)} via name '{member.name}'")
+
+        # Also search with initials from regular name (if not already searched via pub_name)
+        if not member.pub_name or member.pub_name == member.name:
+            name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
+                                                                    max_results=args.max_results)
+            all_pmids.extend(name_initial_pmids)
+            if name_initial_pmids:
+                print(f"  Found {len(name_initial_pmids)} via name initials")
 
         # Deduplicate PMIDs
         pmids = list(set(all_pmids))
