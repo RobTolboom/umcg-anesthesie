@@ -14,5 +14,5 @@ set -e
 #     -s -f -S \
 #     -L https://raw.githubusercontent.com/DIAGNijmegen/Literature/main/fullstrings.bib
 
-python ./bibliography/bibparser.py diag
-#python ./bibliography/bibparser.py cara
+python3 ./bibliography/bibparser.py umcg-anes
+#python3 ./bibliography/bibparser.py cara
