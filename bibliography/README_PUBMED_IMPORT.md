@@ -4,13 +4,14 @@ Automatisch publicaties importeren vanuit PubMed voor alle groepsleden.
 
 ## Overzicht
 
-Het `pubmed_importer.py` script haalt automatisch publicaties op uit PubMed voor alle leden van de groep en voegt ze toe aan het `diag.bib` bestand. Het script:
+Het `pubmed_importer.py` script haalt automatisch publicaties op uit PubMed voor alle leden van de groep en voegt ze toe aan het `umcg-anes.bib` bestand. Het script:
 
 - Leest alle member informatie uit `content/pages/members/*.md` bestanden
 - Zoekt publicaties in PubMed via ORCID IDs (meest betrouwbaar) of auteursnamen
 - Converteert PubMed data naar BibTeX formaat
 - Detecteert duplicaten (via PMID) en voorkomt dubbele entries
-- Voegt nieuwe publicaties toe aan `content/diag.bib`
+- **Update bestaande entries** als er wijzigingen zijn in PubMed (nieuwe functionaliteit!)
+- Voegt nieuwe publicaties toe aan `content/umcg-anes.bib`
 
 ## Vereisten
 
@@ -182,8 +183,8 @@ Dit genereert de JSON bestanden en markdown pagina's.
 ### 4. Review en commit
 
 ```bash
-git diff content/diag.bib
-git add content/diag.bib content/*.json
+git diff content/umcg-anes.bib
+git add content/umcg-anes.bib content/*.json
 git commit -m "Add new publications from PubMed (2024)"
 git push
 ```
@@ -208,9 +209,18 @@ Het script zoekt publicaties in deze volgorde:
 
 ORCID is veel betrouwbaarder dan naam matching, dus het is aan te raden om ORCID toe te voegen aan member bestanden.
 
-## Duplicate detectie
+## Duplicate detectie en Updates
 
-Het script detecteert duplicaten op basis van PMID (PubMed ID). Als een publicatie al een `pmid` veld heeft in `diag.bib`, wordt deze overgeslagen.
+Het script detecteert duplicaten op basis van PMID (PubMed ID):
+
+- **Nieuwe publicaties**: PMIDs die nog niet in `umcg-anes.bib` staan worden toegevoegd
+- **Bestaande publicaties**: PMIDs die al bestaan worden gecontroleerd op updates
+  - Het script haalt de laatste versie op uit PubMed
+  - Vergelijkt key fields: titel, auteurs, journal, jaar, volume, pages, DOI, abstract
+  - Als er significante wijzigingen zijn, wordt de entry ge-update
+  - De BibTeX key blijft ongewijzigd om links te behouden
+
+Dit betekent dat als een publicatie in PubMed wordt gecorrigeerd (bijv. auteur toegevoegd, abstract toegevoegd, DOI gewijzigd), deze wijzigingen automatisch worden doorgevoerd in jullie bibliografie.
 
 ## BibTeX formaat
 
@@ -237,6 +247,27 @@ python3 bibliography/pubmed_importer.py \
   --active-only
 
 # Dit duurt ongeveer 5-10 minuten voor ~100 actieve leden
+```
+
+**Let op**: Bij regelmatige updates zal het script ook bestaande publicaties uit de opgegeven periode controleren op updates. Als een publicatie in PubMed is gewijzigd (bijv. een erratum, toegevoegde metadata), wordt deze automatisch bijgewerkt in `umcg-anes.bib`.
+
+### Alleen updates controleren
+
+Als je alleen wilt controleren of bestaande publicaties zijn bijgewerkt in PubMed, zonder nieuwe toe te voegen, gebruik dan een heel oud jaar:
+
+```bash
+# Check alle bestaande publicaties op updates
+python3 bibliography/pubmed_importer.py \
+  --email jouw@email.nl \
+  --api-key JOUW_KEY \
+  --since 1990 \
+  --dry-run
+
+# Voer daadwerkelijk updates door
+python3 bibliography/pubmed_importer.py \
+  --email jouw@email.nl \
+  --api-key JOUW_KEY \
+  --since 1990
 ```
 
 ### Automatisering met GitHub Actions

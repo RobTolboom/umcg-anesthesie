@@ -1,5 +1,5 @@
 """
-This plugin writes the md files for each publication found in bib_file (diag.bib by default)
+This plugin writes the md files for each publication found in bib_file (umcg-anes.bib by default)
 It writes the output in 'out_dir'
 
 @author Gabriel (ghumpire)
@@ -35,14 +35,14 @@ def load_json2dict(json_path):
 
 
 class PublicationsGenerator:
-    # Class PublicationsGenerator reads the diag.bib file to process it and generate the publications
+    # Class PublicationsGenerator reads the umcg-anes.bib file to process it and generate the publications
     # list of researchers/members.
     #
     # The main function is generate_md_bibitem(), the remaining functions are private functions.
     # See the __main__ section to check how to run this python script.
     #
     # Algorithm:
-    # 1. This python script uses bibtexlib (Bart designed it) to parse effitiently the large diag.bib file in
+    # 1. This python script uses bibtexlib (Bart designed it) to parse effitiently the large umcg-anes.bib file in
     #    a couple of seconds.
     # 2. We obtain the list of researchers/members/authors of the current website. This is done in __get_list_people().
     # 3. We filter out publications of the researchers/members/author of the current website. This is done in
@@ -202,13 +202,13 @@ class PublicationsGenerator:
         base_dir = os.path.dirname(os.path.abspath(__file__))
 
         out_dir = os.path.join(base_dir, '..', 'content/pages/publications')
-        bib_file = os.path.join(base_dir, '..', 'content/diag.bib')
+        bib_file = os.path.join(base_dir, '..', 'content/umcg-anes.bib')
         json_path = os.path.join(base_dir, '..', 'output/md5s.json')
 
         print('Bibtex plugin loaded')
         print('Output dirs: {}'.format((out_dir, bib_file, json_path)))
 
-        # Parses diag.bib
+        # Parses umcg-anes.bib
         start_time = time.perf_counter()
         index, global_index, string_rules = bibtexlib.read_bibtex_file(bib_file)
         time_diagbib = time.perf_counter() - start_time
@@ -223,7 +223,7 @@ class PublicationsGenerator:
 
         # Writes single md files per publication
         self.__write_single_publication_md(global_index, string_rules, filtered_bibkeys, out_dir)
-        print('\nTime to process diag.bib ', time_diagbib)
+        print('\nTime to process umcg-anes.bib ', time_diagbib)
         print('Time to create ' + str(len(global_index)) + ' MD files ', time.perf_counter() - start_time)
 
         # Writes list of publications of a member
