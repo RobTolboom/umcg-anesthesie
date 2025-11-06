@@ -347,14 +347,60 @@ class PubMedImporter:
         print(f"  Searching PubMed with ORCID: {orcid_id}")
         return self.search_pubmed(query, retmax=max_results, mindate=mindate)
 
+    def _format_name_for_pubmed(self, name: str) -> str:
+        """
+        Convert name from 'Firstname Lastname' to PubMed format 'Lastname, Firstname'.
+
+        PubMed expects author names in the format:
+        - "Lastname, Firstname" or "Lastname Firstname"
+        - "Lastname Initials" (without periods)
+
+        Examples:
+            "Riccardo Samperna" -> "Samperna, Riccardo"
+            "Joeran S. Bosma" -> "Bosma, Joeran S"
+            "Clara I Sánchez" -> "Sánchez, Clara I"
+
+        Args:
+            name: Name in format "Firstname [Middle] Lastname"
+
+        Returns:
+            Name formatted for PubMed search: "Lastname, Firstname [Middle]"
+        """
+        if not name:
+            return name
+
+        # Split name into parts
+        parts = name.strip().split()
+
+        if len(parts) == 0:
+            return name
+        elif len(parts) == 1:
+            # Single name, return as-is
+            return name
+        else:
+            # Multiple parts: assume last part is lastname
+            lastname = parts[-1]
+            firstname_parts = parts[:-1]
+            firstname = ' '.join(firstname_parts)
+
+            # Remove periods from initials for PubMed format
+            firstname = firstname.replace('.', '')
+
+            return f"{lastname}, {firstname}"
+
     def search_by_author_name(self, name: str, since_year: int = None, max_results: int = 100) -> List[str]:
-        """Search PubMed by author name."""
-        # Simple name formatting: "Lastname Firstname[au]"
-        query = f'"{name}"[Author]'
+        """
+        Search PubMed by author name.
+
+        Converts name from 'Firstname Lastname' to PubMed format 'Lastname, Firstname'.
+        """
+        # Convert to PubMed format
+        pubmed_name = self._format_name_for_pubmed(name)
+        query = f'"{pubmed_name}"[Author]'
 
         mindate = f"{since_year}/01/01" if since_year else None
 
-        print(f"  Searching PubMed with name: {name}")
+        print(f"  Searching PubMed with name: {name} (formatted as: {pubmed_name})")
         return self.search_pubmed(query, retmax=max_results, mindate=mindate)
 
 
