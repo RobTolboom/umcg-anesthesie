@@ -57,26 +57,40 @@ class PubMedImporter:
     ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
     EFETCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
 
-    def __init__(self, email: str = None, api_key: str = None, rate_limit: float = 0.34):
+    def __init__(self, email: str = None, api_key: str = None, rate_limit: float = None):
         """
         Initialize PubMed importer.
 
         Args:
             email: Email for PubMed API (required by NCBI)
             api_key: PubMed API key for faster queries
-            rate_limit: Seconds to wait between requests (0.34 = ~3 req/sec)
+            rate_limit: Seconds to wait between requests (default: 1.0 sec = 1 req/sec)
+                       NCBI allows max 10 req/sec with API key, 3 req/sec without
+                       Being conservative prevents hitting limits with many members
         """
         self.email = email or "pubmed@example.com"  # Default email if none provided
         self.api_key = api_key
-        self.rate_limit = rate_limit if not api_key else 0.1  # 10 req/sec with API key
+
+        # Conservative default: 1 request per second
+        # This is safe for large batch imports with many members
+        if rate_limit is not None:
+            self.rate_limit = rate_limit
+        elif api_key:
+            self.rate_limit = 1.0  # Conservative even with API key
+        else:
+            self.rate_limit = 1.5  # Extra conservative without API key
+
         self.last_request = 0
+        self.request_count = 0
 
     def _rate_limit_wait(self):
         """Wait to respect rate limits."""
         elapsed = time.time() - self.last_request
         if elapsed < self.rate_limit:
-            time.sleep(self.rate_limit - elapsed)
+            wait_time = self.rate_limit - elapsed
+            time.sleep(wait_time)
         self.last_request = time.time()
+        self.request_count += 1
 
     def _build_url_params(self, **kwargs) -> Dict[str, str]:
         """Build URL parameters with email and API key if available."""
@@ -602,6 +616,8 @@ def main():
                         help='Only process active members')
     parser.add_argument('--test', action='store_true',
                         help='Test PubMed API connection and exit')
+    parser.add_argument('--rate-limit', type=float,
+                        help='Seconds to wait between API requests (default: 1.0 for safe batch processing)')
 
     args = parser.parse_args()
 
@@ -648,15 +664,22 @@ def main():
     print()
 
     # Initialize importer
-    importer = PubMedImporter(email=args.email, api_key=args.api_key)
+    importer = PubMedImporter(email=args.email, api_key=args.api_key, rate_limit=args.rate_limit)
+
+    # Show rate limiting info
+    print(f"Rate limiting: {importer.rate_limit} seconds between requests")
+    print(f"  (This ensures safe operation with {len(members)} members)")
+    print()
 
     # Process each member
     new_entries = []
     total_found = 0
     total_new = 0
 
-    for member in members:
-        print(f"Processing: {member.name}")
+    start_time = time.time()
+
+    for idx, member in enumerate(members, 1):
+        print(f"[{idx}/{len(members)}] Processing: {member.name}")
 
         pmids = []
 
@@ -701,10 +724,16 @@ def main():
         print()
 
     # Summary
+    elapsed_time = time.time() - start_time
     print(f"{'='*80}")
     print(f"Summary:")
+    print(f"  Members processed: {len(members)}")
     print(f"  Total publications found: {total_found}")
     print(f"  New publications to add: {total_new}")
+    print(f"  API requests made: {importer.request_count}")
+    print(f"  Time elapsed: {elapsed_time:.1f} seconds")
+    if importer.request_count > 0:
+        print(f"  Average time per request: {elapsed_time/importer.request_count:.2f} seconds")
     print(f"{'='*80}\n")
 
     # Append to file

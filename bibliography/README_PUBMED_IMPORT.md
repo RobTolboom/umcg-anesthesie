@@ -105,6 +105,44 @@ python3 bibliography/pubmed_importer.py \
 | `--api-key KEY` | PubMed API key voor snellere queries (10 req/sec) |
 | `--max-results N` | Maximum resultaten per auteur (default: 100) |
 | `--active-only` | Alleen actieve leden verwerken |
+| `--rate-limit N` | Seconden tussen API requests (default: 1.0) |
+
+## Rate Limiting
+
+Het script respecteert PubMed API limieten met conservatieve defaults:
+
+- **Met API key**: 1.0 seconde tussen requests (standaard)
+- **Zonder API key**: 1.5 seconden tussen requests (standaard)
+- **PubMed maximum**: 10 req/sec met API key, 3 req/sec zonder
+
+### Waarom conservatief?
+
+Met 356 groepsleden en meerdere API calls per lid is het belangrijk om:
+1. Niet tegen API limieten aan te lopen
+2. Een "good citizen" te zijn voor NCBI servers
+3. Te voorkomen dat je account geblokkeerd wordt
+4. Stabiele imports te garanderen
+
+### Custom rate limiting
+
+Voor snellere imports (op eigen risico):
+
+```bash
+# Sneller: 0.5 seconden tussen requests (2 req/sec)
+python3 bibliography/pubmed_importer.py \
+  --rate-limit 0.5 \
+  --email jouw@email.nl \
+  --api-key JOUW_KEY
+```
+
+### Geschatte runtime
+
+Voor alle 356 members:
+- Met 1 sec rate limit: ~10-20 minuten (2 calls per member = 712 sec)
+- Met 0.5 sec rate limit: ~5-10 minuten
+- Afhankelijk van resultaten per lid
+
+**Tip**: Gebruik `--active-only` om tijd te besparen bij reguliere updates.
 
 ## Workflow
 
@@ -191,12 +229,14 @@ Geïmporteerde entries krijgen:
 Voor regelmatige updates, gebruik `--since` om alleen recente publicaties te importeren:
 
 ```bash
-# Maandelijkse update
+# Maandelijkse update (alleen actieve leden, sneller)
 python3 bibliography/pubmed_importer.py \
   --email jouw@email.nl \
   --api-key JOUW_KEY \
   --since 2024 \
   --active-only
+
+# Dit duurt ongeveer 5-10 minuten voor ~100 actieve leden
 ```
 
 ### Automatisering met cron
@@ -240,10 +280,15 @@ Als een lid onder meerdere naamvarianten publiceert:
 
 ### Rate limiting
 
-Met API key: 10 requests/seconde
-Zonder API key: 3 requests/seconde
+**PubMed limieten:**
+- Met API key: max 10 requests/seconde
+- Zonder API key: max 3 requests/seconde
 
-Het script respecteert automatisch deze limieten.
+**Script defaults (conservatief):**
+- Met API key: 1 request/seconde (10x veiliger dan maximum)
+- Zonder API key: 1 request per 1.5 seconden
+
+Dit voorkomt problemen bij batch imports met veel leden. Je kunt dit aanpassen met `--rate-limit` als je weet wat je doet.
 
 ## Geavanceerd gebruik
 
