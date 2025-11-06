@@ -239,9 +239,28 @@ python3 bibliography/pubmed_importer.py \
 # Dit duurt ongeveer 5-10 minuten voor ~100 actieve leden
 ```
 
-### Automatisering met cron
+### Automatisering met GitHub Actions
 
-Je kunt het script automatiseren met een cron job:
+Er is een GitHub Actions workflow beschikbaar die automatisch wekelijks publicaties importeert:
+
+- **Locatie**: `.github/workflows/update-publications.yml`
+- **Schedule**: Elke maandag om 02:00 UTC
+- **Handmatig**: Via Actions tab in GitHub
+- **Documentatie**: `.github/workflows/README.md`
+
+De workflow gebruikt repository secrets:
+- `PUBMED_EMAIL`: Je PubMed email
+- `PUBMED_API`: Je PubMed API key
+
+**Handmatig triggeren:**
+1. Ga naar Actions tab in GitHub
+2. Selecteer "Update Publications from PubMed"
+3. Klik "Run workflow"
+4. Kies opties en start
+
+### Automatisering met cron (lokaal)
+
+Voor lokale automatisering kun je een cron job instellen:
 
 ```bash
 # crontab -e
