@@ -153,3 +153,6 @@ Pipfile.lock
 
 # Custom
 .DS_Store
+
+# Local secrets for testing GitHub Actions
+.secrets

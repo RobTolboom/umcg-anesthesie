@@ -884,6 +884,12 @@ def main():
 
             for pub in publications:
                 pmid = pub['pmid']
+
+                # Check if this PMID exists in our existing entries
+                if pmid not in existing_entries:
+                    print(f"    - Warning: PMID {pmid} not found in existing entries, skipping update check")
+                    continue
+
                 # Generate new entry (reuse existing key to maintain consistency)
                 old_bib_key = existing_entries[pmid]['key']
                 old_entry = existing_entries[pmid]['entry']
