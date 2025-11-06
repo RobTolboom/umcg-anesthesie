@@ -96,7 +96,7 @@ jobs:
 
       - name: Install Netlify
         # if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn global add netlify-cli@v16.9.2
+        run: yarn global add netlify-cli@latest
 
       - name: Deploy images to Netlify
         run: |
