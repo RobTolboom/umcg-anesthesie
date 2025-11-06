@@ -503,26 +503,53 @@ def publication_to_bibtex(pub: Dict, existing_keys: Set[str]) -> str:
     return '\n'.join(lines)
 
 
-def load_existing_pmids(bib_file: str) -> Set[str]:
-    """Load all PMIDs that already exist in the BibTeX file."""
-    pmids = set()
+def load_existing_entries(bib_file: str) -> Dict[str, Dict]:
+    """
+    Load all existing BibTeX entries with their PMIDs.
+
+    Returns:
+        Dictionary mapping PMID to entry info: {pmid: {'key': bibkey, 'entry': full_entry_text}}
+    """
+    entries = {}
 
     if not os.path.exists(bib_file):
-        return pmids
+        return entries
 
     try:
         with open(bib_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Find all pmid entries
-        pmid_pattern = r'pmid\s*=\s*[{\"]?(\d+)[}\"]?'
-        for match in re.finditer(pmid_pattern, content, re.IGNORECASE):
-            pmids.add(match.group(1))
+        # Find all BibTeX entries with their PMIDs
+        # Pattern to match complete BibTeX entries
+        entry_pattern = r'(@\w+\s*{\s*[^,\s]+\s*,[^@]*?})'
+
+        for match in re.finditer(entry_pattern, content, re.DOTALL):
+            entry_text = match.group(1)
+
+            # Extract PMID from this entry
+            pmid_match = re.search(r'pmid\s*=\s*[{\"]?(\d+)[}\"]?', entry_text, re.IGNORECASE)
+            if pmid_match:
+                pmid = pmid_match.group(1)
+
+                # Extract BibTeX key
+                key_match = re.search(r'@(\w+)\s*{\s*([^,\s]+)\s*,', entry_text)
+                if key_match:
+                    bib_key = key_match.group(2)
+                    entries[pmid] = {
+                        'key': bib_key,
+                        'entry': entry_text
+                    }
 
     except Exception as e:
         print(f"Error reading {bib_file}: {e}", file=sys.stderr)
 
-    return pmids
+    return entries
+
+
+def load_existing_pmids(bib_file: str) -> Set[str]:
+    """Load all PMIDs that already exist in the BibTeX file."""
+    entries = load_existing_entries(bib_file)
+    return set(entries.keys())
 
 
 def load_existing_bibkeys(bib_file: str) -> Set[str]:
@@ -547,33 +574,112 @@ def load_existing_bibkeys(bib_file: str) -> Set[str]:
     return keys
 
 
-def append_to_bibfile(bib_file: str, new_entries: List[str], dry_run: bool = False):
-    """Append new BibTeX entries to the bibliography file."""
-    if not new_entries:
-        print("No new entries to add.")
+def has_significant_changes(old_entry: str, new_entry: str) -> bool:
+    """
+    Check if new entry has significant changes compared to old entry.
+
+    Compares key fields like title, authors, journal, doi, abstract.
+    Ignores whitespace and formatting differences.
+    """
+    def extract_field(entry: str, field: str) -> str:
+        """Extract field value from BibTeX entry."""
+        pattern = rf'{field}\s*=\s*{{([^}}]*)}}'
+        match = re.search(pattern, entry, re.IGNORECASE | re.DOTALL)
+        if match:
+            # Normalize whitespace for comparison
+            return ' '.join(match.group(1).split())
+        return ''
+
+    # Fields to compare
+    fields = ['title', 'author', 'journal', 'year', 'volume', 'pages', 'doi', 'abstract']
+
+    for field in fields:
+        old_val = extract_field(old_entry, field)
+        new_val = extract_field(new_entry, field)
+
+        if old_val != new_val:
+            return True
+
+    return False
+
+
+def update_bibfile_entries(bib_file: str, new_entries: List[str], updated_entries: List[Tuple[str, str]], dry_run: bool = False):
+    """
+    Update bibliography file with new and updated entries.
+
+    Args:
+        bib_file: Path to bibliography file
+        new_entries: List of new BibTeX entries to append
+        updated_entries: List of (old_entry, new_entry) tuples to replace
+        dry_run: If True, only show what would be changed
+    """
+    if not new_entries and not updated_entries:
+        print("No changes to make.")
         return
 
     if dry_run:
         print(f"\n{'='*80}")
-        print("DRY RUN: Would add the following entries:")
+        print("DRY RUN: Would make the following changes:")
         print(f"{'='*80}\n")
-        for entry in new_entries:
-            print(entry)
-            print()
+
+        if new_entries:
+            print(f"--- NEW ENTRIES ({len(new_entries)}) ---\n")
+            for entry in new_entries:
+                print(entry)
+                print()
+
+        if updated_entries:
+            print(f"--- UPDATED ENTRIES ({len(updated_entries)}) ---\n")
+            for old_entry, new_entry in updated_entries:
+                # Extract keys for display
+                old_key = re.search(r'@\w+\s*{\s*([^,\s]+)', old_entry)
+                new_key = re.search(r'@\w+\s*{\s*([^,\s]+)', new_entry)
+                old_key = old_key.group(1) if old_key else 'unknown'
+                new_key = new_key.group(1) if new_key else 'unknown'
+                print(f"Update entry: {old_key} -> {new_key}")
+                print(f"OLD:\n{old_entry}\n")
+                print(f"NEW:\n{new_entry}\n")
+                print("-" * 40)
         return
 
     try:
-        with open(bib_file, 'a', encoding='utf-8') as f:
-            f.write('\n\n')
-            for i, entry in enumerate(new_entries):
-                if i > 0:
-                    f.write('\n\n')
-                f.write(entry)
+        # Read current content
+        with open(bib_file, 'r', encoding='utf-8') as f:
+            content = f.read()
 
-        print(f"\n✓ Successfully added {len(new_entries)} new entries to {bib_file}")
+        # Replace updated entries
+        for old_entry, new_entry in updated_entries:
+            # Escape special regex characters in old_entry
+            old_entry_escaped = re.escape(old_entry)
+            content = re.sub(old_entry_escaped, new_entry, content, count=1)
+
+        # Write updated content
+        with open(bib_file, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        # Append new entries
+        if new_entries:
+            with open(bib_file, 'a', encoding='utf-8') as f:
+                f.write('\n\n')
+                for i, entry in enumerate(new_entries):
+                    if i > 0:
+                        f.write('\n\n')
+                    f.write(entry)
+
+        if new_entries and updated_entries:
+            print(f"\n✓ Successfully added {len(new_entries)} new entries and updated {len(updated_entries)} entries in {bib_file}")
+        elif new_entries:
+            print(f"\n✓ Successfully added {len(new_entries)} new entries to {bib_file}")
+        elif updated_entries:
+            print(f"\n✓ Successfully updated {len(updated_entries)} entries in {bib_file}")
 
     except Exception as e:
-        print(f"Error writing to {bib_file}: {e}", file=sys.stderr)
+        print(f"Error updating {bib_file}: {e}", file=sys.stderr)
+
+
+def append_to_bibfile(bib_file: str, new_entries: List[str], dry_run: bool = False):
+    """Append new BibTeX entries to the bibliography file."""
+    update_bibfile_entries(bib_file, new_entries, [], dry_run)
 
 
 def test_api_connection(email: str, api_key: str = None):
@@ -637,7 +743,8 @@ def main():
 
     # Load existing data
     print("Loading existing bibliography...")
-    existing_pmids = load_existing_pmids(bib_file)
+    existing_entries = load_existing_entries(bib_file)
+    existing_pmids = set(existing_entries.keys())
     existing_keys = load_existing_bibkeys(bib_file)
     print(f"  Found {len(existing_pmids)} existing publications")
     print(f"  Found {len(existing_keys)} existing BibTeX keys\n")
@@ -673,8 +780,10 @@ def main():
 
     # Process each member
     new_entries = []
+    updated_entries = []
     total_found = 0
     total_new = 0
+    total_updated = 0
 
     start_time = time.time()
 
@@ -700,26 +809,55 @@ def main():
 
         print(f"  Found {len(pmids)} publications")
 
-        # Filter out existing
+        # Separate new and existing PMIDs
         new_pmids = [pmid for pmid in pmids if pmid not in existing_pmids]
+        existing_pmids_to_check = [pmid for pmid in pmids if pmid in existing_pmids]
 
-        if not new_pmids:
-            print(f"  All publications already in database\n")
+        if not new_pmids and not existing_pmids_to_check:
+            print(f"  No publications to process\n")
             continue
 
-        print(f"  {len(new_pmids)} new publications to add")
         total_found += len(pmids)
-        total_new += len(new_pmids)
 
-        # Fetch details
-        publications = importer.fetch_pubmed_details(new_pmids)
+        # Process new publications
+        if new_pmids:
+            print(f"  {len(new_pmids)} new publications to add")
+            publications = importer.fetch_pubmed_details(new_pmids)
 
-        # Convert to BibTeX
-        for pub in publications:
-            entry = publication_to_bibtex(pub, existing_keys)
-            new_entries.append(entry)
-            # Mark as added to avoid duplicates
-            existing_pmids.add(pub['pmid'])
+            for pub in publications:
+                entry = publication_to_bibtex(pub, existing_keys)
+                new_entries.append(entry)
+                total_new += 1
+                # Mark as added to avoid duplicates
+                existing_pmids.add(pub['pmid'])
+
+        # Check existing publications for updates
+        if existing_pmids_to_check:
+            print(f"  Checking {len(existing_pmids_to_check)} existing publications for updates...")
+            publications = importer.fetch_pubmed_details(existing_pmids_to_check)
+
+            for pub in publications:
+                pmid = pub['pmid']
+                # Generate new entry (reuse existing key to maintain consistency)
+                old_bib_key = existing_entries[pmid]['key']
+                old_entry = existing_entries[pmid]['entry']
+
+                # Create new entry with same key
+                # Temporarily add old key to set to use it
+                temp_keys = existing_keys.copy()
+                temp_keys.discard(old_bib_key)
+                # Force the generation to use the old key
+                new_entry = publication_to_bibtex(pub, temp_keys)
+                # Replace the auto-generated key with the old key
+                new_entry = re.sub(r'@(\w+)\s*{\s*([^,\s]+)\s*,',
+                                 f'@\\1{{{old_bib_key},',
+                                 new_entry, count=1)
+
+                # Check if there are significant changes
+                if has_significant_changes(old_entry, new_entry):
+                    updated_entries.append((old_entry, new_entry))
+                    total_updated += 1
+                    print(f"    - Update detected for PMID {pmid} ({old_bib_key})")
 
         print()
 
@@ -730,23 +868,24 @@ def main():
     print(f"  Members processed: {len(members)}")
     print(f"  Total publications found: {total_found}")
     print(f"  New publications to add: {total_new}")
+    print(f"  Publications to update: {total_updated}")
     print(f"  API requests made: {importer.request_count}")
     print(f"  Time elapsed: {elapsed_time:.1f} seconds")
     if importer.request_count > 0:
         print(f"  Average time per request: {elapsed_time/importer.request_count:.2f} seconds")
     print(f"{'='*80}\n")
 
-    # Append to file
-    if new_entries:
-        append_to_bibfile(bib_file, new_entries, dry_run=args.dry_run)
+    # Update file with new and updated entries
+    if new_entries or updated_entries:
+        update_bibfile_entries(bib_file, new_entries, updated_entries, dry_run=args.dry_run)
 
         if not args.dry_run:
             print(f"\nNext steps:")
-            print(f"  1. Review the new entries in {bib_file}")
+            print(f"  1. Review the changes in {bib_file}")
             print(f"  2. Run: ./parse_publications.sh")
             print(f"  3. Commit and push the changes")
     else:
-        print("No new publications to add.")
+        print("No changes to make.")
 
     return 0
 
