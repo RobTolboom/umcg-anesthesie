@@ -74,13 +74,6 @@ jobs:
             $DRY_RUN \
             --rate-limit 1.0
 
-      - name: Parse bibliography
-        if: github.event.inputs.dry_run != 'true'
-        run: |
-          echo "Parsing bibliography..."
-          chmod +x ./parse_publications.sh
-          ./parse_publications.sh
-
       - name: Check for changes
         id: check_changes
         if: github.event.inputs.dry_run != 'true'
@@ -101,10 +94,10 @@ jobs:
           git config --local user.name "github-actions[bot]"
 
           # Get statistics for commit message
+          git add content/umcg-anes.bib
           ADDED=$(git diff --cached --numstat content/umcg-anes.bib | awk '{sum+=$1} END {print sum}')
           REMOVED=$(git diff --cached --numstat content/umcg-anes.bib | awk '{sum+=$2} END {print sum}')
 
-          git add content/umcg-anes.bib content/*.json content/pages/publications/
 
           git commit -m "Auto-update: Import publications from PubMed
 

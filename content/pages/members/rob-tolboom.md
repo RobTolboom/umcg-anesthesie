@@ -1,6 +1,6 @@
 title: Rob Tolboom
 name: Rob Tolboom
-pub_name: Robert Tolboom
+pub_name: Robert C Tolboom
 template: people-single
 picture: people/Rob_Tolboom.jpg
 position: Anesthesiologist
