@@ -14,7 +14,11 @@ linkedin: https://nl.linkedin.com/in/robtolboom
 scholar: https://scholar.google.com/citations?user=20c9OHYAAAAJ
 researcherid: https://www.webofscience.com/wos/author/record/JAN-9026-2023
 orcid: https://orcid.org/0000-0002-3460-1934
+telephone:
+website:
+publons:
 show_publication_years: yes
+show_finished_projects: false
 
 Rob completed his medical studies at Utrecht University, where his internships in surgery and pediatric anesthesiology sparked an interest in research. After obtaining his medical degree in 2012, he joined Meander Medical Center in Amersfoort as a surgical resident. There, he contributed to improving care for hiatal hernia patients and conducted research on robotic hiatal hernia surgery. His engagement in research led to writing a thesis on robotic surgery for hiatal hernia.
 
