@@ -118,8 +118,12 @@ class PubMedImporter:
         if os.environ.get('DEBUG_PUBMED'):
             print(f"  DEBUG: {url}", file=sys.stderr)
 
+        # Add User-Agent header to avoid being blocked
+        req = urllib.request.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (compatible; PubMedImporter/1.0; +mailto:' + self.email + ')')
+
         try:
-            with urllib.request.urlopen(url, timeout=30) as response:
+            with urllib.request.urlopen(req, timeout=30) as response:
                 data = json.loads(response.read().decode())
                 pmids = data.get('esearchresult', {}).get('idlist', [])
                 return pmids
@@ -155,8 +159,12 @@ class PubMedImporter:
 
         url = f"{self.EFETCH_URL}?{urllib.parse.urlencode(params)}"
 
+        # Add User-Agent header to avoid being blocked
+        req = urllib.request.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (compatible; PubMedImporter/1.0; +mailto:' + self.email + ')')
+
         try:
-            with urllib.request.urlopen(url, timeout=60) as response:
+            with urllib.request.urlopen(req, timeout=60) as response:
                 xml_data = response.read().decode('utf-8')
                 return self._parse_pubmed_xml(xml_data)
         except urllib.error.HTTPError as e:
@@ -554,6 +562,23 @@ def append_to_bibfile(bib_file: str, new_entries: List[str], dry_run: bool = Fal
         print(f"Error writing to {bib_file}: {e}", file=sys.stderr)
 
 
+def test_api_connection(email: str, api_key: str = None):
+    """Test if PubMed API is accessible."""
+    print("Testing PubMed API connection...")
+
+    importer = PubMedImporter(email=email, api_key=api_key)
+    pmids = importer.search_pubmed("cancer", retmax=1)
+
+    if pmids:
+        print(f"✓ PubMed API is accessible! Found test PMID: {pmids[0]}")
+        return True
+    else:
+        print("✗ PubMed API is not accessible from this environment.")
+        print("  This may be due to network restrictions.")
+        print("  The script should work on a machine with normal internet access.")
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Import publications from PubMed for all group members',
@@ -575,8 +600,15 @@ def main():
                         help='Maximum results per author (default: 100)')
     parser.add_argument('--active-only', action='store_true',
                         help='Only process active members')
+    parser.add_argument('--test', action='store_true',
+                        help='Test PubMed API connection and exit')
 
     args = parser.parse_args()
+
+    # Test mode
+    if args.test:
+        success = test_api_connection(args.email, args.api_key)
+        return 0 if success else 1
 
     # Determine paths
     script_dir = os.path.dirname(os.path.abspath(__file__))

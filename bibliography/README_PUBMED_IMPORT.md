@@ -32,6 +32,19 @@ Voor snellere queries (10 requests/seconde i.p.v. 3):
 
 ## Gebruik
 
+### Test eerst de API verbinding
+
+Voordat je begint, test of PubMed API bereikbaar is:
+
+```bash
+python3 bibliography/pubmed_importer.py \
+  --email jouw.email@radboudumc.nl \
+  --api-key JOUW_API_KEY \
+  --test
+```
+
+Als dit werkt zie je: `✓ PubMed API is accessible!`
+
 ### Basis gebruik met dry-run (aanbevolen voor eerste keer)
 
 ```bash
