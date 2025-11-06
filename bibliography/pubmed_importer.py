@@ -836,18 +836,36 @@ def main():
     for idx, member in enumerate(members, 1):
         print(f"[{idx}/{len(members)}] Processing: {member.name}")
 
-        pmids = []
+        # Collect PMIDs from all search methods for comprehensive coverage
+        all_pmids = []
 
-        # Try ORCID first (more reliable)
+        # Search by ORCID (most reliable)
         if member.orcid:
-            pmids = importer.search_by_orcid(member.orcid, since_year=args.since,
-                                            max_results=args.max_results)
+            orcid_pmids = importer.search_by_orcid(member.orcid, since_year=args.since,
+                                                   max_results=args.max_results)
+            all_pmids.extend(orcid_pmids)
+            if orcid_pmids:
+                print(f"  Found {len(orcid_pmids)} via ORCID")
 
-        # Fall back to name search if no ORCID or no results
-        if not pmids:
-            search_name = member.pub_name or member.name
-            pmids = importer.search_by_author_name(search_name, since_year=args.since,
-                                                  max_results=args.max_results)
+        # Search by pub_name (if different from regular name)
+        if member.pub_name and member.pub_name != member.name:
+            pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
+                                                            max_results=args.max_results)
+            all_pmids.extend(pub_name_pmids)
+            if pub_name_pmids:
+                print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
+
+        # Search by regular name
+        name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
+                                                    max_results=args.max_results)
+        all_pmids.extend(name_pmids)
+        if name_pmids:
+            print(f"  Found {len(name_pmids)} via name '{member.name}'")
+
+        # Deduplicate PMIDs
+        pmids = list(set(all_pmids))
+        if len(all_pmids) > len(pmids):
+            print(f"  Removed {len(all_pmids) - len(pmids)} duplicates")
 
         if not pmids:
             print(f"  No publications found\n")
