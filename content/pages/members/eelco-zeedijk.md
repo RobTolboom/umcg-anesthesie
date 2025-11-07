@@ -2,7 +2,7 @@ title: Eelco Zeedijk
 name: Eelco Zeedijk
 pub_name: Eelco Zeedijk
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

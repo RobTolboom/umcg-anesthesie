@@ -2,7 +2,7 @@ title: Denis van Vliet
 name: Denis van Vliet
 pub_name: Denis van Vliet
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Joke de Ruiter
 name: Joke de Ruiter
 pub_name: Joke de Ruiter
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

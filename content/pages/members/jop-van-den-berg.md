@@ -2,7 +2,7 @@ title: Jop van den Berg
 name: Jop van den Berg
 pub_name: Jop van den Berg
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

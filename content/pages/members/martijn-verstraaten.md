@@ -2,7 +2,7 @@ title: Martijn Verstraaten
 name: Martijn Verstraaten
 pub_name: Martijn Verstraaten
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

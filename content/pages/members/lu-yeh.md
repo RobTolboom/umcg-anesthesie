@@ -2,7 +2,7 @@ title: Lu Yeh
 name: Lu Yeh
 pub_name: Lu Yeh
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

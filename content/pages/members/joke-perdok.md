@@ -2,7 +2,7 @@ title: Joke Perdok
 name: Joke Perdok
 pub_name: Joke Perdok
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

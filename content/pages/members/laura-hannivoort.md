@@ -2,7 +2,7 @@ title: Laura Hannivoort
 name: Laura Hannivoort
 pub_name: Laura Hannivoort
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

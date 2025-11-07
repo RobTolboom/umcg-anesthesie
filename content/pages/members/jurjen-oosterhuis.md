@@ -2,7 +2,7 @@ title: Jurjen Oosterhuis
 name: Jurjen Oosterhuis
 pub_name: Jurjen Oosterhuis
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

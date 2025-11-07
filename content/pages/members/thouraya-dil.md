@@ -2,7 +2,7 @@ title: Thouraya Dil
 name: Thouraya Dil
 pub_name: Thouraya Dil
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

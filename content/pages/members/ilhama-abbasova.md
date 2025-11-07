@@ -2,7 +2,7 @@ title: Ilhama Abbasova
 name: Ilhama Abbasova
 pub_name: Ilhama Abbasova
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

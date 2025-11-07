@@ -2,7 +2,7 @@ title: Caroline Meerts
 name: Caroline Meerts
 pub_name: Caroline Meerts
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

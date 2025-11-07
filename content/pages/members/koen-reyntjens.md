@@ -2,7 +2,7 @@ title: Koen Reyntjens
 name: Koen Reyntjens
 pub_name: Koen Reyntjens
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

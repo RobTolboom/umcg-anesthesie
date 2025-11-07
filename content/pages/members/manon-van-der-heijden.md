@@ -2,7 +2,7 @@ title: Manon van der Heijden
 name: Manon van der Heijden
 pub_name: Manon van der Heijden
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Bart Jan Lichtenbelt
 name: Bart Jan Lichtenbelt
 pub_name: Bart Jan Lichtenbelt
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

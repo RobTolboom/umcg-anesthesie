@@ -2,7 +2,7 @@ title: Annelies Heeman
 name: Annelies Heeman
 pub_name: Annelies Heeman
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Arjan Konijn
 name: Arjan Konijn
 pub_name: Arjan Konijn
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

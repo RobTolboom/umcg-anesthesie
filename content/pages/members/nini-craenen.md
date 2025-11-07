@@ -2,7 +2,7 @@ title: Nini Craenen
 name: Nini Craenen
 pub_name: Nini Craenen
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

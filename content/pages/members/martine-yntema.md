@@ -2,7 +2,7 @@ title: Martine Yntema
 name: Martine Yntema
 pub_name: Martine Yntema
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Sawal Atmosoerodjo
 name: Sawal Atmosoerodjo
 pub_name: Sawal Atmosoerodjo
 template: people-single
-picture: people/Missing.svg
+picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes
