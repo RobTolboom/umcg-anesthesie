@@ -225,6 +225,11 @@ class PubMedImporter:
             # Remove trailing period if present
             title = title.rstrip('.')
 
+            # Skip entries without title - required field for BibTeX
+            if not title:
+                print(f"  Warning: Skipping PMID {pmid} - no title found", file=sys.stderr)
+                return None
+
             # Authors
             authors = []
             author_list = art.find('.//AuthorList')
