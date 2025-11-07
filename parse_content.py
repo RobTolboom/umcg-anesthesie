@@ -76,7 +76,7 @@ for file_path in glob.glob(os.path.join("content", "pages", "defaults", "*.md"))
 for page in default_pages:
     src_path = os.path.join("content", "pages", "defaults", page)
     dst_path = os.path.join(site, "content", "pages", page)
-    if os.path.exists(src_path) and not os.path.exists(dst_path):
+    if os.path.exists(src_path):
         shutil.copyfile(src_path, dst_path)
 
 print(f"Copied pages to {site}.")
