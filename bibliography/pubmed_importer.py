@@ -666,8 +666,24 @@ def load_existing_entries(bib_file: str) -> Dict[str, Dict]:
 
 def load_existing_pmids(bib_file: str) -> Set[str]:
     """Load all PMIDs that already exist in the BibTeX file."""
-    entries = load_existing_entries(bib_file)
-    return set(entries.keys())
+    pmids = set()
+
+    if not os.path.exists(bib_file):
+        return pmids
+
+    try:
+        with open(bib_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Find ALL PMIDs directly in the file, not through dict
+        # This prevents missing duplicates due to dict overwriting
+        pmid_matches = re.findall(r'pmid\s*=\s*[{\"]?(\d+)[}\"]?', content, re.IGNORECASE)
+        pmids = set(pmid_matches)
+
+    except Exception as e:
+        print(f"Error reading {bib_file}: {e}", file=sys.stderr)
+
+    return pmids
 
 
 def load_existing_bibkeys(bib_file: str) -> Set[str]:
