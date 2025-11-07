@@ -94,7 +94,7 @@ def create_author_md_files(bibfile, bib_items_per_author_per_date, list_research
             if not os.path.exists(website_dir):
                 continue
 
-            if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
+            if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab'):
                 dir_name = os.path.join(f'./website-{group}/content/pages/publications/',  name.lower())
                 print(dir_name)
                 if not os.path.exists(dir_name):
@@ -157,7 +157,7 @@ def create_publication_md(bibfile, bib_items, bib_items_per_author_per_date, lis
                         website_dir = f'./website-{group}'
                         if not os.path.exists(website_dir):
                             continue
-                        if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
+                        if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab'):
                             groups.add(group)
 
         # If no member authors found, assign to default groups based on bibfile
