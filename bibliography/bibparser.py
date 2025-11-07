@@ -199,7 +199,7 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
 
     # compute all years per group
     for group in groups:
-        if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab' and bibfile == 'diag'):
+        if (group == 'cara-lab' and bibfile == 'cara') or (group != 'cara-lab'):
             # Sort by year (desc), month (desc), then pmid (desc)
             group_keys_sorted = sorted(group_keys[group], key=get_sort_key)
 
