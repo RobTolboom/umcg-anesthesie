@@ -1,0 +1,24 @@
+title: Marco Modestini
+name: Marco Modestini
+pub_name: Marco Modestini
+template: people-single
+picture:
+position: Anesthesiologist
+active: yes
+groups: anes
+default_group: anes
+email: m.modestini@umcg.nl
+office:
+type: faculty
+linkedin:
+scholar:
+researcherid:
+orcid:
+telephone: 46689
+website:
+publons:
+show_publication_years: yes
+show_finished_projects: false
+
+Biografie volgt spoedig.
+

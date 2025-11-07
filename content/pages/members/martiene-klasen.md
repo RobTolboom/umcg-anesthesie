@@ -1,0 +1,24 @@
+title: Martiene Klasen
+name: Martiene Klasen
+pub_name: Martiene Klasen
+template: people-single
+picture:
+position: Anesthesiologist
+active: yes
+groups: anes
+default_group: anes
+email: m.klasen@umcg.nl
+office:
+type: faculty
+linkedin:
+scholar:
+researcherid:
+orcid:
+telephone: 61810
+website:
+publons:
+show_publication_years: yes
+show_finished_projects: false
+
+Biografie volgt spoedig.
+
