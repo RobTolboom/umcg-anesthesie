@@ -2,7 +2,7 @@ title: Jaap Jan Vos
 name: Jaap Jan Vos
 pub_name: Jaap Jan Vos
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

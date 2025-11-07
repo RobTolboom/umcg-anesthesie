@@ -2,7 +2,7 @@ title: Jan-Willem Boldingh
 name: Jan-Willem Boldingh
 pub_name: Jan-Willem Boldingh
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

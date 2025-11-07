@@ -2,7 +2,7 @@ title: André Wolff
 name: André Wolff
 pub_name: André Wolff
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

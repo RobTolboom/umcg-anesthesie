@@ -2,7 +2,7 @@ title: Tony Absalom
 name: Tony Absalom
 pub_name: Tony Absalom
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

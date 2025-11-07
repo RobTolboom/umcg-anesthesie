@@ -2,7 +2,7 @@ title: Gerda Boersma
 name: Gerda Boersma
 pub_name: Gerda Boersma
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

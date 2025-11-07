@@ -2,7 +2,7 @@ title: Lily Menger
 name: Lily Menger
 pub_name: Lily Menger
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

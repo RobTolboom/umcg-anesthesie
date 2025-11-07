@@ -2,7 +2,7 @@ title: Guido de Rooij
 name: Guido de Rooij
 pub_name: Guido de Rooij
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

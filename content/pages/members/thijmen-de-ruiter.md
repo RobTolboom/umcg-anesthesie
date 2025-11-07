@@ -2,7 +2,7 @@ title: Thijmen de Ruiter
 name: Thijmen de Ruiter
 pub_name: Thijmen de Ruiter
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

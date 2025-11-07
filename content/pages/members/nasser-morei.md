@@ -2,7 +2,7 @@ title: Nasser Morei
 name: Nasser Morei
 pub_name: Nasser Morei
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

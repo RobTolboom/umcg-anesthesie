@@ -2,7 +2,7 @@ title: Marco Sahinovic
 name: Marco Sahinovic
 pub_name: Marco Sahinovic
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

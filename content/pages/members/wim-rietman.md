@@ -2,7 +2,7 @@ title: Wim Rietman
 name: Wim Rietman
 pub_name: Wim Rietman
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

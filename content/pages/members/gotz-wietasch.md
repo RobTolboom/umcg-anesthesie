@@ -2,7 +2,7 @@ title: Götz Wietasch
 name: Götz Wietasch
 pub_name: Götz Wietasch
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

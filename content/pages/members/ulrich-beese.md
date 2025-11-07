@@ -2,7 +2,7 @@ title: Ulrich Beese
 name: Ulrich Beese
 pub_name: Ulrich Beese
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

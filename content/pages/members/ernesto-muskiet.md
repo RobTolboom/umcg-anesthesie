@@ -2,7 +2,7 @@ title: Ernesto Muskiet
 name: Ernesto Muskiet
 pub_name: Ernesto Muskiet
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

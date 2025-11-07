@@ -2,7 +2,7 @@ title: Allart Venema
 name: Allart Venema
 pub_name: Allart Venema
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

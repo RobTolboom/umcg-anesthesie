@@ -2,7 +2,7 @@ title: Zaïti Kostense
 name: Zaïti Kostense
 pub_name: Zaïti Kostense
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

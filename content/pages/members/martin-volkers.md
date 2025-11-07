@@ -2,7 +2,7 @@ title: Martin Volkers
 name: Martin Volkers
 pub_name: Martin Volkers
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

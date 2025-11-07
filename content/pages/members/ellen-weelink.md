@@ -2,7 +2,7 @@ title: Ellen Weelink
 name: Ellen Weelink
 pub_name: Ellen Weelink
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

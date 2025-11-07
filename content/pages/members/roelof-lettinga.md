@@ -2,7 +2,7 @@ title: Roelof Lettinga
 name: Roelof Lettinga
 pub_name: Roelof Lettinga
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

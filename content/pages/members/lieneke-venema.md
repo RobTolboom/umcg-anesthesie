@@ -2,7 +2,7 @@ title: Lieneke Venema
 name: Lieneke Venema
 pub_name: Lieneke Venema
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

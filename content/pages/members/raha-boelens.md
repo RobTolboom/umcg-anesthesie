@@ -2,7 +2,7 @@ title: Raha Boelens
 name: Raha Boelens
 pub_name: Raha Boelens
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

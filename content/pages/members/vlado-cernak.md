@@ -2,7 +2,7 @@ title: Vlado Cernak
 name: Vlado Cernak
 pub_name: Vlado Cernak
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

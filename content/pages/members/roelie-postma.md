@@ -2,7 +2,7 @@ title: Roelie Postma
 name: Roelie Postma
 pub_name: Roelie Postma
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

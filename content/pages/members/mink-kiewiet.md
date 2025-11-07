@@ -2,7 +2,7 @@ title: Mink Kiewiet
 name: Mink Kiewiet
 pub_name: Mink Kiewiet
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

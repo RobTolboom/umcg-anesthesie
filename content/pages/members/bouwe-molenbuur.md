@@ -2,7 +2,7 @@ title: Bouwe Molenbuur
 name: Bouwe Molenbuur
 pub_name: Bouwe Molenbuur
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Clemens Barends
 name: Clemens Barends
 pub_name: Clemens Barends
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

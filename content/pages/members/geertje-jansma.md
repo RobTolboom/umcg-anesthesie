@@ -2,7 +2,7 @@ title: Geertje Jansma
 name: Geertje Jansma
 pub_name: Geertje Jansma
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Grita Krenz
 name: Grita Krenz
 pub_name: Grita Krenz
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

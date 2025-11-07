@@ -2,7 +2,7 @@ title: Joost van der Maaten
 name: Joost van der Maaten
 pub_name: Joost van der Maaten
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

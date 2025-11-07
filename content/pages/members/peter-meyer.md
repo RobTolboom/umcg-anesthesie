@@ -2,7 +2,7 @@ title: Peter Meyer
 name: Peter Meyer
 pub_name: Peter Meyer
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

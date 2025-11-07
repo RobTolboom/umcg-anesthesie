@@ -2,7 +2,7 @@ title: Ruud Stellema
 name: Ruud Stellema
 pub_name: Ruud Stellema
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

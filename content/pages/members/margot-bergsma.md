@@ -2,7 +2,7 @@ title: Margot Bergsma
 name: Margot Bergsma
 pub_name: Margot Bergsma
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

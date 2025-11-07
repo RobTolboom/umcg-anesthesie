@@ -2,7 +2,7 @@ title: Jens Valk
 name: Jens Valk
 pub_name: Jens Valk
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

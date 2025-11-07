@@ -2,7 +2,7 @@ title: Ilse Jansen
 name: Ilse Jansen
 pub_name: Ilse Jansen
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

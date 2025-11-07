@@ -2,7 +2,7 @@ title: Susanne Huisman
 name: Susanne Huisman
 pub_name: Susanne Huisman
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

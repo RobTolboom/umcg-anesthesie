@@ -2,7 +2,7 @@ title: Gertrude Nieuwenhuijs
 name: Gertrude Nieuwenhuijs
 pub_name: Gertrude Nieuwenhuijs
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

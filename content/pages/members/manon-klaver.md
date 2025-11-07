@@ -2,7 +2,7 @@ title: Manon Klaver
 name: Manon Klaver
 pub_name: Manon Klaver
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

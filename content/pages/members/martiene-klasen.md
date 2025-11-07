@@ -2,7 +2,7 @@ title: Martiene Klasen
 name: Martiene Klasen
 pub_name: Martiene Klasen
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

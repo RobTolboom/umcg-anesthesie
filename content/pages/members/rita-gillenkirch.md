@@ -2,7 +2,7 @@ title: Rita Gillenkirch
 name: Rita Gillenkirch
 pub_name: Rita Gillenkirch
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

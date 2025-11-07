@@ -2,7 +2,7 @@ title: Frouckje Hoekstra
 name: Frouckje Hoekstra
 pub_name: Frouckje Hoekstra
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

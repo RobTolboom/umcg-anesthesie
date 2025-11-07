@@ -2,7 +2,7 @@ title: Rutger Spruit
 name: Rutger Spruit
 pub_name: Rutger Spruit
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Meine Fernhout
 name: Meine Fernhout
 pub_name: Meine Fernhout
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

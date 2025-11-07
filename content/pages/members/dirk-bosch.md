@@ -2,7 +2,7 @@ title: Dirk Bosch
 name: Dirk Bosch
 pub_name: Dirk Bosch
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

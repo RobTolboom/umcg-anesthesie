@@ -2,7 +2,7 @@ title: Egbert Klarenbeek
 name: Egbert Klarenbeek
 pub_name: Egbert Klarenbeek
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

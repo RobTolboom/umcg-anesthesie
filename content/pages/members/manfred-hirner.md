@@ -2,7 +2,7 @@ title: Manfred Hirner
 name: Manfred Hirner
 pub_name: Manfred Hirner
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

@@ -2,7 +2,7 @@ title: Jayaint Jainandunsing
 name: Jayaint Jainandunsing
 pub_name: Jayaint Jainandunsing
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

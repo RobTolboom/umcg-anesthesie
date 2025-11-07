@@ -2,7 +2,7 @@ title: Miriam Zeillemaker
 name: Miriam Zeillemaker
 pub_name: Miriam Zeillemaker
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

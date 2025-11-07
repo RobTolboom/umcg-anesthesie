@@ -2,7 +2,7 @@ title: Marco Modestini
 name: Marco Modestini
 pub_name: Marco Modestini
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

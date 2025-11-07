@@ -2,7 +2,7 @@ title: Renske Uildriks
 name: Renske Uildriks
 pub_name: Renske Uildriks
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

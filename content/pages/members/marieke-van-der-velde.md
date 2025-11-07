@@ -2,7 +2,7 @@ title: Marieke van der Velde
 name: Marieke van der Velde
 pub_name: Marieke van der Velde
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

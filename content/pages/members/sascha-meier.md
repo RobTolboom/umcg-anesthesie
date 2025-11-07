@@ -2,7 +2,7 @@ title: Sascha Meier
 name: Sascha Meier
 pub_name: Sascha Meier
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

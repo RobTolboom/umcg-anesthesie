@@ -2,7 +2,7 @@ title: Nadia Stellema
 name: Nadia Stellema
 pub_name: Nadia Stellema
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes

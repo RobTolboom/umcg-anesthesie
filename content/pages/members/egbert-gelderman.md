@@ -2,7 +2,7 @@ title: Egbert Gelderman
 name: Egbert Gelderman
 pub_name: Egbert Gelderman
 template: people-single
-picture:
+picture: people/Missing.svg
 position: Anesthesiologist
 active: yes
 groups: anes
