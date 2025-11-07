@@ -1,6 +1,6 @@
-title: André Wolff
-name: André Wolff
-pub_name: André Wolff
+title: Andre Wolff
+name: Andre Wolff
+pub_name: Andre Wolff
 template: people-single
 picture: people/Missing.jpg
 position: Anesthesiologist
@@ -21,4 +21,3 @@ show_publication_years: yes
 show_finished_projects: false
 
 Biografie volgt spoedig.
-

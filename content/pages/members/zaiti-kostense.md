@@ -1,6 +1,6 @@
-title: Zaïti Kostense
-name: Zaïti Kostense
-pub_name: Zaïti Kostense
+title: Zaiti Kostense
+name: Zaiti Kostense
+pub_name: Zaiti Kostense
 template: people-single
 picture: people/Missing.jpg
 position: Anesthesiologist
@@ -21,4 +21,3 @@ show_publication_years: yes
 show_finished_projects: false
 
 Biografie volgt spoedig.
-

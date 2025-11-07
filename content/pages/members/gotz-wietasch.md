@@ -1,6 +1,6 @@
-title: Götz Wietasch
-name: Götz Wietasch
-pub_name: Götz Wietasch
+title: Gotz Wietasch
+name: Gotz Wietasch
+pub_name: Gotz Wietasch
 template: people-single
 picture: people/Missing.jpg
 position: Anesthesiologist
@@ -21,4 +21,3 @@ show_publication_years: yes
 show_finished_projects: false
 
 Biografie volgt spoedig.
-
