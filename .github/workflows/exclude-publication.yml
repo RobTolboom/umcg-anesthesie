@@ -1,0 +1,130 @@
+name: Exclude Publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      pmid:
+        description: 'PubMed ID (PMID) to exclude'
+        required: true
+        type: string
+      member:
+        description: 'Member slug'
+        required: true
+        type: choice
+        options:
+          - allart-venema
+          - andre-wolff
+          - annelies-heeman
+          - arjan-konijn
+          - bart-jan-lichtenbelt
+          - bouwe-molenbuur
+          - caroline-meerts
+          - clemens-barends
+          - denis-van-vliet
+          - dirk-bosch
+          - eelco-zeedijk
+          - egbert-gelderman
+          - egbert-klarenbeek
+          - ellen-weelink
+          - ernesto-muskiet
+          - frouckje-hoekstra
+          - geertje-jansma
+          - gerda-boersma
+          - gertrude-nieuwenhuijs
+          - gotz-wietasch
+          - grita-krenz
+          - guido-de-rooij
+          - ilhama-abbasova
+          - ilse-jansen
+          - jaap-jan-vos
+          - jan-willem-boldingh
+          - jayaint-jainandunsing
+          - jens-valk
+          - joke-de-ruiter
+          - joke-perdok
+          - joost-van-der-maaten
+          - jop-van-den-berg
+          - jurjen-oosterhuis
+          - koen-reyntjens
+          - laura-hannivoort
+          - lieneke-venema
+          - lily-menger
+          - lu-yeh
+          - manfred-hirner
+          - manon-klaver
+          - manon-van-der-heijden
+          - marco-modestini
+          - marco-sahinovic
+          - margot-bergsma
+          - marieke-van-der-velde
+          - martiene-klasen
+          - martijn-verstraaten
+          - martin-volkers
+          - martine-yntema
+          - meine-fernhout
+          - michiel-schoorl
+          - mink-kiewiet
+          - miriam-zeillemaker
+          - nadia-stellema
+          - nasser-morei
+          - nini-craenen
+          - oliver-jung
+          - peter-meyer
+          - raha-boelens
+          - renske-uildriks
+          - rita-gillenkirch
+          - rob-tolboom
+          - roelie-postma
+          - roelof-lettinga
+          - rutger-spruit
+          - ruud-stellema
+          - sascha-meier
+          - sawal-atmosoerodjo
+          - sonja-kessner
+          - susanne-huisman
+          - thiago-ramos-grigio
+          - thijmen-de-ruiter
+          - thouraya-dil
+          - tony-absalom
+          - ulrich-beese
+          - vlado-cernak
+          - wim-rietman
+          - zaiti-kostense
+      reason:
+        description: 'Reason for exclusion'
+        required: true
+        type: string
+
+jobs:
+  exclude:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Exclude publication
+        run: |
+          python3 bibliography/exclude_pmid.py \
+            --pmid "${{ github.event.inputs.pmid }}" \
+            --member "${{ github.event.inputs.member }}" \
+            --reason "${{ github.event.inputs.reason }}" \
+            --excluded-by "${{ github.actor }}"
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add bibliography/excluded_pmids.json content/umcg-anes.bib
+          git commit -m "exclude: Remove PMID ${{ github.event.inputs.pmid }} for ${{ github.event.inputs.member }}" -m "Reason: ${{ github.event.inputs.reason }}" -m "Excluded by: ${{ github.actor }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}

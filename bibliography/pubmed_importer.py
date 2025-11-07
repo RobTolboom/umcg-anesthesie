@@ -718,6 +718,26 @@ def load_existing_pmids(bib_file: str) -> Set[str]:
     return pmids
 
 
+def load_excluded_pmids(exclude_file: str) -> Set[str]:
+    """Load all PMIDs that should be excluded from import."""
+    pmids = set()
+
+    if not os.path.exists(exclude_file):
+        return pmids
+
+    try:
+        with open(exclude_file, 'r', encoding='utf-8') as f:
+            excluded_data = json.load(f)
+
+        # Extract PMIDs from the JSON keys
+        pmids = set(excluded_data.keys())
+
+    except Exception as e:
+        print(f"Error reading {exclude_file}: {e}", file=sys.stderr)
+
+    return pmids
+
+
 def load_existing_bibkeys(bib_file: str) -> Set[str]:
     """Load all BibTeX keys that already exist."""
     keys = set()
@@ -903,6 +923,7 @@ def main():
     project_root = os.path.dirname(script_dir)
     members_dir = os.path.join(project_root, 'content', 'pages', 'members')
     bib_file = os.path.join(project_root, 'content', 'umcg-anes.bib')
+    exclude_file = os.path.join(script_dir, 'excluded_pmids.json')
 
     print(f"PubMed Bibliography Importer")
     print(f"{'='*80}\n")
@@ -912,8 +933,10 @@ def main():
     existing_entries = load_existing_entries(bib_file)
     existing_pmids = load_existing_pmids(bib_file)  # Use correct function to find ALL PMIDs
     existing_keys = load_existing_bibkeys(bib_file)
+    excluded_pmids = load_excluded_pmids(exclude_file)
     print(f"  Found {len(existing_pmids)} existing publications")
     print(f"  Found {len(existing_keys)} existing BibTeX keys")
+    print(f"  Found {len(excluded_pmids)} excluded publications")
 
     # Check for duplicates in existing file
     duplicates_found = sum(1 for entries in existing_entries.values() if len(entries) > 1)
@@ -1016,9 +1039,18 @@ def main():
 
         print(f"  Found {len(pmids)} publications")
 
-        # Separate new and existing PMIDs
-        new_pmids = [pmid for pmid in pmids if pmid not in existing_pmids]
-        existing_pmids_to_check = [pmid for pmid in pmids if pmid in existing_pmids]
+        # Filter out excluded PMIDs
+        excluded_for_member = [pmid for pmid in pmids if pmid in excluded_pmids]
+        if excluded_for_member:
+            print(f"  {len(excluded_for_member)} publication(s) in exclude list")
+            for pmid in excluded_for_member[:5]:  # Show first 5
+                print(f"    - PMID {pmid} (excluded)")
+            if len(excluded_for_member) > 5:
+                print(f"    ... and {len(excluded_for_member) - 5} more")
+
+        # Separate new and existing PMIDs (excluding excluded PMIDs)
+        new_pmids = [pmid for pmid in pmids if pmid not in existing_pmids and pmid not in excluded_pmids]
+        existing_pmids_to_check = [pmid for pmid in pmids if pmid in existing_pmids and pmid not in excluded_pmids]
 
         if not new_pmids and not existing_pmids_to_check:
             print(f"  No publications to process\n")
