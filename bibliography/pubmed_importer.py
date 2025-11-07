@@ -621,12 +621,15 @@ def publication_to_bibtex(pub: Dict, existing_keys: Set[str]) -> str:
     return '\n'.join(lines)
 
 
-def load_existing_entries(bib_file: str) -> Dict[str, Dict]:
+def load_existing_entries(bib_file: str) -> Dict[str, List[Dict]]:
     """
     Load all existing BibTeX entries with their PMIDs.
 
     Returns:
-        Dictionary mapping PMID to entry info: {pmid: {'key': bibkey, 'entry': full_entry_text}}
+        Dictionary mapping PMID to list of entry infos:
+        {pmid: [{'key': bibkey, 'entry': full_entry_text}, ...]}
+
+    Note: Returns a list per PMID to handle duplicates that may exist in the file.
     """
     entries = {}
 
@@ -638,11 +641,30 @@ def load_existing_entries(bib_file: str) -> Dict[str, Dict]:
             content = f.read()
 
         # Find all BibTeX entries with their PMIDs
-        # Pattern to match complete BibTeX entries
-        entry_pattern = r'(@\w+\s*{\s*[^,\s]+\s*,[^@]*?})'
+        # Use improved parsing that handles nested braces in abstracts
+        # Split by entry start pattern - entries begin with @ at start of line
+        entry_starts = [(m.start(), m.group(0)) for m in re.finditer(r'(?:^|\n)@\w+\s*{', content, re.MULTILINE)]
 
-        for match in re.finditer(entry_pattern, content, re.DOTALL):
-            entry_text = match.group(1)
+        for i, (start_pos, start_match) in enumerate(entry_starts):
+            # Adjust start_pos if match includes leading newline
+            if start_pos > 0 and content[start_pos] == '\n':
+                start_pos += 1
+
+            # Determine end of this entry (start of next entry or end of file)
+            if i + 1 < len(entry_starts):
+                end_pos = entry_starts[i + 1][0]
+                # Adjust if next match includes leading newline
+                if end_pos > 0 and content[end_pos] == '\n':
+                    end_pos += 1
+            else:
+                end_pos = len(content)
+
+            # Extract entry text
+            entry_text = content[start_pos:end_pos].rstrip()
+
+            # Only process @article entries (skip @string, etc.)
+            if not entry_text.startswith('@article'):
+                continue
 
             # Extract PMID from this entry
             pmid_match = re.search(r'pmid\s*=\s*[{\"]?(\d+)[}\"]?', entry_text, re.IGNORECASE)
@@ -653,10 +675,15 @@ def load_existing_entries(bib_file: str) -> Dict[str, Dict]:
                 key_match = re.search(r'@(\w+)\s*{\s*([^,\s]+)\s*,', entry_text)
                 if key_match:
                     bib_key = key_match.group(2)
-                    entries[pmid] = {
+
+                    # Store as list to handle duplicates
+                    if pmid not in entries:
+                        entries[pmid] = []
+
+                    entries[pmid].append({
                         'key': bib_key,
                         'entry': entry_text
-                    }
+                    })
 
     except Exception as e:
         print(f"Error reading {bib_file}: {e}", file=sys.stderr)
@@ -878,10 +905,18 @@ def main():
     # Load existing data
     print("Loading existing bibliography...")
     existing_entries = load_existing_entries(bib_file)
-    existing_pmids = set(existing_entries.keys())
+    existing_pmids = load_existing_pmids(bib_file)  # Use correct function to find ALL PMIDs
     existing_keys = load_existing_bibkeys(bib_file)
     print(f"  Found {len(existing_pmids)} existing publications")
-    print(f"  Found {len(existing_keys)} existing BibTeX keys\n")
+    print(f"  Found {len(existing_keys)} existing BibTeX keys")
+
+    # Check for duplicates in existing file
+    duplicates_found = sum(1 for entries in existing_entries.values() if len(entries) > 1)
+    if duplicates_found > 0:
+        total_duplicate_entries = sum(len(entries) - 1 for entries in existing_entries.values() if len(entries) > 1)
+        print(f"  WARNING: Found {duplicates_found} PMIDs with duplicates ({total_duplicate_entries} duplicate entries)")
+        print(f"  Consider running: python bibliography/cleanup_duplicates.py --dry-run")
+    print()
 
     # Parse members
     print("Parsing member files...")
@@ -1011,9 +1046,15 @@ def main():
                     print(f"    - Warning: PMID {pmid} not found in existing entries, skipping update check")
                     continue
 
-                # Generate new entry (reuse existing key to maintain consistency)
-                old_bib_key = existing_entries[pmid]['key']
-                old_entry = existing_entries[pmid]['entry']
+                # Handle duplicates - use first entry and warn if duplicates exist
+                entry_list = existing_entries[pmid]
+                if len(entry_list) > 1:
+                    print(f"    - Warning: PMID {pmid} has {len(entry_list)} duplicate entries, using first one")
+                    print(f"      Keys: {', '.join(e['key'] for e in entry_list)}")
+
+                # Use first entry (in clean files there will be only one)
+                old_bib_key = entry_list[0]['key']
+                old_entry = entry_list[0]['entry']
 
                 # Create new entry with same key
                 # Temporarily add old key to set to use it
