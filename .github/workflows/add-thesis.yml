@@ -188,7 +188,5 @@ jobs:
             -m "Added via GitHub Action by @${{ github.actor }}"
 
       - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_BIB_TOKEN }}
-          branch: ${{ github.ref }}
+        run: |
+          git push

@@ -1,18 +1,19 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
-# Install python3.8
+# Install python3.12
 RUN : \
     && apt-get update \
-    && apt-get install -y --no-install-recommends software-properties-common \
-    && add-apt-repository -y ppa:deadsnakes \
-    && apt-get install -y --no-install-recommends python3.8-venv \
-    && apt-get install -y --no-install-recommends git \
-    && apt-get install libpython3.8-dev -y \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+       python3.12 \
+       python3.12-venv \
+       python3-pip \
+       git \
     && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
     && :
-    
+
 # Add env to PATH
-RUN python3.8 -m venv /venv
+RUN python3.12 -m venv /venv
 ENV PATH=/venv/bin:$PATH
 
 # Website specific requirements
