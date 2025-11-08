@@ -9,7 +9,7 @@ groups: anes
 default_group: anes
 email: a.p.wolff@umcg.nl
 office:
-type: faculty
+type: chair
 linkedin:
 scholar:
 researcherid:

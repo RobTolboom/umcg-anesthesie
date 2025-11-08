@@ -1,20 +1,20 @@
-title: Tony Absalom
-name: Tony Absalom
-pub_name: Tony Absalom
+title: Michel Struys
+name: Michel Struys
+pub_name: Michel M R F Struys
 template: people-single
 picture: people/Missing.jpg
 position: Anesthesiologist
 active: yes
 groups: anes
 default_group: anes
-email: a.r.absalom@umcg.nl
+email: m.m.r.f.struys@umcg.nl
 office:
-type: chair
+type: director
 linkedin:
 scholar:
 researcherid:
 orcid:
-telephone: 46611
+telephone: 
 website:
 publons:
 show_publication_years: yes
