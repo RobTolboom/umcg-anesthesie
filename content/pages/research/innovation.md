@@ -7,7 +7,7 @@ picture: research/education.jpg
 bibkeys: 
 people: Rob Tolboom
 description: Shaping the medical professionals of the future.
-projects: 
+projects: AI-podcast
 
 ![Innovation in Education.]({{ IMGURL }}/images/research/education.jpg) 
 
