@@ -4,7 +4,7 @@ pub_name: Thiago Ramos Grigio
 template: people-single
 picture: people/Thiago_Ramos_Grigio.jpg
 position: PhD candidate
-active: yes
+active: no
 groups: anes
 default_group: anes
 email: T.R.Grigio@umcg.nl
