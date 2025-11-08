@@ -618,9 +618,6 @@ def publication_to_bibtex(pub: Dict, existing_keys: Set[str]) -> str:
         abstract = pub['abstract'].replace('{', '\\{').replace('}', '\\}')
         lines.append(f"  abstract = {{{abstract}}},")
 
-    # Add DIAG note
-    lines.append(f"  optnote = {{DIAG, RADIOLOGY}},")
-
     lines.append("}")
 
     return '\n'.join(lines)

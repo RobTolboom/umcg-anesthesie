@@ -230,7 +230,6 @@ Geïmporteerde entries krijgen:
 - Alle beschikbare metadata: auteurs, titel, journal, jaar, volume, issue, pages
 - PMID en DOI links
 - Abstract (indien beschikbaar)
-- `optnote = {DIAG, RADIOLOGY}` voor categorisatie
 
 ## Tips
 

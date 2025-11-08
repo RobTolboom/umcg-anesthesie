@@ -148,7 +148,6 @@ def create_bibtex_entry(bibkey: str, author: str, title: str, school: str, year:
 
     # Fixed fields
     lines.append(f"  journal = {{PhD thesis}},")
-    lines.append(f"  optnote = {{anes}},")
 
     lines.append("}")
 
