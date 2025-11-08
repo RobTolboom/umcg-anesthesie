@@ -1,9 +1,9 @@
 title: Tony Absalom
 name: Tony Absalom
-pub_name: Tony Absalom
+pub_name: Anthony R Absalom
 template: people-single
 picture: people/Missing.jpg
-position: Anesthesiologist
+position: Professor
 active: yes
 groups: anes
 default_group: anes
@@ -13,7 +13,7 @@ type: chair
 linkedin:
 scholar:
 researcherid:
-orcid:
+orcid: https://orcid.org/0000-0001-7563-9157
 telephone: 46611
 website:
 publons:

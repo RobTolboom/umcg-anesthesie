@@ -3,7 +3,7 @@ name: Michel Struys
 pub_name: Michel M R F Struys
 template: people-single
 picture: people/Missing.jpg
-position: Anesthesiologist
+position: Department Head
 active: yes
 groups: anes
 default_group: anes
@@ -13,7 +13,7 @@ type: director
 linkedin:
 scholar:
 researcherid:
-orcid:
+orcid: https://orcid.org/0000-0003-0421-536X
 telephone: 
 website:
 publons:

@@ -1,9 +1,9 @@
 title: Andre Wolff
 name: Andre Wolff
-pub_name: Andre Wolff
+pub_name: Andre P Wolff
 template: people-single
 picture: people/Missing.jpg
-position: Anesthesiologist
+position: Professor
 active: yes
 groups: anes
 default_group: anes
@@ -13,7 +13,7 @@ type: chair
 linkedin:
 scholar:
 researcherid:
-orcid:
+orcid: https://orcid.org/0000-0001-6240-3903
 telephone: 68668
 website:
 publons:

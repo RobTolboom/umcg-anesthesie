@@ -1,19 +1,19 @@
 title: Gertrude Nieuwenhuijs
 name: Gertrude Nieuwenhuijs
-pub_name: Gertrude Nieuwenhuijs
+pub_name: Gertrude J Nieuwenhuijs-Moeke
 template: people-single
 picture: people/Missing.jpg
-position: Anesthesiologist
+position: Research Head & Deputy Departmnet Head
 active: yes
 groups: anes
 default_group: anes
 email: g.j.nieuwenhuijs-moeke@umcg.nl
 office:
-type: faculty
-linkedin:
+type: director
+linkedin: https://nl.linkedin.com/in/gertrude-nieuwenhuijs-moeke-44887120
 scholar:
 researcherid:
-orcid:
+orcid: https://orcid.org/0000-0001-9874-2632
 telephone: 46642
 website:
 publons:
