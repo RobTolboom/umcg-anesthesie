@@ -7,7 +7,7 @@ picture: research/education.jpg
 bibkeys: 
 people: Gotz Wietasch
 description: Shaping the medical professionals of the future.
-projects: AI-podcast
+projects: ai-podcast
 
 ![Innovation in Education.]({{ IMGURL }}/images/research/education.jpg) 
 
