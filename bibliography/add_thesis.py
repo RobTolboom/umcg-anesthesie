@@ -19,7 +19,10 @@ from typing import Set, Optional
 
 
 def get_author_full_name(member_slug: str, members_dir: str) -> str:
-    """Extract full name from member markdown file."""
+    """Extract full name from member markdown file.
+
+    Prefers pub_name over name for consistent publication matching.
+    """
     member_file = os.path.join(members_dir, f"{member_slug}.md")
 
     if not os.path.exists(member_file):
@@ -29,10 +32,15 @@ def get_author_full_name(member_slug: str, members_dir: str) -> str:
         with open(member_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Extract name field
+        # Extract pub_name field (preferred for publications)
+        pub_name_match = re.search(r'^pub_name:\s*(.+)$', content, re.MULTILINE)
+        if pub_name_match:
+            return pub_name_match.group(1).strip()
+
+        # Fallback to name field
         name_match = re.search(r'^name:\s*(.+)$', content, re.MULTILINE)
         if not name_match:
-            raise ValueError(f"No 'name' field found in {member_file}")
+            raise ValueError(f"No 'name' or 'pub_name' field found in {member_file}")
 
         return name_match.group(1).strip()
 
