@@ -16,7 +16,8 @@ groups: diag, pathology, retina, rse (this determines on which websites the prof
 default_group: diag (the main group of this person, used for internal links. If not set, the first group from 'groups' is used. If set to 'external', internal links and people-circles will load data from external-people.yaml.)
 email: example@radboudumc.nl
 office: Route ..., room ....
-type: phd/chair/faculty/tech/student  (header = Scientific Staff/Chair/Faculty)/Technical Staff/Visiting researchers
+type: (see available types below)
+
 linkedin: link
 scholar: link
 researcherid: link
@@ -29,8 +30,44 @@ show_publication_years: yes (if this tag is not present it will be automatically
 The bio should be written in the 3rd person. Include your former education, the topic of your research and your supervisors. Include links where possible.
 External link: [Text](link), e.g.: [Kaggle website](https://www.kaggle.com/c/prostate-cancer-grade-assessment/overview)
 Internal link to person: [member/firstname-lastname], e.g.: [member/geert-litjens]
-Internal link to project: [project/projectname], e.g. [project/panda-challenge]}  
+Internal link to project: [project/projectname], e.g. [project/panda-challenge]}
 ```
+
+### Available Member Types
+
+The `type` field determines in which section a member appears on the people page. The following types are supported:
+
+| Type Value | Display Section | Use For |
+|------------|-----------------|---------|
+| `director` | Directors | Department directors and heads |
+| `staff` | Staff | General staff members |
+| `chair` | Chair | Full professors with chair positions |
+| `faculty` | Faculty | Faculty members (doctors, associate/assistant professors) |
+| `postdoc` | Scientific staff | Postdoctoral researchers |
+| `phd` | Scientific staff | PhD candidates |
+| `tech` | Technical staff | Technical staff and engineers |
+| `administrative` | Administrative Staff | Administrative personnel |
+| `student-assistant` | Student assistants | Student assistants |
+| `student` | Visiting researchers | Master/Bachelor students |
+| `visiting` | Visiting researchers | Visiting researchers and guests |
+
+**Display order on the people page:**
+1. Directors
+2. Staff
+3. Chair
+4. Faculty
+5. Scientific staff (postdoc + phd)
+6. Technical staff
+7. Administrative Staff
+8. Student assistants
+9. Visiting researchers (student + visiting)
+
+**Example:**
+```
+type: phd
+```
+
+## Multiple Groups
 
 If a person belongs to more than one group (i.e. diag, pathology), the _active_, _type_ and _position_ fields may have different values according to the corresponding group. You can specify a list of values, one for each group. For example, member A belongs to diag and pathology, he/she is active in DIAG and no longer active in pathology and was a student in DIAG and a PhD student in pathology. Then we would have:
 ```
