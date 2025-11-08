@@ -5,7 +5,7 @@ template: research-single
 groups: anes
 picture: research/education.jpg
 bibkeys: 
-people: Rob Tolboom
+people: Gotz Wietasch
 description: Shaping the medical professionals of the future.
 projects: AI-podcast
 
