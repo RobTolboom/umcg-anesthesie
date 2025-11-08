@@ -1,0 +1,193 @@
+name: Add PhD Thesis
+
+on:
+  workflow_dispatch:
+    inputs:
+      member:
+        description: 'PhD candidate (member slug)'
+        required: true
+        type: choice
+        options:
+          - allart-venema
+          - andre-wolff
+          - annelies-heeman
+          - arjan-konijn
+          - bart-jan-lichtenbelt
+          - bouwe-molenbuur
+          - caroline-meerts
+          - clemens-barends
+          - denis-van-vliet
+          - dirk-bosch
+          - eelco-zeedijk
+          - egbert-gelderman
+          - egbert-klarenbeek
+          - ellen-weelink
+          - ernesto-muskiet
+          - frouckje-hoekstra
+          - geertje-jansma
+          - gerda-boersma
+          - gertrude-nieuwenhuijs
+          - gotz-wietasch
+          - grita-krenz
+          - guido-de-rooij
+          - ilhama-abbasova
+          - ilse-jansen
+          - jaap-jan-vos
+          - jan-willem-boldingh
+          - jayaint-jainandunsing
+          - jens-valk
+          - joke-de-ruiter
+          - joke-perdok
+          - joost-van-der-maaten
+          - jop-van-den-berg
+          - jurjen-oosterhuis
+          - koen-reyntjens
+          - laura-hannivoort
+          - lieneke-venema
+          - lily-menger
+          - lu-yeh
+          - manfred-hirner
+          - manon-klaver
+          - manon-van-der-heijden
+          - marco-modestini
+          - marco-sahinovic
+          - margot-bergsma
+          - marieke-van-der-velde
+          - martiene-klasen
+          - martijn-verstraaten
+          - martin-volkers
+          - martine-yntema
+          - meine-fernhout
+          - michiel-schoorl
+          - mink-kiewiet
+          - miriam-zeillemaker
+          - nadia-stellema
+          - nasser-morei
+          - nini-craenen
+          - oliver-jung
+          - peter-meyer
+          - raha-boelens
+          - renske-uildriks
+          - rita-gillenkirch
+          - rob-tolboom
+          - roelie-postma
+          - roelof-lettinga
+          - rutger-spruit
+          - ruud-stellema
+          - sascha-meier
+          - sawal-atmosoerodjo
+          - sonja-kessner
+          - susanne-huisman
+          - thiago-ramos-grigio
+          - thijmen-de-ruiter
+          - thouraya-dil
+          - tony-absalom
+          - ulrich-beese
+          - vlado-cernak
+          - wim-rietman
+          - zaiti-kostense
+      title:
+        description: 'Thesis title'
+        required: true
+        type: string
+      year:
+        description: 'Year (e.g., 2024)'
+        required: true
+        type: number
+      month:
+        description: 'Month (1-12, optional)'
+        required: false
+        type: number
+      school:
+        description: 'University/School (e.g., "Rijksuniversiteit Groningen, Groningen")'
+        required: true
+        type: string
+      promotor:
+        description: 'Promotor name(s) (e.g., "A.P. Wolff and A.M. Sousa")'
+        required: true
+        type: string
+      copromotor:
+        description: 'Co-promotor name(s) (optional)'
+        required: false
+        type: string
+      url:
+        description: 'URL to thesis (e.g., institutional repository handle)'
+        required: true
+        type: string
+      abstract:
+        description: 'Full abstract text'
+        required: true
+        type: string
+      cover_image_url:
+        description: 'URL to cover image (PNG/JPG) - use GitHub issue attachment or public URL'
+        required: true
+        type: string
+
+jobs:
+  add-thesis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_BIB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget imagemagick python3-pil
+
+      - name: Download cover image
+        run: |
+          wget -O cover_temp.jpg "${{ github.event.inputs.cover_image_url }}" || \
+          wget -O cover_temp.png "${{ github.event.inputs.cover_image_url }}" || \
+          (echo "Failed to download cover image" && exit 1)
+
+          # Determine downloaded file
+          if [ -f cover_temp.jpg ]; then
+            COVER_FILE="cover_temp.jpg"
+          elif [ -f cover_temp.png ]; then
+            COVER_FILE="cover_temp.png"
+          else
+            echo "No cover image file found"
+            exit 1
+          fi
+
+          echo "COVER_FILE=$COVER_FILE" >> $GITHUB_ENV
+
+      - name: Add thesis to bibliography
+        run: |
+          python3 bibliography/add_thesis.py \
+            --member "${{ github.event.inputs.member }}" \
+            --title "${{ github.event.inputs.title }}" \
+            --year "${{ github.event.inputs.year }}" \
+            ${{ github.event.inputs.month && format('--month "{0}"', github.event.inputs.month) || '' }} \
+            --school "${{ github.event.inputs.school }}" \
+            --promotor "${{ github.event.inputs.promotor }}" \
+            ${{ github.event.inputs.copromotor && format('--copromotor "{0}"', github.event.inputs.copromotor) || '' }} \
+            --url "${{ github.event.inputs.url }}" \
+            --abstract "${{ github.event.inputs.abstract }}" \
+            --cover-image "$COVER_FILE"
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/umcg-anes.bib content/images/theses/
+          git commit -m "feat: Add PhD thesis for ${{ github.event.inputs.member }}" \
+            -m "Title: ${{ github.event.inputs.title }}" \
+            -m "Year: ${{ github.event.inputs.year }}" \
+            -m "School: ${{ github.event.inputs.school }}" \
+            -m "Added via GitHub Action by @${{ github.actor }}"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_BIB_TOKEN }}
+          branch: ${{ github.ref }}

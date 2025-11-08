@@ -28,7 +28,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          if git diff --quiet .github/workflows/exclude-publication.yml; then
+          if git diff --quiet .github/workflows/exclude-publication.yml .github/workflows/add-thesis.yml; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
@@ -39,8 +39,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add .github/workflows/exclude-publication.yml
-          git commit -m "chore: Update member list in exclude-publication workflow" -m "Auto-updated based on changes in content/pages/members/"
+          git add .github/workflows/exclude-publication.yml .github/workflows/add-thesis.yml
+          git commit -m "chore: Update member lists in workflows" -m "Auto-updated based on changes in content/pages/members/"
 
       - name: Push changes
         if: steps.check_changes.outputs.changed == 'true'

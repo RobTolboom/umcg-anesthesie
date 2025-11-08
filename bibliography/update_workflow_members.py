@@ -74,11 +74,15 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     members_dir = os.path.join(project_root, 'content', 'pages', 'members')
-    workflow_file = os.path.join(project_root, '.github', 'workflows', 'exclude-publication.yml')
 
-    print("Updating workflow member list...")
+    # Both workflows that need member dropdowns
+    workflow_files = [
+        os.path.join(project_root, '.github', 'workflows', 'exclude-publication.yml'),
+        os.path.join(project_root, '.github', 'workflows', 'add-thesis.yml'),
+    ]
+
+    print("Updating workflow member lists...")
     print(f"Members directory: {members_dir}")
-    print(f"Workflow file: {workflow_file}")
     print()
 
     # Get all members
@@ -88,18 +92,30 @@ def main():
         return 1
 
     print(f"Found {len(members)} members")
+    print()
 
-    # Update workflow file
-    changed = update_workflow_file(workflow_file, members)
+    # Update all workflow files
+    updated_files = []
+    for workflow_file in workflow_files:
+        if os.path.exists(workflow_file):
+            changed = update_workflow_file(workflow_file, members)
+            if changed:
+                updated_files.append(workflow_file)
+        else:
+            print(f"  Warning: {workflow_file} not found, skipping")
 
-    if changed:
+    if updated_files:
         print()
         print("=" * 80)
-        print("✓ Workflow file updated successfully")
+        print("✓ Workflow files updated successfully")
         print(f"  Total members: {len(members)}")
+        print(f"  Files updated: {len(updated_files)}")
+        for f in updated_files:
+            print(f"    - {os.path.basename(f)}")
         print("=" * 80)
         return 0
     else:
+        print("No changes needed - all member lists are up to date")
         return 0
 
 
