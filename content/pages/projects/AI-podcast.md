@@ -9,7 +9,8 @@ groups: anes
 default_group: anes
 people: Rob Tolboom
 description: Korte beschrijving van het project (1-2 zinnen)
-bibkeys: 
+bibkeys:
+category: projects
 ---
 
 **Start date: 01-09-2025** <br>
