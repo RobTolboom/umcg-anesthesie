@@ -50,9 +50,9 @@
     <a class="badge badge-publication" href={{ BIB_ITEMS[page.bibkey]['taverne_url'] }}>Download</a>
     {% endif %}
 
-    {% if 'gscites' in BIB_ITEMS[page.bibkey] %}
-      {% if BIB_ITEMS[page.bibkey]['gscites'] != '0' %}
-        <a class="badge badge-publication" style="background-color: #FCFCFC !important; margin-left: 10px;">Cited by ~{{ BIB_ITEMS[page.bibkey]['gscites'] }}</a>
+    {% if 'citations' in BIB_ITEMS[page.bibkey] %}
+      {% if BIB_ITEMS[page.bibkey]['citations'] != '0' %}
+        <a class="badge badge-publication" style="background-color: #FCFCFC !important; margin-left: 10px;">Cited by ~{{ BIB_ITEMS[page.bibkey]['citations'] }}</a>
       {% endif %}
     {% endif %}
     
