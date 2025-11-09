@@ -1,9 +1,9 @@
 name: Update Publications from PubMed
 
 on:
-  # Run every Monday at 2:00 AM UTC
+  # Run every Sunday at 2:00 AM UTC
   schedule:
-    - cron: '0 2 * * 1'
+    - cron: '0 2 * * 0'
 
   # Allow manual triggering
   workflow_dispatch:
