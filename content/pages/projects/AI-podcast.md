@@ -20,6 +20,7 @@ Medical professionals and researchers need to quickly assess and synthesize evid
 ## Solution / Project summary
 
 Vetrix Podcast is an intelligent data extraction pipeline that processes medical literature PDFs through a five-stage workflow:
+
 1. **Classification** - Automatically identifies publication type (interventional trials, observational studies, systematic reviews, prediction models, editorials)
 2. **Extraction** - Uses LLM vision models to extract complete structured data while preserving tables, figures, and complex formatting
 3. **Validation & Correction** - Iteratively validates and corrects extracted data through dual-tier schema and LLM validation
@@ -56,6 +57,7 @@ Outputs are validated against publication-type-specific JSON schemas covering me
 ## Approach
 
 **Technical Architecture:**
+
 - **Vision-first extraction**: Direct PDF-to-LLM processing preserves tables, figures, and layout
 - **Schema-driven validation**: JSON Schema enforcement with dual-tier validation (local + LLM)
 - **Iterative quality improvement**: Automatic correction loops until quality thresholds are met
@@ -63,6 +65,7 @@ Outputs are validated against publication-type-specific JSON schemas covering me
 - **Modular prompts**: Study-type-specific prompts for classification, extraction, validation, correction, and appraisal
 
 **Quality Assurance:**
+
 - Configurable quality thresholds (completeness, accuracy, schema compliance)
 - Early stopping when quality degrades
 - Best-iteration selection based on composite quality scores
@@ -70,19 +73,13 @@ Outputs are validated against publication-type-specific JSON schemas covering me
 
 ## Goals
 
-- ✅ Implement core extraction pipeline with classification, extraction, and validation (complete)
-- ✅ Achieve dual-tier validation with iterative correction (complete)
-- 🔄 Add critical appraisal module with tool-specific assessments (in progress)
-- 🔄 Integrate GRADE certainty ratings and applicability assessment (in progress)
-- 📋 Develop automated report generation from structured outputs (planned)
-- 📋 Create podcast script generation with quality context (planned)
-- 📋 Deploy as self-hosted service for UMCG researchers (planned)
-
-## Website / Further contact
-
-- **GitHub Repository**: [PDFtoPodcast](https://github.com/RobTolboom/PDFtoPodcast) (if public)
-- **Contact**: [member/rob-tolboom] - UMCG Anesthesiology Department
-- **License**: Dual-license (Prosperity Public License 3.0.0 for academic/non-commercial use; commercial license available)
+- Implement core extraction pipeline with classification, extraction, and validation (complete)
+- Achieve dual-tier validation with iterative correction (complete)
+- Add critical appraisal module with tool-specific assessments (in progress)
+- Integrate GRADE certainty ratings and applicability assessment (in progress)
+- Develop automated report generation from structured outputs (planned)
+- Create podcast script generation with quality context (planned)
+- Deploy as self-hosted service for UMCG researchers (planned)
 
 ## Funding
 
