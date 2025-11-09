@@ -3,7 +3,7 @@ title: Vetrix Podcast
 title_long: AI-powered medical literature extraction pipeline
 finished: false
 type: normal
-picture: projects/AI-podcast.webp
+picture: projects/vetrix-podcast.png
 template: project-single
 groups: anes
 default_group: anes
