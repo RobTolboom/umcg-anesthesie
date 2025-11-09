@@ -65,8 +65,8 @@ def create_group_md_files(_bib_items, bib_items_per_group_per_date, rest_year=20
             save_md_file(md_file_name, '\n'.join(md_content.values()))
 
             md_content['title'] = 'title: Most cited'
-            gs_bib_items = [item for item in all_bib_items if 'gscites' in _bib_items[item]]
-            gs_bib_items = sorted(gs_bib_items, key = lambda i: int(_bib_items[i]['gscites']),reverse=True) 
+            gs_bib_items = [item for item in all_bib_items if 'citations' in _bib_items[item]]
+            gs_bib_items = sorted(gs_bib_items, key = lambda i: int(_bib_items[i]['citations']),reverse=True) 
             md_content['bibkeys'] = f"bibkeys: {','.join(gs_bib_items[:100])}"
             md_file_name = os.path.join(f'./website-{group}/content/pages/publications/most-cited.md')
             save_md_file(md_file_name, '\n'.join(md_content.values()))
