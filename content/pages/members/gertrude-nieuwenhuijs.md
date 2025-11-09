@@ -3,7 +3,7 @@ name: Gertrude Nieuwenhuijs
 pub_name: Gertrude J Nieuwenhuijs-Moeke
 template: people-single
 picture: people/Missing.jpg
-position: Research Head & Deputy Departmnet Head
+position: Research Head & Deputy Department Head
 active: yes
 groups: anes
 default_group: anes
