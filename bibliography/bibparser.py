@@ -10,6 +10,7 @@ import sys
 from mdfiles import create_author_md_files, create_publication_md, create_group_md_files
 from authors import get_list_researchers, get_publications_by_author
 from bibreader import parse_bibtex_file
+from vancouver_formatter import format_vancouver
 
 
 class SetEncoder(json.JSONEncoder):
@@ -57,6 +58,7 @@ def sort_bib_keys_author(author_bib_keys, bib_items):
         "phdthesis",
         "mastersthesis",
         "book",
+        "incollection",
         "other",
     ]
 
@@ -123,6 +125,7 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
         "phdthesis",
         "mastersthesis",
         "book",
+        "incollection",
         "other",
     ]
     bib_items_per_group_per_date = {}
@@ -230,6 +233,11 @@ def sort_bib_keys_group(author_bib_keys, bib_items, list_researchers, bibfile, i
 def parse_bib_file():
     print("parsing bib file...")
     bib_items = parse_bibtex_file("./content/{}.bib".format(sys.argv[1]), "./content/fullstrings.bib")
+
+    # Add Vancouver formatted citations
+    print("formatting citations in Vancouver style...")
+    for bib_key, bib_item in bib_items.items():
+        bib_item['vancouver_citation'] = format_vancouver(bib_item)
 
     print("retreiving list of diag members")
     list_researchers = get_list_researchers("./content/pages/members/")

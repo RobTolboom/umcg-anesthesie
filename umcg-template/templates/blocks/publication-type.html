@@ -11,7 +11,9 @@
 <h2>{{ 'PhD theses' }}</h2>
 {% elif pub_type in ['mscthesis', 'mastersthesis'] %}
 <h2>{{ 'Master theses' }}</h2>
-{% elif pub_type in ['book', 'other'] %}
+{% elif pub_type in ['book', 'incollection'] %}
+<h2>{{ 'Books & Book chapters' }}</h2>
+{% elif pub_type == 'other' %}
 <h2>{{ 'Other publications' }}</h2>
 {% endif%}
 </p>

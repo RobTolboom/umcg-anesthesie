@@ -1,14 +1,4 @@
-<li>{{- BIB_ITEMS[bibkey]['authors']|safe }}, "{{ BIB_ITEMS[bibkey]['title'] }}",
-  {% if 'journal' in BIB_ITEMS[bibkey] -%}
-    <i>{{ BIB_ITEMS[bibkey]['journal'] }},
-    </i>
-  {%- elif 'booktitle' in BIB_ITEMS[bibkey] -%}
-    <i>{{ BIB_ITEMS[bibkey]['booktitle'] }},
-    </i>
-  {%- endif -%}
-  {%- if 'pubinfo' in BIB_ITEMS[bibkey] -%}
-    {{- BIB_ITEMS[bibkey]['pubinfo'] -}}.
-  {%- endif -%}
+<li>{{ BIB_ITEMS[bibkey]['vancouver_citation']|safe }}
   <div>
     <small>
       {% if 'abstract' in BIB_ITEMS[bibkey] and 'abstract unavailable' not in BIB_ITEMS[bibkey]['abstract']|lower %}
