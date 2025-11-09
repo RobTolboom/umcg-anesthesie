@@ -1132,15 +1132,17 @@ def main():
         print(f"[{idx}/{len(members)}] Processing: {member.name}")
 
         # Collect PMIDs from all search methods for comprehensive coverage
-        all_pmids = []
+        # IMPORTANT: Keep ORCID and name-based PMIDs separate for different filtering
+        orcid_pmids_set = set()
+        name_based_pmids_set = set()
 
-        # Search by ORCID (most reliable when available)
+        # Search by ORCID (most reliable - 100% trust, no filtering needed)
         if member.orcid:
             orcid_pmids = importer.search_by_orcid(member.orcid, since_year=args.since,
                                                    max_results=args.max_results)
-            all_pmids.extend(orcid_pmids)
+            orcid_pmids_set.update(orcid_pmids)
             if orcid_pmids:
-                print(f"  Found {len(orcid_pmids)} via ORCID")
+                print(f"  Found {len(orcid_pmids)} via ORCID (will accept without author check)")
             else:
                 print(f"  No publications found via ORCID")
         else:
@@ -1148,27 +1150,27 @@ def main():
 
         # IMPROVED: Always do name-based searches for comprehensive coverage
         # Many authors don't maintain their ORCID profile, or publish under variations
-        # Our improved author matching will filter false positives
+        # These results WILL be filtered with check_author_match() to prevent false positives
 
         # Search by pub_name (if different from regular name)
         if member.pub_name and member.pub_name != member.name:
             pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
                                                             max_results=args.max_results)
-            all_pmids.extend(pub_name_pmids)
+            name_based_pmids_set.update(pub_name_pmids)
             if pub_name_pmids:
                 print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
 
             # Also search with initials from pub_name
             pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
                                                                         max_results=args.max_results)
-            all_pmids.extend(pub_name_initial_pmids)
+            name_based_pmids_set.update(pub_name_initial_pmids)
             if pub_name_initial_pmids:
                 print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
 
         # Search by regular name
         name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
                                                     max_results=args.max_results)
-        all_pmids.extend(name_pmids)
+        name_based_pmids_set.update(name_pmids)
         if name_pmids:
             print(f"  Found {len(name_pmids)} via name '{member.name}'")
 
@@ -1176,12 +1178,20 @@ def main():
         if not member.pub_name or member.pub_name == member.name:
             name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
                                                                     max_results=args.max_results)
-            all_pmids.extend(name_initial_pmids)
+            name_based_pmids_set.update(name_initial_pmids)
             if name_initial_pmids:
                 print(f"  Found {len(name_initial_pmids)} via name initials")
 
-        # Deduplicate PMIDs
-        pmids = list(set(all_pmids))
+        # Combine all PMIDs (ORCID + name-based)
+        # Note: We keep track of which are ORCID vs name-based for different filtering
+        all_pmids = orcid_pmids_set | name_based_pmids_set
+        pmids = list(all_pmids)
+
+        # Report deduplication across ORCID and name-based
+        total_before = len(orcid_pmids_set) + len(name_based_pmids_set)
+        overlap = len(orcid_pmids_set & name_based_pmids_set)
+        if overlap > 0:
+            print(f"  {overlap} publication(s) found in both ORCID and name searches")
         if len(all_pmids) > len(pmids):
             print(f"  Removed {len(all_pmids) - len(pmids)} duplicates")
 
@@ -1215,34 +1225,62 @@ def main():
             print(f"  {len(new_pmids)} new publications to add")
             publications = importer.fetch_pubmed_details(new_pmids)
 
-            # Filter publications with author name matching
+            # IMPROVED: Apply different filtering based on source
+            # - ORCID PMIDs: accept without check (100% trust)
+            # - Name-based PMIDs: filter with check_author_match() (prevent false positives)
             filtered_count = 0
+            orcid_accepted = 0
+            name_based_accepted = 0
+
             for pub in publications:
-                # Check if member is actually an author of this publication
-                matched, matched_author = importer.check_author_match(
-                    pub.get('authors', []),
-                    member.family_name,
-                    member.given_name,
-                    member.initials
-                )
+                pmid = pub['pmid']
 
-                if not matched:
-                    # False positive - member not in author list
-                    filtered_count += 1
+                # Check if this PMID came from ORCID or name-based search
+                from_orcid = pmid in orcid_pmids_set
+                from_name_based = pmid in name_based_pmids_set
+
+                if from_orcid:
+                    # ORCID result - accept without author check (100% trust)
+                    entry = publication_to_bibtex(pub, existing_keys)
+                    new_entries.append(entry)
+                    total_new += 1
+                    orcid_accepted += 1
+                    existing_pmids.add(pmid)
                     if os.environ.get('DEBUG_PUBMED'):
-                        print(f"    ✗ Filtered: {pub.get('title', '')[:60]}... (PMID: {pub['pmid']})")
-                        print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
-                    continue
+                        print(f"    ✓ ORCID: {pub.get('title', '')[:60]}... (PMID: {pmid})")
+                elif from_name_based:
+                    # Name-based result - check if member is actually an author
+                    matched, matched_author = importer.check_author_match(
+                        pub.get('authors', []),
+                        member.family_name,
+                        member.given_name,
+                        member.initials
+                    )
 
-                # Member found in author list - add publication
-                entry = publication_to_bibtex(pub, existing_keys)
-                new_entries.append(entry)
-                total_new += 1
-                # Mark as added to avoid duplicates
-                existing_pmids.add(pub['pmid'])
+                    if not matched:
+                        # False positive - member not in author list
+                        filtered_count += 1
+                        if os.environ.get('DEBUG_PUBMED'):
+                            print(f"    ✗ Filtered: {pub.get('title', '')[:60]}... (PMID: {pmid})")
+                            print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
+                        continue
 
+                    # Member found in author list - add publication
+                    entry = publication_to_bibtex(pub, existing_keys)
+                    new_entries.append(entry)
+                    total_new += 1
+                    name_based_accepted += 1
+                    existing_pmids.add(pmid)
+                    if os.environ.get('DEBUG_PUBMED'):
+                        print(f"    ✓ Name-based: {pub.get('title', '')[:60]}... (PMID: {pmid})")
+
+            # Report filtering results
+            if orcid_accepted > 0:
+                print(f"  ✓ Accepted {orcid_accepted} publication(s) from ORCID (no filtering)")
+            if name_based_accepted > 0:
+                print(f"  ✓ Accepted {name_based_accepted} publication(s) from name-based searches (after filtering)")
             if filtered_count > 0:
-                print(f"  ✓ Filtered {filtered_count} false positive(s) (author name mismatch)")
+                print(f"  ✓ Filtered {filtered_count} false positive(s) from name-based searches")
 
         # Check existing publications for updates
         if existing_pmids_to_check:
@@ -1258,22 +1296,29 @@ def main():
                     print(f"    - Warning: PMID {pmid} not found in existing entries, skipping update check")
                     continue
 
-                # Check if member is actually an author (detect existing false positives)
-                matched, matched_author = importer.check_author_match(
-                    pub.get('authors', []),
-                    member.family_name,
-                    member.given_name,
-                    member.initials
-                )
+                # Check if this PMID came from ORCID or name-based search
+                from_orcid = pmid in orcid_pmids_set
+                from_name_based = pmid in name_based_pmids_set
 
-                if not matched:
-                    # Existing false positive detected - warn but don't remove
-                    false_positive_count += 1
-                    if os.environ.get('DEBUG_PUBMED'):
-                        print(f"    ⚠ Existing false positive: {pub.get('title', '')[:60]}... (PMID: {pmid})")
-                        print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
-                    # Skip update check for false positives
-                    continue
+                # IMPROVED: Only check author match for name-based results
+                # ORCID results are trusted (author self-reported)
+                if from_name_based and not from_orcid:
+                    # Name-based result - check if member is actually an author (detect existing false positives)
+                    matched, matched_author = importer.check_author_match(
+                        pub.get('authors', []),
+                        member.family_name,
+                        member.given_name,
+                        member.initials
+                    )
+
+                    if not matched:
+                        # Existing false positive detected - warn but don't remove
+                        false_positive_count += 1
+                        if os.environ.get('DEBUG_PUBMED'):
+                            print(f"    ⚠ Existing false positive: {pub.get('title', '')[:60]}... (PMID: {pmid})")
+                            print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
+                        # Skip update check for false positives
+                        continue
 
                 # Handle duplicates - use first entry and warn if duplicates exist
                 entry_list = existing_entries[pmid]
