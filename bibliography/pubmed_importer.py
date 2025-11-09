@@ -568,13 +568,41 @@ class PubMedImporter:
                 if author_initials_clean and member_initials_clean:
                     # Full initials match
                     if author_initials_clean == member_initials_clean:
-                        return True, author
-                    # Or author initials start with member initials
-                    if author_initials_clean.startswith(member_initials_clean):
-                        return True, author
-                    # Or member initials start with author initials (author has fewer initials)
-                    if member_initials_clean.startswith(author_initials_clean) and len(author_initials_clean) >= 1:
-                        return True, author
+                        # IMPROVED: If only single initial (e.g., "R"), also check given name
+                        # to prevent false positives (Raha vs Rolf, both "R")
+                        if len(author_initials_clean) == 1:
+                            # Require first 2-3 chars of given name to match
+                            if member_given and author_given_lower:
+                                # Check first N chars (2-3 depending on name length)
+                                min_len = min(3, len(member_given_lower), len(author_given_lower))
+                                # For very short names use 2 chars minimum
+                                min_len = max(2, min_len)
+                                if author_given_lower[:min_len] == member_given_lower[:min_len]:
+                                    return True, author
+                                # No match - different names with same initial
+                                else:
+                                    continue
+                            # Only accept if member ALSO has only initial (no given name available)
+                            elif not member_given:
+                                return True, author
+                        else:
+                            # Multiple initials (e.g., "RC") - accept directly (more specific)
+                            return True, author
+                    # Or author initials start with member initials (member has fewer)
+                    # e.g., author "Robert Charles" (RC) vs member "Robert" (R)
+                    # But ONLY if member has fewer initials, not the other way around!
+                    elif author_initials_clean.startswith(member_initials_clean):
+                        # Still apply single-initial check for safety
+                        if len(member_initials_clean) == 1:
+                            if member_given and author_given_lower:
+                                min_len = min(3, len(member_given_lower), len(author_given_lower))
+                                min_len = max(2, min_len)
+                                if author_given_lower[:min_len] == member_given_lower[:min_len]:
+                                    return True, author
+                            elif not member_given:
+                                return True, author
+                        else:
+                            return True, author
 
         # No match found
         return False, None
@@ -615,12 +643,14 @@ def parse_member_file(filepath: str) -> Optional[MemberInfo]:
         member = MemberInfo(name, filepath)
 
         # Extract ORCID
-        orcid_match = re.search(r'^orcid:\s*(.+)$', content, re.MULTILINE)
+        # NOTE: Use [ \t]* instead of \s* to avoid matching newlines
+        orcid_match = re.search(r'^orcid:[ \t]*(.+)$', content, re.MULTILINE)
         if orcid_match:
             member.orcid = orcid_match.group(1).strip()
 
         # Extract pub_name if available
-        pub_name_match = re.search(r'^pub_name:\s*(.+)$', content, re.MULTILINE)
+        # NOTE: Use [ \t]* instead of \s* to avoid matching newlines
+        pub_name_match = re.search(r'^pub_name:[ \t]*(.+)$', content, re.MULTILINE)
         if pub_name_match:
             member.pub_name = pub_name_match.group(1).strip()
 
@@ -1112,35 +1142,42 @@ def main():
             if orcid_pmids:
                 print(f"  Found {len(orcid_pmids)} via ORCID")
 
-        # Search by pub_name (if different from regular name)
-        if member.pub_name and member.pub_name != member.name:
-            pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
-                                                            max_results=args.max_results)
-            all_pmids.extend(pub_name_pmids)
-            if pub_name_pmids:
-                print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
+            # IMPROVED: Skip name-based searches for members with ORCID
+            # ORCID is 100% reliable, name searches often cause false positives
+            print(f"  Skipping name-based searches (ORCID available, more reliable)")
+        else:
+            # No ORCID available - use name-based searches (less reliable)
+            print(f"  ⚠ No ORCID - using name-based search (may have false positives)")
 
-            # Also search with initials from pub_name
-            pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
+            # Search by pub_name (if different from regular name)
+            if member.pub_name and member.pub_name != member.name:
+                pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
+                                                                max_results=args.max_results)
+                all_pmids.extend(pub_name_pmids)
+                if pub_name_pmids:
+                    print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
+
+                # Also search with initials from pub_name
+                pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
+                                                                            max_results=args.max_results)
+                all_pmids.extend(pub_name_initial_pmids)
+                if pub_name_initial_pmids:
+                    print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
+
+            # Search by regular name
+            name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
+                                                        max_results=args.max_results)
+            all_pmids.extend(name_pmids)
+            if name_pmids:
+                print(f"  Found {len(name_pmids)} via name '{member.name}'")
+
+            # Also search with initials from regular name (if not already searched via pub_name)
+            if not member.pub_name or member.pub_name == member.name:
+                name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
                                                                         max_results=args.max_results)
-            all_pmids.extend(pub_name_initial_pmids)
-            if pub_name_initial_pmids:
-                print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
-
-        # Search by regular name
-        name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
-                                                    max_results=args.max_results)
-        all_pmids.extend(name_pmids)
-        if name_pmids:
-            print(f"  Found {len(name_pmids)} via name '{member.name}'")
-
-        # Also search with initials from regular name (if not already searched via pub_name)
-        if not member.pub_name or member.pub_name == member.name:
-            name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
-                                                                    max_results=args.max_results)
-            all_pmids.extend(name_initial_pmids)
-            if name_initial_pmids:
-                print(f"  Found {len(name_initial_pmids)} via name initials")
+                all_pmids.extend(name_initial_pmids)
+                if name_initial_pmids:
+                    print(f"  Found {len(name_initial_pmids)} via name initials")
 
         # Deduplicate PMIDs
         pmids = list(set(all_pmids))
