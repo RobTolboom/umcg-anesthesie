@@ -1134,50 +1134,51 @@ def main():
         # Collect PMIDs from all search methods for comprehensive coverage
         all_pmids = []
 
-        # Search by ORCID (most reliable)
+        # Search by ORCID (most reliable when available)
         if member.orcid:
             orcid_pmids = importer.search_by_orcid(member.orcid, since_year=args.since,
                                                    max_results=args.max_results)
             all_pmids.extend(orcid_pmids)
             if orcid_pmids:
                 print(f"  Found {len(orcid_pmids)} via ORCID")
-
-            # IMPROVED: Skip name-based searches for members with ORCID
-            # ORCID is 100% reliable, name searches often cause false positives
-            print(f"  Skipping name-based searches (ORCID available, more reliable)")
+            else:
+                print(f"  No publications found via ORCID")
         else:
-            # No ORCID available - use name-based searches (less reliable)
-            print(f"  ⚠ No ORCID - using name-based search (may have false positives)")
+            print(f"  ⚠ No ORCID - name-based search may have false positives")
 
-            # Search by pub_name (if different from regular name)
-            if member.pub_name and member.pub_name != member.name:
-                pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
-                                                                max_results=args.max_results)
-                all_pmids.extend(pub_name_pmids)
-                if pub_name_pmids:
-                    print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
+        # IMPROVED: Always do name-based searches for comprehensive coverage
+        # Many authors don't maintain their ORCID profile, or publish under variations
+        # Our improved author matching will filter false positives
 
-                # Also search with initials from pub_name
-                pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
-                                                                            max_results=args.max_results)
-                all_pmids.extend(pub_name_initial_pmids)
-                if pub_name_initial_pmids:
-                    print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
+        # Search by pub_name (if different from regular name)
+        if member.pub_name and member.pub_name != member.name:
+            pub_name_pmids = importer.search_by_author_name(member.pub_name, since_year=args.since,
+                                                            max_results=args.max_results)
+            all_pmids.extend(pub_name_pmids)
+            if pub_name_pmids:
+                print(f"  Found {len(pub_name_pmids)} via pub_name '{member.pub_name}'")
 
-            # Search by regular name
-            name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
-                                                        max_results=args.max_results)
-            all_pmids.extend(name_pmids)
-            if name_pmids:
-                print(f"  Found {len(name_pmids)} via name '{member.name}'")
-
-            # Also search with initials from regular name (if not already searched via pub_name)
-            if not member.pub_name or member.pub_name == member.name:
-                name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
+            # Also search with initials from pub_name
+            pub_name_initial_pmids = importer.search_by_author_initials(member.pub_name, since_year=args.since,
                                                                         max_results=args.max_results)
-                all_pmids.extend(name_initial_pmids)
-                if name_initial_pmids:
-                    print(f"  Found {len(name_initial_pmids)} via name initials")
+            all_pmids.extend(pub_name_initial_pmids)
+            if pub_name_initial_pmids:
+                print(f"  Found {len(pub_name_initial_pmids)} via pub_name initials")
+
+        # Search by regular name
+        name_pmids = importer.search_by_author_name(member.name, since_year=args.since,
+                                                    max_results=args.max_results)
+        all_pmids.extend(name_pmids)
+        if name_pmids:
+            print(f"  Found {len(name_pmids)} via name '{member.name}'")
+
+        # Also search with initials from regular name (if not already searched via pub_name)
+        if not member.pub_name or member.pub_name == member.name:
+            name_initial_pmids = importer.search_by_author_initials(member.name, since_year=args.since,
+                                                                    max_results=args.max_results)
+            all_pmids.extend(name_initial_pmids)
+            if name_initial_pmids:
+                print(f"  Found {len(name_initial_pmids)} via name initials")
 
         # Deduplicate PMIDs
         pmids = list(set(all_pmids))
