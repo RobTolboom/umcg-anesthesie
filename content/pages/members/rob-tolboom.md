@@ -19,11 +19,7 @@ website:
 show_publication_years: yes
 show_finished_projects: false
 
-Rob completed his medical studies at Utrecht University, where his internships in surgery and pediatric anesthesiology sparked an interest in research. After obtaining his medical degree in 2012, he joined Meander Medical Center in Amersfoort as a surgical resident. There, he contributed to improving care for hiatal hernia patients and conducted research on robotic hiatal hernia surgery. His engagement in research led to writing a thesis on robotic surgery for hiatal hernia.
-
-He has recently finished his anesthesiology residency at Radboud University Medical Center and has taken a course on AI for Health to better understand the role of technology in medicine. As part of the AI for Anesthesiology research group, he is exploring how AI can support anesthesiology, aiming to contribute to the field through collaboration and innovation.
-
-He is currently working as anesthesiologist at University Medical Center Groningen.
+Rob Tolboom, MD, PhD, is an anesthesiologist at the University Medical Center Groningen (UMCG) with clinical focus on advanced airway management (member of the dedicated airway team) and pediatric anesthesia. He earned his MD from Utrecht University in 2012 and subsequently worked at Meander Medical Center (Amersfoort) as an ANIOS in general surgery—a junior doctor not in specialist training—where he optimized care pathways for hiatal hernia patients and earned a PhD with a dissertation on robotic hiatal hernia surgery. After completing his anesthesiology residency at Radboud University Medical Center, he completed a fellowship in pediatric anesthesia at UMCG and the “AI for Health” course. His research targets deployable AI in perioperative care, emphasizing large language models for literature synthesis, structured data extraction, and workflow support.
 
 
 
