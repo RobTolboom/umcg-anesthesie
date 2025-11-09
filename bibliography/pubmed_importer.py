@@ -46,6 +46,9 @@ class MemberInfo:
         self.orcid = None
         self.pub_name = None
         self.active = False
+        self.family_name = None
+        self.given_name = None
+        self.initials = None
 
     def __repr__(self):
         return f"MemberInfo(name='{self.name}', orcid='{self.orcid}', active={self.active})"
@@ -480,6 +483,102 @@ class PubMedImporter:
         print(f"  Searching PubMed with initials: {name} (formatted as: {pubmed_name})")
         return self.search_pubmed(query, retmax=max_results, mindate=mindate)
 
+    def check_author_match(self, authors: List[str], member_family: str, member_given: str = None, member_initials: str = None) -> Tuple[bool, Optional[str]]:
+        """
+        Check if the member appears in the author list of a publication.
+
+        This function verifies that the publication actually includes the member as an author
+        by checking both the family name and given name/initials. This prevents false positives
+        where someone with a similar name (e.g., "Jules Tolboom" vs "Rob Tolboom") is incorrectly
+        associated with the member.
+
+        Args:
+            authors: List of author names from publication (format: "Firstname Lastname" or "Initials Lastname")
+            member_family: Member's family name (e.g., "Tolboom")
+            member_given: Member's given/first name (e.g., "Rob", "Robert")
+            member_initials: Member's initials (e.g., "RC", "R")
+
+        Returns:
+            Tuple of (matched: bool, matched_author: str or None)
+            - matched: True if member found in author list, False otherwise
+            - matched_author: The matching author string if found, None otherwise
+
+        Examples:
+            >>> check_author_match(["Robert C Tolboom", "John Smith"], "Tolboom", "Robert", "RC")
+            (True, "Robert C Tolboom")
+
+            >>> check_author_match(["Jules Tolboom", "John Smith"], "Tolboom", "Robert", "RC")
+            (False, None)
+        """
+        if not authors:
+            return False, None
+
+        for author in authors:
+            # Parse author name
+            # Formats we see from PubMed:
+            # - "Robert C Tolboom" (from ForeName + LastName)
+            # - "RC Tolboom" (from Initials + LastName)
+            # - "Tolboom" (LastName only)
+
+            parts = author.strip().split()
+            if not parts:
+                continue
+
+            # Assume last part is family name
+            author_family = parts[-1]
+            author_given_parts = parts[:-1] if len(parts) > 1 else []
+            author_given = ' '.join(author_given_parts) if author_given_parts else ''
+
+            # Check family name match (case-insensitive)
+            if author_family.lower() != member_family.lower():
+                continue
+
+            # Family name matches! Now check given name/initials
+            # If no given name info provided, family match is enough (rare case)
+            if not member_given and not member_initials:
+                return True, author
+
+            author_given_lower = author_given.lower()
+
+            # Check given name match
+            if member_given:
+                member_given_lower = member_given.lower()
+
+                # Full match or partial match (e.g., "Rob" in "Robert")
+                if member_given_lower in author_given_lower:
+                    return True, author
+
+                # Check if author given starts with member given (e.g., "Robert" starts with "Rob")
+                if author_given_lower.startswith(member_given_lower):
+                    return True, author
+
+                # Also check reverse (member "Robert" matches author "Rob")
+                if member_given_lower.startswith(author_given_lower) and len(author_given_lower) >= 3:
+                    return True, author
+
+            # Check initials match
+            if member_initials and author_given:
+                # Extract initials from author given name
+                # E.g., "Robert C" -> "RC", "R C" -> "RC"
+                author_initials = ''.join([c for c in author_given if c.isupper()])
+                author_initials_clean = author_initials.replace('.', '').replace(' ', '').upper()
+                member_initials_clean = member_initials.replace('.', '').replace(' ', '').upper()
+
+                # Check if initials match (at least the first initial must match)
+                if author_initials_clean and member_initials_clean:
+                    # Full initials match
+                    if author_initials_clean == member_initials_clean:
+                        return True, author
+                    # Or author initials start with member initials
+                    if author_initials_clean.startswith(member_initials_clean):
+                        return True, author
+                    # Or member initials start with author initials (author has fewer initials)
+                    if member_initials_clean.startswith(author_initials_clean) and len(author_initials_clean) >= 1:
+                        return True, author
+
+        # No match found
+        return False, None
+
 
 def parse_member_files(members_dir: str) -> List[MemberInfo]:
     """Parse all member markdown files and extract relevant information."""
@@ -528,6 +627,24 @@ def parse_member_file(filepath: str) -> Optional[MemberInfo]:
         # Check if active
         active_match = re.search(r'^active:\s*(yes|true)$', content, re.MULTILINE | re.IGNORECASE)
         member.active = bool(active_match)
+
+        # Extract family name, given name and initials from pub_name (or name as fallback)
+        name_to_parse = member.pub_name if member.pub_name else name
+        parts = name_to_parse.split()
+
+        if len(parts) >= 2:
+            # Assume last part is family name
+            member.family_name = parts[-1]
+            # First part is given name
+            member.given_name = parts[0]
+
+            # Extract initials from all parts except last (family name)
+            initials = []
+            for part in parts[:-1]:
+                clean_part = part.replace('.', '').strip()
+                if clean_part:
+                    initials.append(clean_part[0].upper())
+            member.initials = ''.join(initials)
 
         return member
 
@@ -1060,24 +1177,64 @@ def main():
             print(f"  {len(new_pmids)} new publications to add")
             publications = importer.fetch_pubmed_details(new_pmids)
 
+            # Filter publications with author name matching
+            filtered_count = 0
             for pub in publications:
+                # Check if member is actually an author of this publication
+                matched, matched_author = importer.check_author_match(
+                    pub.get('authors', []),
+                    member.family_name,
+                    member.given_name,
+                    member.initials
+                )
+
+                if not matched:
+                    # False positive - member not in author list
+                    filtered_count += 1
+                    if os.environ.get('DEBUG_PUBMED'):
+                        print(f"    ✗ Filtered: {pub.get('title', '')[:60]}... (PMID: {pub['pmid']})")
+                        print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
+                    continue
+
+                # Member found in author list - add publication
                 entry = publication_to_bibtex(pub, existing_keys)
                 new_entries.append(entry)
                 total_new += 1
                 # Mark as added to avoid duplicates
                 existing_pmids.add(pub['pmid'])
 
+            if filtered_count > 0:
+                print(f"  ✓ Filtered {filtered_count} false positive(s) (author name mismatch)")
+
         # Check existing publications for updates
         if existing_pmids_to_check:
             print(f"  Checking {len(existing_pmids_to_check)} existing publications for updates...")
             publications = importer.fetch_pubmed_details(existing_pmids_to_check)
 
+            false_positive_count = 0
             for pub in publications:
                 pmid = pub['pmid']
 
                 # Check if this PMID exists in our existing entries
                 if pmid not in existing_entries:
                     print(f"    - Warning: PMID {pmid} not found in existing entries, skipping update check")
+                    continue
+
+                # Check if member is actually an author (detect existing false positives)
+                matched, matched_author = importer.check_author_match(
+                    pub.get('authors', []),
+                    member.family_name,
+                    member.given_name,
+                    member.initials
+                )
+
+                if not matched:
+                    # Existing false positive detected - warn but don't remove
+                    false_positive_count += 1
+                    if os.environ.get('DEBUG_PUBMED'):
+                        print(f"    ⚠ Existing false positive: {pub.get('title', '')[:60]}... (PMID: {pmid})")
+                        print(f"      Authors: {', '.join(pub.get('authors', [])[:3])}...")
+                    # Skip update check for false positives
                     continue
 
                 # Handle duplicates - use first entry and warn if duplicates exist
@@ -1106,6 +1263,9 @@ def main():
                     updated_entries.append((old_entry, new_entry))
                     total_updated += 1
                     print(f"    - Update detected for PMID {pmid} ({old_bib_key})")
+
+            if false_positive_count > 0:
+                print(f"  ⚠ Warning: {false_positive_count} existing false positive(s) detected (will be removed when .bib is reset)")
 
         print()
 
