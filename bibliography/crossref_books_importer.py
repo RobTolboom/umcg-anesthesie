@@ -55,6 +55,7 @@ class CrossrefBooksImporter:
     """Handles importing books and book chapters from Crossref."""
 
     BASE_URL = "https://api.crossref.org/works"
+    GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes"
     BOOK_TYPES = ['book', 'book-chapter', 'monograph', 'edited-book']
 
     def __init__(self, rate_limit: float = 1.0, verbose: bool = False):
@@ -69,11 +70,16 @@ class CrossrefBooksImporter:
         self.verbose = verbose
         self.last_request = 0
         self.request_count = 0
+        self.google_books_cache = {}  # Cache for Google Books API results
         self.stats = {
             'total_queries': 0,
             'total_results': 0,
             'filtered_matches': 0,
-            'new_entries': 0
+            'new_entries': 0,
+            'google_books_queries': 0,
+            'enriched_with_editors': 0,
+            'enriched_with_pages': 0,
+            'enriched_with_address': 0
         }
 
     def _rate_limit_wait(self):
@@ -164,6 +170,65 @@ class CrossrefBooksImporter:
                 return True
 
         return False
+
+    def fetch_google_books_metadata(self, isbn: str) -> Optional[Dict]:
+        """
+        Fetch book metadata from Google Books API using ISBN.
+
+        Args:
+            isbn: ISBN of the book (can be ISBN-10 or ISBN-13)
+
+        Returns:
+            Dictionary with editor information or None if not found
+        """
+        # Check cache first
+        if isbn in self.google_books_cache:
+            return self.google_books_cache[isbn]
+
+        self._rate_limit_wait()
+        self.stats['google_books_queries'] += 1
+
+        params = {
+            'q': f'isbn:{isbn}',
+            'maxResults': 1
+        }
+
+        try:
+            response = requests.get(self.GOOGLE_BOOKS_URL, params=params, timeout=30)
+
+            if response.status_code == 200:
+                data = response.json()
+
+                if data.get('totalItems', 0) > 0:
+                    volume_info = data['items'][0].get('volumeInfo', {})
+
+                    # Extract editors (in Google Books, book editors are listed as 'authors')
+                    editors = volume_info.get('authors', [])
+
+                    result = {
+                        'editors': editors,
+                        'publisher': volume_info.get('publisher'),
+                        'published_date': volume_info.get('publishedDate'),
+                        'page_count': volume_info.get('pageCount')
+                    }
+
+                    # Cache the result
+                    self.google_books_cache[isbn] = result
+                    return result
+                else:
+                    if self.verbose:
+                        print(f"    Google Books: No results for ISBN {isbn}")
+            else:
+                if self.verbose:
+                    print(f"    Warning: Google Books API returned status {response.status_code}", file=sys.stderr)
+
+        except Exception as e:
+            if self.verbose:
+                print(f"    Warning: Error querying Google Books: {e}", file=sys.stderr)
+
+        # Cache negative result to avoid repeated queries
+        self.google_books_cache[isbn] = None
+        return None
 
     def search_member_publications(self, member: MemberInfo, max_results: int = 100) -> List[Dict]:
         """
@@ -302,21 +367,46 @@ class CrossrefBooksImporter:
         if publisher:
             lines.append(f"  publisher = {{{publisher}}},")
 
+        # Publisher location (address)
+        publisher_location = item.get('publisher-location', '')
+        if publisher_location:
+            lines.append(f"  address = {{{publisher_location}}},")
+            self.stats['enriched_with_address'] += 1
+
+        # Pages (for book chapters)
+        pages = item.get('page', '')
+        if pages:
+            # Convert hyphen to double-dash for BibTeX
+            pages_formatted = pages.replace('-', '--')
+            lines.append(f"  pages = {{{pages_formatted}}},")
+            self.stats['enriched_with_pages'] += 1
+
         # ISBN
         isbn_list = item.get('ISBN', [])
-        if isbn_list:
-            lines.append(f"  isbn = {{{isbn_list[0]}}},")
+        isbn = isbn_list[0] if isbn_list else None
+        if isbn:
+            lines.append(f"  isbn = {{{isbn}}},")
 
         # DOI
         doi = item.get('DOI', '')
         if doi:
             lines.append(f"  doi = {{{doi}}},")
 
-        # For book chapters: booktitle
+        # For book chapters: booktitle and editor
         if bib_type == 'incollection':
             container = item.get('container-title', [''])[0]
             if container:
                 lines.append(f"  booktitle = {{{container}}},")
+
+            # Fetch editor information from Google Books API using ISBN
+            if isbn:
+                google_books_data = self.fetch_google_books_metadata(isbn)
+                if google_books_data and google_books_data.get('editors'):
+                    editors = google_books_data['editors']
+                    # Format editors similar to authors
+                    editor_string = ' and '.join(editors)
+                    lines.append(f"  editor = {{{editor_string}}},")
+                    self.stats['enriched_with_editors'] += 1
 
         # Citations (if available)
         citations = item.get('is-referenced-by-count', 0)
@@ -510,11 +600,16 @@ def main():
     print(f"\n{'='*70}")
     print("Summary")
     print(f"{'='*70}")
-    print(f"Members processed:    {len(members)}")
-    print(f"Total API queries:    {importer.stats['total_queries']}")
-    print(f"Total results:        {importer.stats['total_results']}")
-    print(f"Filtered matches:     {importer.stats['filtered_matches']}")
-    print(f"New entries to add:   {len(new_entries)}")
+    print(f"Members processed:        {len(members)}")
+    print(f"Total API queries:        {importer.stats['total_queries']}")
+    print(f"Google Books queries:     {importer.stats['google_books_queries']}")
+    print(f"Total results:            {importer.stats['total_results']}")
+    print(f"Filtered matches:         {importer.stats['filtered_matches']}")
+    print(f"New entries to add:       {len(new_entries)}")
+    print(f"\nMetadata Enrichment:")
+    print(f"  Entries with editors:   {importer.stats['enriched_with_editors']}")
+    print(f"  Entries with pages:     {importer.stats['enriched_with_pages']}")
+    print(f"  Entries with address:   {importer.stats['enriched_with_address']}")
     print(f"{'='*70}\n")
 
     # Write new entries
