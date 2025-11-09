@@ -121,31 +121,37 @@ def format_article_vancouver(bib_item: Dict) -> str:
             parts.append(authors + ".")
 
     # Title (remove trailing period if present)
-    if "title" in bib_item:
-        title = bib_item["title"].rstrip(".")
+    title = bib_item.get("title")
+    if title:
+        title = str(title).rstrip(".")
         parts.append(title + ".")
 
     # Journal name
-    if "journal" in bib_item:
-        parts.append(bib_item["journal"] + ".")
+    journal = bib_item.get("journal")
+    if journal:
+        parts.append(str(journal) + ".")
 
     # Publication info: Year;Volume(Issue):Pages
     pub_info = []
-    if "year" in bib_item:
-        pub_info.append(bib_item["year"])
+    year = bib_item.get("year")
+    if year not in [None, ""]:
+        pub_info.append(str(year))
 
     volume_info = ""
-    if "volume" in bib_item:
-        volume_info = bib_item["volume"]
-        if "number" in bib_item:
-            volume_info += f"({bib_item['number']})"
+    volume = bib_item.get("volume")
+    if volume not in [None, ""]:
+        volume_info = str(volume)
+        number = bib_item.get("number")
+        if number not in [None, ""]:
+            volume_info += f"({number})"
 
     if volume_info:
         pub_info.append(volume_info)
 
-    if "pages" in bib_item:
+    pages = bib_item.get("pages")
+    if pages:
         # Vancouver uses abbreviated page ranges: 123-45 instead of 123-145
-        pages = bib_item["pages"].replace("--", "-")
+        pages = str(pages).replace("--", "-")
         if pub_info:
             pub_info[-1] += f":{pages}"
         else:
@@ -175,26 +181,30 @@ def format_book_vancouver(bib_item: Dict) -> str:
             parts.append(authors + ".")
 
     # Title
-    if "title" in bib_item:
-        title = bib_item["title"].rstrip(".")
+    title = bib_item.get("title")
+    if title:
+        title = str(title).rstrip(".")
         parts.append(title + ".")
 
     # City: Publisher; Year
     location_pub_year = []
-    if "address" in bib_item:
-        location_pub_year.append(bib_item["address"])
+    address = bib_item.get("address")
+    if address:
+        location_pub_year.append(str(address))
 
-    if "publisher" in bib_item:
+    publisher = bib_item.get("publisher")
+    if publisher:
         if location_pub_year:
-            location_pub_year[-1] += ": " + bib_item["publisher"]
+            location_pub_year[-1] += ": " + str(publisher)
         else:
-            location_pub_year.append(bib_item["publisher"])
+            location_pub_year.append(str(publisher))
 
-    if "year" in bib_item:
+    year = bib_item.get("year")
+    if year:
         if location_pub_year:
-            location_pub_year[-1] += "; " + bib_item["year"]
+            location_pub_year[-1] += "; " + str(year)
         else:
-            location_pub_year.append(bib_item["year"])
+            location_pub_year.append(str(year))
 
     if location_pub_year:
         parts.append(location_pub_year[0] + ".")
@@ -220,8 +230,9 @@ def format_incollection_vancouver(bib_item: Dict) -> str:
             parts.append(authors + ".")
 
     # Chapter title
-    if "title" in bib_item:
-        title = bib_item["title"].rstrip(".")
+    title = bib_item.get("title")
+    if title:
+        title = str(title).rstrip(".")
         parts.append(title + ".")
 
     # In: Editors, editor(s). Book Title.
@@ -234,35 +245,40 @@ def format_incollection_vancouver(bib_item: Dict) -> str:
             in_part += " " + editors + "."
 
     # Book title
-    if "booktitle" in bib_item:
-        booktitle = bib_item["booktitle"].rstrip(".")
+    booktitle = bib_item.get("booktitle")
+    if booktitle:
+        booktitle = str(booktitle).rstrip(".")
         in_part += " " + booktitle + "."
 
     parts.append(in_part)
 
     # City: Publisher; Year
     location_pub_year = []
-    if "address" in bib_item:
-        location_pub_year.append(bib_item["address"])
+    address = bib_item.get("address")
+    if address:
+        location_pub_year.append(str(address))
 
-    if "publisher" in bib_item:
+    publisher = bib_item.get("publisher")
+    if publisher:
         if location_pub_year:
-            location_pub_year[-1] += ": " + bib_item["publisher"]
+            location_pub_year[-1] += ": " + str(publisher)
         else:
-            location_pub_year.append(bib_item["publisher"])
+            location_pub_year.append(str(publisher))
 
-    if "year" in bib_item:
+    year = bib_item.get("year")
+    if year:
         if location_pub_year:
-            location_pub_year[-1] += "; " + bib_item["year"]
+            location_pub_year[-1] += "; " + str(year)
         else:
-            location_pub_year.append(bib_item["year"])
+            location_pub_year.append(str(year))
 
     if location_pub_year:
         parts.append(location_pub_year[0] + ".")
 
     # Pages
-    if "pages" in bib_item:
-        pages = bib_item["pages"].replace("--", "-")
+    pages = bib_item.get("pages")
+    if pages:
+        pages = str(pages).replace("--", "-")
         parts.append(f"p. {pages}.")
 
     return " ".join(parts)
@@ -286,8 +302,9 @@ def format_thesis_vancouver(bib_item: Dict) -> str:
             parts.append(authors + ".")
 
     # Title [type]
-    if "title" in bib_item:
-        title = bib_item["title"].rstrip(".")
+    title = bib_item.get("title")
+    if title:
+        title = str(title).rstrip(".")
 
         # Determine thesis type
         thesis_type = "dissertation"
@@ -300,20 +317,23 @@ def format_thesis_vancouver(bib_item: Dict) -> str:
 
     # City: University; Year
     location_inst_year = []
-    if "address" in bib_item:
-        location_inst_year.append(bib_item["address"])
+    address = bib_item.get("address")
+    if address:
+        location_inst_year.append(str(address))
 
-    if "school" in bib_item:
+    school = bib_item.get("school")
+    if school:
         if location_inst_year:
-            location_inst_year[-1] += ": " + bib_item["school"]
+            location_inst_year[-1] += ": " + str(school)
         else:
-            location_inst_year.append(bib_item["school"])
+            location_inst_year.append(str(school))
 
-    if "year" in bib_item:
+    year = bib_item.get("year")
+    if year:
         if location_inst_year:
-            location_inst_year[-1] += "; " + bib_item["year"]
+            location_inst_year[-1] += "; " + str(year)
         else:
-            location_inst_year.append(bib_item["year"])
+            location_inst_year.append(str(year))
 
     if location_inst_year:
         parts.append(location_inst_year[0] + ".")
