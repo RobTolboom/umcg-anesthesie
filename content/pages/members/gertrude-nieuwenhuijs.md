@@ -16,7 +16,6 @@ researcherid:
 orcid: https://orcid.org/0000-0001-9874-2632
 telephone: 46642
 website:
-publons:
 show_publication_years: yes
 show_finished_projects: false
 

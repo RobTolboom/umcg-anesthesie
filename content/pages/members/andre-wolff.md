@@ -16,7 +16,6 @@ researcherid:
 orcid: https://orcid.org/0000-0001-6240-3903
 telephone: 68668
 website:
-publons:
 show_publication_years: yes
 show_finished_projects: false
 

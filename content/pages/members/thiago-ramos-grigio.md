@@ -16,7 +16,6 @@ researcherid:
 orcid: https://orcid.org/0000-0002-6271-8718
 telephone:
 website:
-publons:
 show_publication_years: yes
 show_finished_projects: false
 

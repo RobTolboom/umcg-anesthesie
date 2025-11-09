@@ -16,7 +16,6 @@ researcherid: https://www.webofscience.com/wos/author/record/JAN-9026-2023
 orcid: https://orcid.org/0000-0002-3460-1934
 telephone: 62482
 website:
-publons:
 show_publication_years: yes
 show_finished_projects: false
 

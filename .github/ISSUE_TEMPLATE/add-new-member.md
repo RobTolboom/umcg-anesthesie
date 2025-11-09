@@ -67,9 +67,6 @@ assignees: ''
 **ResearcherID:**
 <!-- Full URL -->
 
-**Publons:**
-<!-- Full URL -->
-
 **Twitter/X:**
 <!-- Full URL or handle -->
 

@@ -16,7 +16,6 @@ researcherid:
 orcid:
 telephone: 61091
 website:
-publons:
 show_publication_years: yes
 show_finished_projects: false
 

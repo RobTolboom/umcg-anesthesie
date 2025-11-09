@@ -21,7 +21,6 @@ type: (see available types below)
 linkedin: link
 scholar: link
 researcherid: link
-publons: link
 orcid: link
 twitter: link
 show_publication_years: yes (if this tag is not present it will be automatically set to yes)
