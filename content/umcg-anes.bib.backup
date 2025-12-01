@@ -557,7 +557,7 @@
   month = {5},
   doi = {10.1038/521435a},
   pmid = {26017441},
-  citations = {28},
+  citations = {29},
 }
 
 @article{Vianen25,
@@ -787,7 +787,7 @@
   doi = {10.1177/2048872616652310},
   pmid = {27245700},
   abstract = {Cardiogenic shock due to severe aortic regurgitation in patients with left ventricle assist devices is a life threatening condition. Here, we consider transcatheter aortic valve implantation as a treatment option. A patient with a left ventricle assist device was presented to us with cardiogenic shock due to severe aortic regurgitation. We successfully implanted a transcatheter aortic valve in emergency setting. The patient recovered and underwent cardiac transplantation three months afterwards. We performed a systematic literature review and identified 10 cases of patients with a left ventricle assist device undergoing transcatheter aortic valve implantation. In these cases, there was no procedural related mortality reported. In four (40%) patients, transcatheter aortic valve implantation resulted in significant paravalvular aortic regurgitation. In two of these cases it was due to migration of the valve towards the left ventricle. Our case report and review of literature suggests that transcatheter aortic valve implantation is a feasible and lifesaving treatment option for left ventricle assist device patients presenting with severe aortic regurgitation.},
-  citations = {6},
+  citations = {5},
 }
 
 @article{Huet12a,
@@ -1270,7 +1270,7 @@
   doi = {10.1002/biot.201400288},
   pmid = {25159317},
   abstract = {Plant sesquiterpenes, such as (+)-valencene, artemisinin, and farnesene are valuable chemicals for use as aromatics, pharmaceuticals, and biofuels. Plant-based production systems for terpenoids critically depend on the availability of farnesyl diphosphate (FPP). Currently, these systems show insufficient yields, due to the competition for FPP of newly introduced pathways with endogenous ones. In this study, for the first time an RNAi strategy aiming at silencing of endogenous pathways for increased (+)-valencene production was employed. Firstly, a transient production system for (+)-valencene in Nicotiana benthamiana was set up using agroinfiltration. Secondly, silencing of the endogenous 5-epi-aristolochene synthase (EAS) and squalene synthase (SQS) that compete for the FPP pool was deployed. This resulted in a N. benthamiana plant that produces (+)-valencene as a prevalent volatile with a 2.8-fold increased yield. Finally, the size of the FPP pool was increased by overexpression of enzymes that are rate-limiting in FPP biosynthesis. Combined with silencing of EAS and SQS, no further increase of (+)-valencene production was observed, but emission of farnesol. Formation of farnesol, which is a breakdown product of FPP, indicates that overproducing sesquiterpenes is no longer limited by FPP availability in the cytosol. This study shows that metabolic engineering of plants can effectively be used for increased production of desired products in plants.},
-  citations = {52},
+  citations = {53},
 }
 
 @article{Girolamo20,
@@ -1741,14 +1741,13 @@
 
 @article{Weiss25,
   author = {Emmanuel Weiss and Gonzalo Crespo and Alexandra Anderson and Gianni Biancofiore and Ryan Chadha and Jacek B Cywinski and Andrea De Gasperi and James Findlay and Marc Giménez-Milà and Constantine Karvellas and Michael Kaufman and Ashish Malik and Marina Moguilevitch and Sher-Lu Pai and Koen Reyntjens and Fuat Saner and Anil Singh and Flora Simmons and Li Ying Sun and Michael Spiro and Dana Tomescu and Gebhard Wagener and Myriam Zeillemaker and Manhal Izzy and Dimitri Bezinover and Annabel Blasi},
-  title = {ILTS/LICAGE Guidelines for Cardiovascular Assessment Before Liver Transplantation},
+  title = {International Liver Transplantation Society/Liver Intensive Care Group of Europe guidelines for cardiovascular assessment before liver transplantation},
   journal = {Am J Transplant},
   year = {2025},
   month = {10},
   doi = {10.1016/j.ajt.2025.09.020},
   pmid = {41109571},
-  abstract = {Cardiovascular disease is the leading cause of morbidity and mortality among liver transplantation (LT) recipients. A panel of 24 experts from the International Liver Transplantation Society (ILTS) and the Liver Intensive Care Group of Europe (LICAGE) convened to develop guidelines for preoperative cardiovascular assessment of LT candidates. The panel identified seven areas required for standard cardiovascular preoperative assessment. Quality of evidence was evaluated using the Grading of Recommendations Assessment, Development, and Evaluation (GRADE) approach. Strong or conditional recommendations were provided according to overall level of evidence. Good practice statements were provided for recommendations with only low to very low quality of evidence. After two rounds of deliberations, the panel provided seven strong (high level of evidence, Grade 1 +/-) recommendations and six conditional (low level of evidence, Grade 2 +/-) recommendations for cardiovascular evaluation before LT. Seven recommendations were based on good practice statements because of a very low level of evidence. Agreement between panelists was reached for 100% of recommendations. Several recommendations are made to improve a candidate's cardiovascular assessment before LT.},
-  citations = {0},
+  abstract = {Cardiovascular disease is the leading cause of morbidity and mortality among liver transplantation (LT) recipients. A panel of 24 experts from the International Liver Transplantation Society and the Liver Intensive Care Group of Europe convened to develop guidelines for preoperative cardiovascular assessment of LT candidates. The panel identified 7 areas required for standard cardiovascular preoperative assessment. Quality of evidence was evaluated using the Grading of Recommendations Assessment, Development, and Evaluation approach. Strong or conditional recommendations were provided according to the overall level of evidence. Good practice statements were provided for recommendations with only low to very low quality of evidence. After 2 rounds of deliberations, the panel provided 7 strong (high level of evidence, grade 1 ±) recommendations and 6 conditional (low level of evidence, grade 2 ±) recommendations for cardiovascular evaluation before LT. Seven recommendations were based on good practice statements because of a very low level of evidence. Agreement between panelists was reached for 100% of recommendations. Several recommendations are made to improve a candidate's cardiovascular assessment before LT.},
 }
 
 @article{Lebbinck06,
@@ -3152,7 +3151,7 @@
   doi = {10.1007/s40262-018-0672-3},
   pmid = {30019172},
   abstract = {Propofol is an intravenous hypnotic drug that is used for induction and maintenance of sedation and general anaesthesia. It exerts its effects through potentiation of the inhibitory neurotransmitter γ-aminobutyric acid (GABA) at the GABA},
-  citations = {520},
+  citations = {521},
 }
 
 @article{Costa21,
@@ -3297,7 +3296,7 @@
   doi = {10.1007/s40262-017-0507-7},
   pmid = {28105598},
   abstract = {Dexmedetomidine is an α},
-  citations = {845},
+  citations = {847},
 }
 
 @article{Vandemoortele22,
@@ -3632,7 +3631,7 @@
   doi = {10.1007/s40262-024-01460-6},
   pmid = {39722108},
   abstract = {The pharmacokinetics (PK) of piperacillin/tazobactam (PIP/TAZ) is highly variable across different patient populations and there are controversies regarding non-linear elimination as well as the fraction unbound of PIP (f Population PK models were separately built for PIP and TAZ based on data from 13 studies in various patient populations. In the development of those single-drug models, postnatal age (PNA), postmenstrual age (PMA), total body weight (TBW), height, and serum creatinine (SCR) were tested as covariates. Subsequently, a combined population PK model was established and the correlations between the PK of PIP and TAZ were tested. Monte Carlo simulations were performed based on the final combined model to evaluate the current dosing recommendations. The final combined model for PIP/TAZ consisted of four compartments (two for each drug), with covariates including TBW, PMA, and SCR. For a 70-kg, 35-year-old patient with SCR of 0.83 mg L We developed a combined population PK model for PIP/TAZ across a broad range of patients covering the extremes of patient characteristics. This model can be used as a robust a priori model for Bayesian forecasting to achieve individualised dosing. The simulations indicate that adjustments based on the allometric theory as well as maturation and decline of CL of PIP may help the current dosing recommendations to provide consistent target attainment across patient populations.},
-  citations = {1},
+  citations = {2},
 }
 
 @article{Welling19,
@@ -3691,7 +3690,7 @@
   doi = {10.1213/ANE.0000000000001005},
   pmid = {26516801},
   abstract = {Target-controlled infusion (TCI) technology has been available in most countries worldwide for clinical use in anesthesia for approximately 2 decades. This infusion mode uses pharmacokinetic models to calculate infusion rates necessary to reach and maintain the desired drug concentration. TCI is computationally more complex than traditional modes of drug administration. The primary difference between TCI and conventional infusions is that TCI decreases the infusion rate at regular intervals to account for the uptake of drug into saturable compartments. Although the calculated infusion rates are consistent with manually controlled infusion rates, there are concerns that TCI administration of IV anesthetics could introduce unique safety concerns. After approximately 2 decades of clinical use, it is appropriate to assess the safety of TCI. Our aim in this article was to describe safety-relevant issues related to TCI, which should have emerged after its use in millions of patients. We collected information from published medical literature, TCI manufacturers, and publicly available governmental Web sites to find evidence of safety issues with the clinical use of TCI. Although many case reports emphasize that IV anesthesia is technically more demanding than inhaled anesthesia, including human errors associated with setting up IV infusions, no data suggest that a TCI mode of drug delivery introduces unique safety issues other than selecting the wrong pharmacokinetic model. This is analogous to the risk of selecting the wrong drug with current infusion pumps. We found no evidence that TCI is not at least as safe as anesthetic administration using constant rate infusions.},
-  citations = {76},
+  citations = {77},
 }
 
 @article{Vellinga21a,
@@ -3706,7 +3705,7 @@
   doi = {10.1016/j.bja.2020.10.027},
   pmid = {33317804},
   abstract = {Target-controlled infusion (TCI) systems incorporating pharmacokinetic (PK) or PK-pharmacodynamic (PK-PD) models can be used to facilitate drug administration. Existing models were developed using data from select populations, the use of which is, strictly speaking, limited to these populations. Recently a propofol PK-PD model was developed for a broad population range. The aim of the study was to prospectively validate this model in children, adults, older subjects, and obese adults undergoing general anaesthesia. The 25 subjects included in each of four groups were stratified by age and weight. Subjects received propofol through TCI with the Eleveld model, titrated to a bispectral index (BIS) of 40-60. Arterial blood samples were collected at 5, 10, 20, 30, 40, and 60 min after the start of propofol infusion, and every 30 min thereafter, to a maximum of 10 samples. BIS was recorded continuously. Predictive performance was assessed using the Varvel criteria. For PK, the Eleveld model showed a bias < ±20% in children, adults, and obese adults, but a greater bias (-27%) in older subjects. Precision was <30% in all groups. For PD, the bias and wobble were <5 BIS units and the precision was close to 10 BIS units in all groups. Anaesthetists were able to achieve intraoperative BIS values of 40-60 using effect-site target concentrations about 85-140% of the age-adjusted Ce The Eleveld propofol PK-PD model showed predictive precision <30% for arterial plasma concentrations and BIS predictions with a low (population) bias when used in TCI in clinical anaesthesia practice.},
-  citations = {66},
+  citations = {67},
 }
 
 @article{Vos19,
@@ -4557,7 +4556,7 @@
   doi = {10.1111/j.1444-0938.2004.tb03097.x},
   pmid = {15575810},
   abstract = {Thermal cataract has long been known as an occupational disease in furnace workers. This affliction has virtually disappeared in western countries due to improved working conditions. However, new light sources have appeared on the scene, in particular lasers, which might also be capable of producing thermal cataract. The aim of this survey is to review the history and describe the present state of knowledge. Experimental work, mainly on rabbits, was reviewed and complemented with the results of calculations on the thermal changes in the ocular media. Safe exposure limits were derived over the optical spectrum from the near ultraviolet to the far infrared. Lasers may be a cause of thermal cataract only in the near ultraviolet. Moreover, in this field of research too, it is concluded that science may be regarded as the present state of misunderstanding.},
-  citations = {21},
+  citations = {18},
 }
 
 @article{Vos87a,
@@ -5030,7 +5029,7 @@
   doi = {10.1111/j.1444-0938.2005.tb06698.x},
   pmid = {16083414},
   abstract = {The ACGIH guidelines for protection against retinal damage by optical radiation are often difficult to apply due to their lack of transparency. The less known guidelines by the Netherlands Health Council (HCN), dating from 1978 and updated in 1993, might offer a way out in many cases. A comparison is made of these guidelines, embedded in a short sketch of the history. They are illustrated by examples of applications. In most cases the HCN guidelines produce results that hardly deviate from those obtained with the ACGIH guidelines but in some cases the results diverge and in other cases HCN gives an answer where ACGIH seems to fall short. The HCN guidelines form a good alternative to those of ACGIH.},
-  citations = {8},
+  citations = {7},
 }
 
 @article{Vos13a,
@@ -5266,7 +5265,7 @@
   doi = {10.1097/EJA.0000000000002174},
   pmid = {40308048},
   abstract = {This article was developed by a diverse group of 25 international experts from the European Society of Anaesthesiology and Intensive Care (ESAIC), who formulated recommendations on intra-operative haemodynamic monitoring and management of adults having noncardiac surgery based on a review of the current evidence. We recommend basing intra-operative arterial pressure management on mean arterial pressure and keeping intra-operative mean arterial pressure above 60 mmHg. We further recommend identifying the underlying causes of intra-operative hypotension and addressing them appropriately. We suggest pragmatically treating bradycardia or tachycardia when it leads to profound hypotension or likely results in reduced cardiac output, oxygen delivery or organ perfusion. We suggest monitoring stroke volume or cardiac output in patients with high baseline risk for complications or in patients having high-risk surgery to assess the haemodynamic status and the haemodynamic response to therapeutic interventions. However, we recommend not routinely maximising stroke volume or cardiac output in patients having noncardiac surgery. Instead, we suggest defining stroke volume and cardiac output targets individually for each patient considering the clinical situation and clinical and metabolic signs of tissue perfusion and oxygenation. We recommend not giving fluids simply because a patient is fluid responsive but only if there are clinical or metabolic signs of hypovolaemia or tissue hypoperfusion. We suggest monitoring and optimising the depth of anaesthesia to titrate doses of anaesthetic drugs and reduce their side effects.},
-  citations = {8},
+  citations = {9},
 }
 
 @article{Meeteren72,
@@ -5703,7 +5702,7 @@
   doi = {10.2196/46857},
   pmid = {38289669},
   abstract = {Decision support systems (DSSs) for suggesting optimal treatments for individual patients with low back pain (LBP) are currently insufficiently accurate for clinical application. Most of the input provided to train these systems is based on patient-reported outcome measures. However, with the appearance of electronic health records (EHRs), additional qualitative data on reasons for referrals and patients' goals become available for DSSs. Currently, no decision support tools cover a wide range of biopsychosocial factors, including referral letter information to help clinicians triage patients to the optimal LBP treatment. The objective of this study was to investigate the added value of including qualitative data from EHRs and referral letters to the accuracy of a quantitative DSS for patients with LBP. A retrospective study was conducted in a clinical cohort of Dutch patients with LBP. Patients filled out a baseline questionnaire about demographics, pain, disability, work status, quality of life, medication, psychosocial functioning, comorbidity, history, and duration of pain. Referral reasons and patient requests for help (patient goals) were extracted via natural language processing (NLP) and enriched in the data set. For decision support, these data were considered independent factors for triage to neurosurgery, anesthesiology, rehabilitation, or minimal intervention. Support vector machine, k-nearest neighbor, and multilayer perceptron models were trained for 2 conditions: with and without consideration of the referral letter content. The models' accuracies were evaluated via F1-scores, and confusion matrices were used to predict the treatment path (out of 4 paths) with and without additional referral parameters. Data from 1608 patients were evaluated. The evaluation indicated that 2 referral reasons from the referral letters (for anesthesiology and rehabilitation intervention) increased the F1-score accuracy by up to 19.5% for triaging. The confusion matrices confirmed the results. This study indicates that data enriching by adding NLP-based extraction of the content of referral letters increases the model accuracy of DSSs in suggesting optimal treatments for individual patients with LBP. Overall model accuracies were considered low and insufficient for clinical application.},
-  citations = {7},
+  citations = {8},
 }
 
 @article{Hofste20,
@@ -6253,7 +6252,7 @@
   doi = {10.1093/bja/aei307},
   pmid = {16390859},
   abstract = {The present preliminary study documents the effects of a selective nerve root block (SNB) with short or long acting local anaesthetic compared with baseline measurements in patients with chronic low back pain radiating to the leg with maximum pain in one dermatome (L4). Ten consecutive patients underwent 20 controlled SNBs at L4 with ropivacaine 0.25% and lidocaine 1% in a prospective, randomized, double blind, crossover fashion. Baseline measurements included sensory function (assessed by pinprick on both unaffected and painful leg) and pain (Verbal Numeric Rating Scale; VNRS, 0-10). A change in size of areas with altered sensory function >10% and a VNRS change of 2 points were considered clinically significant. P-values<0.05 were considered statistically significant. Asymptomatic hypoaesthesia, variable in extent and non-dermatomal in distribution, was present in seven patients at baseline. It appeared to be more extensive and distal with longer duration of pre-existing pain. SNB produced no consistent changes in extent and distribution of hypoaesthetic areas. Change in VNRS did not correlate with the extent of pre-block or post-block hypoaesthesia. No differences in effects were found between lidocaine and ropivacaine. Pre-block assessment of sensory function is essential to assess the net effect of SNBs. In this small study group, SNBs failed to demonstrate uniform or distinct effects on sensory function.},
-  citations = {9},
+  citations = {8},
 }
 
 @article{Dutmer22,
@@ -6727,7 +6726,7 @@
   month = {2},
   doi = {10.1016/j.bja.2020.09.030},
   pmid = {33121749},
-  citations = {9},
+  citations = {10},
 }
 
 @article{Ryalino24,
@@ -6911,7 +6910,7 @@
   doi = {10.1016/S0140-6736(18)32485-1},
   pmid = {30782342},
   abstract = {In laboratory animals, exposure to most general anaesthetics leads to neurotoxicity manifested by neuronal cell death and abnormal behaviour and cognition. Some large human cohort studies have shown an association between general anaesthesia at a young age and subsequent neurodevelopmental deficits, but these studies are prone to bias. Others have found no evidence for an association. We aimed to establish whether general anaesthesia in early infancy affects neurodevelopmental outcomes. In this international, assessor-masked, equivalence, randomised, controlled trial conducted at 28 hospitals in Australia, Italy, the USA, the UK, Canada, the Netherlands, and New Zealand, we recruited infants of less than 60 weeks' postmenstrual age who were born at more than 26 weeks' gestation and were undergoing inguinal herniorrhaphy, without previous exposure to general anaesthesia or risk factors for neurological injury. Patients were randomly assigned (1:1) by use of a web-based randomisation service to receive either awake-regional anaesthetic or sevoflurane-based general anaesthetic. Anaesthetists were aware of group allocation, but individuals administering the neurodevelopmental assessments were not. Parents were informed of their infants group allocation upon request, but were told to mask this information from assessors. The primary outcome measure was full-scale intelligence quotient (FSIQ) on the Wechsler Preschool and Primary Scale of Intelligence, third edition (WPPSI-III), at 5 years of age. The primary analysis was done on a per-protocol basis, adjusted for gestational age at birth and country, with multiple imputation used to account for missing data. An intention-to-treat analysis was also done. A difference in means of 5 points was predefined as the clinical equivalence margin. This completed trial is registered with ANZCTR, number ACTRN12606000441516, and ClinicalTrials.gov, number NCT00756600. Between Feb 9, 2007, and Jan 31, 2013, 4023 infants were screened and 722 were randomly allocated: 363 (50%) to the awake-regional anaesthesia group and 359 (50%) to the general anaesthesia group. There were 74 protocol violations in the awake-regional anaesthesia group and two in the general anaesthesia group. Primary outcome data for the per-protocol analysis were obtained from 205 children in the awake-regional anaesthesia group and 242 in the general anaesthesia group. The median duration of general anaesthesia was 54 min (IQR 41-70). The mean FSIQ score was 99·08 (SD 18·35) in the awake-regional anaesthesia group and 98·97 (19·66) in the general anaesthesia group, with a difference in means (awake-regional anaesthesia minus general anaesthesia) of 0·23 (95% CI -2·59 to 3·06), providing strong evidence of equivalence. The results of the intention-to-treat analysis were similar to those of the per-protocol analysis. Slightly less than 1 h of general anaesthesia in early infancy does not alter neurodevelopmental outcome at age 5 years compared with awake-regional anaesthesia in a predominantly male study population. US National Institutes of Health, US Food and Drug Administration, Thrasher Research Fund, Australian National Health and Medical Research Council, Health Technologies Assessment-National Institute for Health Research (UK), Australian and New Zealand College of Anaesthetists, Murdoch Children's Research Institute, Canadian Institutes of Health Research, Canadian Anesthesiologists Society, Pfizer Canada, Italian Ministry of Health, Fonds NutsOhra, UK Clinical Research Network, Perth Children's Hospital Foundation, the Stan Perron Charitable Trust, and the Callahan Estate.},
-  citations = {565},
+  citations = {566},
 }
 
 @article{Bos19,
@@ -7123,7 +7122,7 @@
   doi = {10.1016/j.bja.2021.10.044},
   pmid = {34916051},
   abstract = {Intraoperative and postoperative hypotension occur commonly and are associated with organ injury and poor outcomes. Changes in arterial blood pressure (BP) during procedural sedation are not well described. Individual patient data from five trials of propofol sedation for colonoscopy and a clinical database were pooled and explored with logistic and linear regression. A literature search and focused meta-analysis compared the incidence of hypotension with propofol and alternative forms of procedural sedation. Hypotensive episodes were characterised by the original authors' definitions (typically systolic BP <90 mm Hg). In pooled individual patient data (n=939), 36% of procedures were associated with episodes of hypotension. Longer periods of propofol sedation and larger propofol doses were associated with longer-lasting and more-profound hypotension. Amongst 380 patients for whom individual BP measurements were available, 107 (28%) experienced systolic BP <90 mm Hg for >5 min, and in 89 (23%) the episodes exceeded 10 min. Meta-analysis of 18 RCTs identified an increased risk ratio for the development of hypotension in procedures where propofol was used compared with the use of etomidate (two studies; n=260; risk ratio [RR] 2.0 [95% confidence interval: 1.37-2.92]; P=0.0003), remimazolam (one study; n=384; RR 2.15 [1.61-2.87]; P=0.0001), midazolam (14 studies; n=2218; RR 1.46 [1.18-1.79]; P=0.0004), or all benzodiazepines (15 studies; n=2602; 1.67 [1.41-1.98]; P<0.00001). Hypotension was less likely with propofol than with dexmedetomidine (one study; n=60; RR 0.24 [0.09-0.62]; P=0.003). Hypotension is common during propofol sedation for colonoscopy and of a magnitude and duration associated with harm in surgical patients.},
-  citations = {139},
+  citations = {140},
 }
 
 @article{Venema19,
@@ -7236,7 +7235,7 @@
   doi = {10.1111/anae.14428},
   pmid = {30378102},
   abstract = {Guidelines are presented for safe practice in the use of intravenous drug infusions for general anaesthesia. When maintenance of general anaesthesia is by intravenous infusion, this is referred to as total intravenous anaesthesia. Although total intravenous anaesthesia has advantages for some patients, the commonest technique used for maintenance of anaesthesia in the UK and Ireland remains the administration of an inhaled volatile anaesthetic. However, the use of an inhalational technique is sometimes not possible, and in some situations, inhalational anaesthesia is contraindicated. Therefore, all anaesthetists should be able to deliver total intravenous anaesthesia competently and safely. For the purposes of simplicity, these guidelines will use the term total intravenous anaesthesia but also encompass techniques involving a combination of intravenous infusion and inhalational anaesthesia. This document is intended as a guideline for safe practice when total intravenous anaesthesia is being used, and not as a review of the pros and cons of total intravenous anaesthesia vs. inhalational anaesthesia in situations where both techniques are possible.},
-  citations = {225},
+  citations = {226},
 }
 
 @article{Tasbihgou21a,
@@ -7979,7 +7978,7 @@
   doi = {10.2519/jospt.2012.3727},
   pmid = {22031594},
   abstract = {Systematic review of the literature. To summarize peer-reviewed literature on the reliability, validity, and responsiveness of the Patient-Specific Functional Scale (PSFS), and to identify its use as an outcome measure. Searches were performed of several electronic databases from 1995 to May 2010. Studies included were published articles containing (1) primary research investigating the psychometric and clinimetrics of the PSFS or (2) the implementation of the PSFS as an outcome measure. We assessed the methodological quality of studies included in the first category. Two hundred forty-two articles published from 1994 to May 2010 were identified. Of these, 66 met the inclusion criteria for this review, with 13 reporting the measurement properties of the PSFS, 55 implementing the PSFS as an outcome measure, and 2 doing both of the above. The PSFS was reported to be valid, reliable, and responsive in populations with knee dysfunction, cervical radiculopathy, acute low back pain, mechanical low back pain, and neck dysfunction. The PSFS was found to be reliable and responsive in populations with chronic low back pain. The PSFS was also reported to be valid, reliable, or responsive in individuals with a limited number of acute, subacute, and chronic conditions. This review found that the PSFS is also being used as an outcome measure in many other conditions, despite a lack of published evidence supporting its validity in these conditions. Although the use of the PSFS as an outcome measure is increasing in physiotherapy practice, there are gaps in the research literature regarding its validity, reliability, and responsiveness in many health conditions.},
-  citations = {341},
+  citations = {342},
 }
 
 @article{Tjardes23,
@@ -8213,7 +8212,7 @@
   doi = {10.3389/fpsyt.2021.715898},
   pmid = {34497546},
   abstract = {Affective disorders are associated with maladaptive emotion regulation strategies. In particular, the left more than the right ventrolateral prefrontal cortex (vlPFC) may insufficiently regulate emotion processing, e.g., in the amygdala. A double-blind cross-over study investigated NF-supported cognitive reappraisal training in major depression (},
-  citations = {26},
+  citations = {27},
 }
 
 @article{Mathiak13,
@@ -8226,7 +8225,7 @@
   doi = {10.3389/fnhum.2013.00820},
   pmid = {24348366},
   abstract = {The interaction of low perceptual stimulation or goal-directed behavior with a negative subjective evaluation may lead to boredom. This contribution to boredom may shed light on its neural correlates, which are poorly characterized so far. A video game served as simulation of free interactive behavior without interruption of the game's narrative. Thirteen male German volunteers played a first-person shooter game (Tactical Ops: Assault on Terror) during functional magnetic resonance imaging (fMRI). Two independent coders performed the time-based analysis of the audio-visual game content. Boredom was operationalized as interaction of prolonged absence of goal-directed behavior with lowered affect in the Positive and Negative Affect Schedule (PANAS). A decrease of positive affect (PA) correlated with response amplitudes in bilateral insular clusters extending into the amygdala to prolonged inactive phases in a game play and an increase in negative affect (NA) was associated with higher responses in bilateral ventromedial prefrontal cortex (vmPFC). Precuneus and hippocampus responses were negatively correlated with changes in NA. We describe for the first time neural contributions to boredom, using a video game as complex virtual environment. Further our study confirmed that PA and NA are separable constructs, reflected by distinct neural patterns. PA may be associated with afferent limbic activity whereas NA with affective control.},
-  citations = {32},
+  citations = {33},
 }
 
 @article{Klasen13,
@@ -8721,7 +8720,7 @@
   month = {3},
   doi = {10.1093/bjs/znae028},
   pmid = {38436470},
-  citations = {7},
+  citations = {8},
 }
 
 @article{Berg19,
@@ -8851,7 +8850,7 @@
   doi = {10.1007/s00423-020-01936-6},
   pmid = {32691130},
   abstract = {Frailty is the body's failure to return to homeostasis after every day or acute stressful events, causing adverse outcomes. To study its dynamics in kidney transplant recipients (KTR), we determined whether the degree of frailty and its domains are affected by kidney transplantation (KT). Between 2015 and 2017, 176 KTR were included. Frailty scores were measured using the Groningen Frailty Indicator (GFI), assessed preoperatively and during follow-up. Transitions in frailty state and changes in the individual domains were determined. Mean age (±SD) was 51.8 (± 14.1) years, and 63.1% of KTR were male. Thirty patients were considered frail (GFI ≥ 4) at baseline. After a mean follow-up of 22.8 ± 8.3 months, 34 non-frail patients (19.3%) became frail, 125 patients (71.0%) remained the same, and 17 frail patients (9.7%) became non-frail (GFI < 4). In the domain psychosocial functioning, 28.4% of the patients had an increase in GFI score after follow-up. Patients who scored a point in the domain cognition at baseline had a greater chance of becoming frail (OR 4.38, 95% CI 0.59-32.24). In conclusion, almost one-fifth of non-frail KTR transitioned to a frail state after their transplantation. These results could be used to predict the impact of KT on frailty course and help with implementing prehabilitation for patients at risk.},
-  citations = {23},
+  citations = {24},
 }
 
 @article{Schopmeyer19,
@@ -8952,7 +8951,7 @@
   doi = {10.1038/s41598-021-97629-1},
   pmid = {34556708},
   abstract = {In kidney transplantation, microthrombi and fibrin deposition may lead to local perfusion disorders and subsequently poor initial graft function. Microthrombi are often regarded as donor-derived. However, the incidence, time of development, and potential difference between living donor kidneys (LDK) and deceased donor kidneys(DDK), remains unclear. Two open-needle biopsies, taken at preimplantation and after reperfusion, were obtained from 17 LDK and 28 DDK transplanted between 2005 and 2008. Paraffin-embedded sections were immunohistochemically stained with anti-fibrinogen antibody. Fibrin deposition intensity in peritubular capillaries(PTC) and glomeruli was categorized as negative, weak, moderate or strong and the number of microthrombi/mm},
-  citations = {11},
+  citations = {12},
 }
 
 @article{Quint21,
@@ -8967,7 +8966,7 @@
   doi = {10.1097/TXD.0000000000001156},
   pmid = {34036171},
   abstract = {Frailty is a multidimensional condition and is the result of the body's age-associated decline in physical, cognitive, physiological, and immune reserves. The aim of this systematic review is to assess the quality of evidence of the included studies, determine the prevalence of frailty among kidney transplant candidates, and evaluate the relationship between frailty and associated patient characteristics and outcomes after kidney transplantation. A systematic search was performed for relevant literature on frailty and kidney transplantation. This was followed by a meta-analysis for patient characteristics and outcomes reported by a minimum of 2 studies including mean age, gender, mean body mass index, type of kidney transplantation, dialysis, previous kidney transplantation, comorbidities, hypertension, race, preemptive kidney transplantation, delayed graft function, and length of stay. A total of 18 studies were included in the systematic review and 14 of those studies were suitable for meta-analysis. The overall pooled prevalence of frailty before transplantation was estimated at 17.1% (95% confidence interval [CI], 15.4-18.7). Frailty was significantly associated with higher age (mean difference, 3.6; 95% CI, 1.4-5.9), lower rate of preemptive transplantation (relative risk, 0.60; 95% CI, 0.4-0.9), longer duration of delayed graft function (relative risk, 1.80; 95% CI, 1.1-3.0), and length of stay longer than 2 wk (odds ratio, 1.64; 95% CI, 1.2-2.3). One in 6 kidney transplant recipients is frail before transplantation. The presence of frailty is associated with lower rates of preemptive transplantation, older recipient age, higher rates of delayed graft function, and longer length of stay. Future research is required to explore the association of frailty with other adverse outcomes after kidney transplantation and the effects of intervention programs to improve the different frailty domains.},
-  citations = {63},
+  citations = {65},
 }
 
 @article{Nielsen19a,
@@ -9156,7 +9155,7 @@
   doi = {10.1016/s0003-9861(02)00711-7},
   pmid = {12623068},
   abstract = {Monoterpene cyclases are the key enzymes in the monoterpene biosynthetic pathway, as they catalyze the cyclization of the ubiquitous geranyl diphosphate (GDP) to the specific monoterpene skeletons. From Citrus limon, four monoterpene synthase-encoding cDNAs for a beta-pinene synthase named Cl(-)betaPINS, a gamma-terpinene synthase named ClgammaTS, and two limonene synthases named Cl(+)LIMS1 and Cl(+)LIMS2 were recently isolated [J. Lücker et al., Eur. J. Biochem. 269 (2002) 3160]. The aim of our work in this study was to identify domains within these monoterpene synthase enzymes determining the product specificity. Domain swapping experiments between Cl(-)betaPINS and ClgammaTS and between Cl(+)LIMS2 and ClgammaTS were conducted. We found that within the C-terminal domain of these monoterpene synthases, a region comprising 200 amino acids, of which 41 are different between Cl(-)betaPINS and ClgammaTS, determines the specificity for the formation of beta-pinene or gamma-terpinene, respectively, while another region localized further downstream is required for a chimeric enzyme to yield products in the same ratio as in the wild-type ClgammaTS. For Cl(+)LIMS2, the two domains together appear to be sufficient for its enzyme specificity, but many chimeras were inactive probably due to the low homology with ClgammaTS. Molecular modeling was used to further pinpoint the amino acids responsible for the differences in product specificity of ClgammaTS and Cl(-)betaPINS.},
-  citations = {31},
+  citations = {32},
 }
 
 @article{Herpen10,
@@ -9813,7 +9812,7 @@
   doi = {10.1161/01.ATV.0000254823.15843.1f},
   pmid = {17170376},
   abstract = {Extracellular superoxide dismutase (ecSOD) lowers superoxide anions and maintains vascular nitric oxide level. We studied the function of ecSOD in high-volume hypertension induced by the 1-kidney-1-clip model in wild-type, ecSOD-/- mice, and endothelial nitric oxide synthase (eNOS)-/- mice. The 1-kidney-1-clip model resulted in impaired endothelium-dependent relaxation and hypertension and vascular oxidative stress in wild-type and ecSOD-/- mice. Recombinant ecSOD lowered the blood pressure and improved aortic nitric oxide bioavailability in wild-type and ecSOD-/- but not eNOS-/- mice. ecSOD had no effect on blood pressure in eNOS-/- or wild-type mice treated with a nitric oxide synthase inhibitor. The 1-kidney-1-clip model markedly induced ecSOD protein expression, whereas activity was increased by only 25%, suggesting a partial inactivation of ecSOD in high-volume hypertension. Incubation of aortic segments with peroxynitrite or hydrogen peroxide attenuated ecSOD activity, but peroxynitrite did not induce tyrosine nitration of ecSOD, suggesting oxidative inactivation of the enzyme. Administration of polyethyleneglycol-catalase for 3 days selectively lowered the blood pressure in ecSOD+/+ but not ecSOD-/- mice and improved nitric oxide bioavailability. In contrast, acute application of catalase had no effect. Nitric oxide mediates the vascular effects of ecSOD. Vascular dysfunction in 1-kidney-1-clip model hypertension is partially a consequence of inactivation of ecSOD by reactive oxygen species.},
-  citations = {37},
+  citations = {38},
 }
 
 @article{Jung19,
@@ -9871,7 +9870,7 @@
   doi = {10.1177/0885066617748596},
   pmid = {29378487},
   abstract = {Acute kidney injury (AKI) is a severe complication in medical and surgical intensive care units accounting for a high morbidity and mortality. Incidence, risk factors, and prognostic impact of this deleterious condition are well established in this setting. Data concerning the neurocritically ill patients is scarce. Therefore, aim of this study was to determine the incidence of AKI and elucidate risk factors in this special population. Patients admitted to a specialized neurocritical care unit between 2005 and 2011 with a length of stay above 48 hours were analyzed retrospectively for incidence, cause, and outcome of AKI (AKI Network-stage ≥2). The study population comprised 681 neurocritically ill patients from a mixed neurosurgical and neurological intensive care unit. The prevalence of chronic kidney disease (CKD) was 8.4% (57/681). Overall incidence of AKI was 11.6% with 36 (45.6%) patients developing dialysis-requiring AKI. Sepsis was the main cause of AKI in nearly 50% of patients. Acute kidney injury and renal replacement therapy are independent predictors of worse outcome (hazard ratio [HR]: 3.704; 95% confidence interval [CI]: 1.867-7.350;  Acute kidney injury in neurocritical care has a high incidence and is a crucial risk factor for mortality independently of the underlying neurocritical condition. Sepsis is the main cause of AKI in this setting. Therefore, careful prevention of infectious complications and considering CKD in treatment decisions may lower the incidence of AKI and hereby improve outcome in neurocritical care.},
-  citations = {35},
+  citations = {36},
 }
 
 @article{Jung22,
@@ -9915,7 +9914,7 @@
   doi = {10.1016/j.tins.2022.03.003},
   pmid = {35461727},
   abstract = {The blood-brain barrier (BBB) continues to represent one of the most significant challenges for successful drug-based treatments of neurological disease. Mechanical modulation of the BBB using focused ultrasound (FUS) and microbubbles (MBs) has shown considerable promise in enhancing the delivery of therapeutics to the brain, but questions remain regarding possible long-term effects of such forced disruption. This review examines the evidence for inflammation associated with ultrasound-induced BBB disruption and potential strategies for managing such inflammatory effects to improve both the efficacy and safety of therapeutic ultrasound in neurological applications.},
-  citations = {43},
+  citations = {44},
 }
 
 @article{Jung10,
@@ -10260,7 +10259,7 @@
   doi = {10.1016/j.bja.2018.01.018},
   pmid = {29661412},
   abstract = {Pharmacokinetic (PK) and pharmacodynamic (PD) models are used in target-controlled-infusion (TCI) systems to determine the optimal drug administration to achieve a desired target concentration in a central or effect-site compartment. Our aim was to develop a PK-PD model for propofol that can predict the bispectral index (BIS) for a broad population, suitable for TCI applications. Propofol PK data were obtained from 30 previously published studies, five of which also contained BIS observations. A PK-PD model was developed using NONMEM. Weight, age, post-menstrual age (PMA), height, sex, BMI, and presence/absence of concomitant anaesthetic drugs were explored as covariates. The predictive performance was measured across young children, children, adults, elderly, and high-BMI individuals, and in simulated TCI applications. Overall, 15 433 propofol concentration and 28 639 BIS observations from 1033 individuals (672 males and 361 females) were analysed. The age range was from 27 weeks PMA to 88 yr, and the weight range was 0.68-160 kg. The final model uses age, PMA, weight, height, sex, and presence/absence of concomitant anaesthetic drugs as covariates. A 35-yr-old, 170 cm, 70 kg male (without concomitant anaesthetic drugs) has a V We developed a PK-PD model to predict the propofol concentrations and BIS for broad, diverse population. This should be useful for TCI in anaesthesia and sedation.},
-  citations = {237},
+  citations = {239},
 }
 
 @article{Fechner24,
@@ -10662,4 +10661,48 @@
   month = {11},
   doi = {10.1016/j.bja.2025.10.016},
   pmid = {41224582},
+  citations = {0},
+}
+
+@article{Gentile25,
+  author = {Andrea Gentile and Michele Introna and Michel M R F Struys and Johannes P van den Berg},
+  title = {Rapid sequence induction with target-controlled infusions: a technical simulation study},
+  journal = {Anaesthesia},
+  year = {2025},
+  month = {11},
+  doi = {10.1111/anae.70078},
+  pmid = {41238509},
+}
+
+@article{TaberneHeijtmeijer25,
+  author = {Esmée S E TabernéeHeijtmeijer and Jaap Jan Vos and Liv M Freeman and Renée J Burger and Ellen B F Terpstra-Prinsen and Michel M R F Struys and Sanne J Gordijn},
+  title = {[Pain relief during childbirth: epidural analgesia, remifentanil or nitrous oxide?]},
+  journal = {Ned Tijdschr Geneeskd},
+  year = {2025},
+  volume = {169},
+  month = {11},
+  pmid = {41258900},
+  abstract = {Pain relief during labor is a critical aspect of obstetric care, balancing maternal comfort with neonatal safety. With the increasing use, questions arise regarding the available pharmaceutical pain relief options and their obstetric, anesthetic, and neonatal implications. This article discusses two cases involving epidural analgesia and briefly reviews remifentanil and nitrous oxide, including their mechanisms, side effects, and implications. Epidural analgesia remains the gold standard for labor pain management due to its effectiveness and safety. Although it generally causes only mild and well-manageable side effects without clinical consequences, it remains an invasive technique that can, in rare cases, lead to (serious) complications. Remifentanil offers an alternative but with reduced efficacy and risks like respiratory depression. Nitrous oxide provides rapid pain relief but is less effective and limited by its short duration, environmental impact, healthcare personal exposure risks and uncertain neonatal effects.},
+}
+
+@article{Eshuis25,
+  author = {Thom A H Eshuis and Hans Timmerman and Ruud Stellema and Egbert J M Klarenbeek and Anna K L Reyners and André P Wolff},
+  title = {[The percutaneous cordotomy: an effective oncological pain treatment in palliative care]},
+  journal = {Ned Tijdschr Geneeskd},
+  year = {2025},
+  volume = {169},
+  month = {9},
+  pmid = {41255197},
+  abstract = {Oncological pain in palliative care is common. This article presents a 61-year-old man with a Pancoast tumor which caused severe pain and impaired his quality of life. Multimodal analgesia was not effective due to a limited analgesic effect and side effects. After one year the patient underwent a percutaneous cordotomy which resulted in a complete and long-term pain relief and an improvement of social and physical functioning. Reflecting on this case, the patient might have benefited from an earlier referral to a pain clinic that performs the cordotomy. Timely referral is recommended to discuss the possibility of a cordotomy with the patient in the early palliative phase. During this phase, the patient can make a well-considered decision whether the advantages and disadvantages of analgesics still outweigh those of a cordotomy. Early treatment might lead to a longer and improved quality of life with less or without pain.},
+}
+
+@article{Gadella25,
+  author = {Maria C Gadella and Marko M Sahinovic and Sebastiaan E Dulfer and Katalin Tamási and Fiete Lange and Cristopher Faber and Frits Hein Wapstra and Rob J M Groen and Anthony R Absalom and Gea Drost},
+  title = {The Effects of Depth of Anesthesia on Muscle-Recorded Motor Evoked Potentials: A Prospective Observational Study},
+  journal = {Anesth Analg},
+  year = {2025},
+  month = {11},
+  doi = {10.1213/ANE.0000000000007777},
+  pmid = {41263572},
+  abstract = {Intraoperative neurophysiological monitoring is used to assess neurological function during surgeries placing the spinal cord at risk. Transcranial electrical stimulation muscle motor evoked potentials (Tc-mMEPs) are used to monitor motors tracts, but their interpretation is complicated by the large temporal variability which can result in false-positive warnings. Although the choice of anesthetic drug regimen and drug dose are often claimed to be factors causing this variability, the relationship between depth of anesthesia, quantified by processed electroencephalogram (pEEG) parameters, and Tc-mMEPs characteristics in upper and lower extremity muscles have not yet been rigorously investigated in patients receiving propofol/remifentanil-based anesthesia. Twenty-five patients were included in this prospective observational study. All received propofol/remifentanil-based total intravenous anesthesia. Depth of anesthesia was quantified by the bispectral index (BIS). After induction of anesthesia, the target propofol concentration was altered to sequentially achieve BIS values of either 30, 40, and 50, or the reverse (direction randomly determined). At each depth of anesthesia Tc-mMEP thresholds were determined, and arterial blood samples were collected. Supramaximal Tc-mMEP signals were recorded every 2 minutes and amplitudes, latencies and area under the curve (AUC) were subsequently calculated. Effects of depth of anesthesia on Tc-mMEP outcomes were analyzed using linear mixed effects modeling. The median (range) age of the study population was 18 (14-66) years (n = 25). In the leg muscles, a decrease of 10 BIS points was associated with a decrease in Tc-mMEP amplitude of 11%-12% (all P < .001; mean [95% confidence interval \{CI\}], 12% [7.1-16], 11% [6.8-16], and 12% [7.5-16], for the AH, TA, and GAS muscles, respectively). In contrast, no significant amplitude or AUC change was found in the hand muscles (P = .201, 2.8% [-1.5 to 7.1] and P = .076, 4.0% [-0.4 to 7.6], respectively). Latencies changed <0.5% per 10 BIS points decrease (0.03% [-0.3 to 0.2], -0.2% [-0.5 to 0.1], -0.2% [-0.5 to 0.04], 0.3% [0.04-0.6] for the AH, TA, GAS, and hand muscles, respectively), and thresholds increased 3.6% (0.8-7) when BIS decreased from 50 to 30 (P = .037). Our findings challenge some commonly held beliefs. First, our findings suggest that deeper anesthesia has differential effects on the different muscle groups, with little effect on the hand muscles. The current practice of using the hand signals as reference values during procedures below C8/T1 may therefore need re-evaluation. Second, the paucity of effect of depth of anesthesia on Tc-mMEP thresholds and latencies suggests that Tc-mMEP generation is not influenced by deep anesthesia in a clinically relevant way. Therefore, the threshold level monitoring method may provide a more reliable indicator of motor pathway integrity during surgery. This could reduce the likelihood of false-positive warnings and unnecessary interventions.},
 }
